@@ -34,6 +34,11 @@ a, a:hover, a:focus {
     transition: all 0.3s;
 }
 
+thead {
+	background: #008fff;
+	color: white;
+}
+
 .wrapper {
     display: flex;
 }
@@ -45,6 +50,7 @@ a, a:hover, a:focus {
 	background: #008fff;
     color: #fff;
     transition: all 0.3s;
+    position: fixed;
 }
 
 #sidebar .sidebar-header {
@@ -59,7 +65,6 @@ a, a:hover, a:focus {
 	position: absolute;
 	bottom: 0;
 	width: 220px;
-    padding: 20px 0;
 }
 
 ul.links2 a {
@@ -92,7 +97,7 @@ ul.links2 a {
 
 #content {
 	width: 100%;
-	padding: 20px;
+	margin-left: 220px;
 	padding-right: 40px;
 }
 
@@ -103,5 +108,11 @@ ul.links2 a {
 #content button {
 	position: fixed;
 	bottom: 5px;
-	width: 79%;
+	width: 81%;
+	background: #008fff;
+	color: white;
+}
+
+.hidden {
+	display: none;
 }
