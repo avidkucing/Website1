@@ -1,0 +1,48 @@
+body {
+	
+}
+
+thead {
+	background: #008fff;
+	color: white;
+}
+
+button {
+	background: #008fff;
+	color: white;
+	position: fixed;
+	bottom: 10px;
+}
+
+.button-container {
+	text-align: center;
+}
+
+.content-item {
+	margin-right: auto;
+	margin-left: auto;
+	width: 90%
+}
+
+.title {
+	padding: 20px;
+	text-align: center;
+	font-weight: bold;
+	font-size: 20px;
+}
+
+.left-item {
+	display: inline-block;
+	position: relative;
+	left: 5%;
+	padding-bottom: 20px;
+}
+.right-item {
+	display: inline-block;
+	position: absolute;
+	right: 15%;
+}
+
+.sign {
+	padding-top: 20px;
+}

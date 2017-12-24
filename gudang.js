@@ -1,5 +1,5 @@
 $(document).ready(function(){
-	$("tbody tr").addClass("klik");
+	$(".bahanbaku tbody tr").addClass("klik");
 	$(".klik").attr("data-href","print-lpb.html");
 	$(".klik").click(function() {
         window.location = $(this).data("href");

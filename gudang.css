@@ -1,7 +1,7 @@
 @import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";
 
 body {
-	font-family: 'Poppins', sans-serif;
+	/*font-family: 'Poppins', sans-serif;*/
 }
 
 p {
@@ -106,13 +106,8 @@ ul.links2 a {
 }
 
 #content button {
-	position: fixed;
-	bottom: 5px;
-	width: 81%;
+	margin-top: 20px;
 	background: #008fff;
 	color: white;
-}
-
-.hidden {
-	display: none;
+	font-weight: bold;
 }
