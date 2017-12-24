@@ -10,12 +10,27 @@ thead {
 button {
 	background: #008fff;
 	color: white;
-	position: fixed;
-	bottom: 10px;
+}
+
+.button-item {
+	display: inline-block;
+	margin-top: 20%;
 }
 
 .button-container {
 	text-align: center;
+}
+
+#print {
+	background: green;
+}
+
+#back {
+	background: red;
+}
+
+#tambah {
+	background: #008fff;
 }
 
 .content-item {
