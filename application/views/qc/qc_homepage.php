@@ -62,8 +62,52 @@
 			        'table_open'            => '<table class="content-item table table-bordered table-hover table-responsive bahanbaku">'
 				);
 				$this->table->set_template($template);
-				$this->table->set_heading('No. LPB', 'Tanggal Terima', 'Kode Bahan', 'Nomor Batch','Jumlah Sampel', 'Satuan', 'Nomor Instruksi Sampling', 'Nomor Analisa', 'Sisa Sampel Pertinggal');
-				echo $this->table->generate($lps);
+				$this->table->set_heading('No. LPB',  'Nomor Instruksi Sampling', 'Tanggal Terima', 'Kode Bahan', 'Nomor Batch', 'Jumlah Sampel', 'Satuan','Nomor Analisa', 'Sisa Sampel Pertinggal');
+				
+				//print_r($lps_analisa); baru bisa dilihat setelah fungsi tambahnya jadi
+				
+				
+				foreach ($lps as $row) {
+					
+					//indeks nomor batch & form
+					$a = $row->Nomor_LPB;
+					
+					//link untuk isi form
+					$link_instruksi = anchor('quality_control/instruksi_sampling_bahan_show/'.$a ,'Isi');
+					$link_analisa = anchor('quality_control/analisa_sampling_bahan_show/'.$a ,'Isi');
+
+					////////////////////////////////////////////////////////
+					//convert $lps_instruksi
+					$b = 0;
+					$lps_ins = array();
+
+					foreach ($lps_instruksi as $x => $b) {
+						$kode = $lps_instruksi[$x]['Nomor_LPB'];
+						$lps_ins[$kode] = $lps_instruksi[$x]['Nomor_Instruksi'];
+						$lps_ins_j[$kode] = $lps_instruksi[$x]['Jumlah_Sampel'];
+					}
+					//convert $lps_analisa
+					$b = 0;
+					$lps_ana = array();
+
+					foreach ($lps_analisa as $y => $b) {
+						$kode = $lps_analisa[$y]['Nomor_LPB'];
+						$lps_ana[$kode] = $lps_analisa[$y]['Nomor_Analisa'];
+						$lps_ana_s[$kode] = $lps_analisa[$y]['Sisa_Sampel'];
+					}
+					////////////////////////////////////////////////////////
+
+					//cek form apa sudah diisi
+					if (!(isset($lps_ins[$a]))) {
+						$this->table->add_row($row->Nomor_LPB, $link_instruksi , $row->Tanggal_Terima, $row->Kode_Bahan, $lps_batch[$a], $link_instruksi, $row->Satuan, 'Isi instruksi terlebih dahulu', 'Isi instruksi terlebih dahulu');
+					} else if (($lps_ana[$a]) == ($lps_ins[$a])) {
+						$this->table->add_row($row->Nomor_LPB, $lps_ins[$a] , $row->Tanggal_Terima, $row->Kode_Bahan, $lps_batch[$a], $lps_ins_j[$a], $row->Satuan, $link_analisa, $link_analisa);
+					} else {
+						$this->table->add_row($row->Nomor_LPB, $lps_ins[$a] , $row->Tanggal_Terima, $row->Kode_Bahan, $lps_batch[$a], $lps_ins_j[$a], $row->Satuan, $lps_ana[$a], $lps_ana_s[$a]);
+					}
+					
+				}
+				echo $this->table->generate();
 			?>
 			<!--<table class="content-item table table-bordered table-hover table-responsive bahanbaku">
 				<thead>
