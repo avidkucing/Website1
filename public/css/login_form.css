@@ -1,0 +1,14 @@
+#text-input {
+	text-align: center;
+	margin-top: 20%;
+}
+
+#main button {
+	background: #1584B2;
+	color: white;
+}
+
+#main button:hover {
+	background: #008fff;
+	color: white;
+}

@@ -1,9 +1,5 @@
 @import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";
 
-body {
-	/*font-family: 'Poppins', sans-serif;*/
-}
-
 p {
     font-size: 1em;
     font-weight: 300;
@@ -35,7 +31,7 @@ a, a:hover, a:focus {
 }
 
 thead {
-	background: #008fff;
+	background: #1584B2;
 	color: white;
 }
 
@@ -47,7 +43,7 @@ thead {
 	min-width: 220px;
 	max-width: 220px;
 	height: 100vh;
-	background: #008fff;
+	background: #1584B2;
     color: #fff;
     transition: all 0.3s;
     position: fixed;
@@ -87,11 +83,11 @@ ul.links2 a {
 
 #sidebar ul li a:hover {
     color: #fff;
-    background: #4CB1FF;
+    background: #008fff;
 }
 
 #sidebar ul li.active > a, a[aria-expanded="true"] {
-    color: #008fff;
+    color: #1584B2;
     background: #fff;
 }
 
@@ -111,3 +107,8 @@ ul.links2 a {
 	color: white;
 	font-weight: bold;
 }
+
+#content button:hover {
+    background: #228B22;
+}
+
