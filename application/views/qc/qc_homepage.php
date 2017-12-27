@@ -12,7 +12,7 @@
 	?>
 
 <head>
-  <title>Gudang</title>
+  <title>Quality Control</title>
   <meta charset="utf-8">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>public/css/gudang.css">
@@ -26,12 +26,11 @@
 	<div class="wrapper">
 		<nav id="sidebar">
 			<div class="sidebar-header">
-				<h2>Warehouse</h2>
+				<h2>Quality Control</h2>
 				<h4>Halo, <?php echo $nama;?></h4>
 			</div>
 			<ul class="links list-unstyled">
-				<li class="active" id="bahanbakutab"><a href="#">Stock Bahan Baku</a></li>
-				<li id="bahanjaditab"><a href="#">Stock Bahan Jadi</a></li>
+				<li class="active" id="bahanbakutab"><a href="#">List Penerimaan Sampel</a></li>
 				<li>
 					<a href="#sublinks" data-toggle="collapse" aria-expanded="false">Lihat Lainnya</a>
 					<ul class="collapse list-unstyled" id="sublinks">
@@ -45,7 +44,7 @@
 			</ul>
 			<ul class="links2 list-unstyled">
 				<li><a href="#"><i class="fas fa-bell fa-fw fa-lg"></i> Notifikasi</a></li>
-				<li><a href="gudang/logout"><i class="fas fa-power-off fa-fw fa-lg"></i> Logout</a></li>
+				<li><a href="quality_control/logout"><i class="fas fa-power-off fa-fw fa-lg"></i> Logout</a></li>
 			</ul>
 		</nav>
 		<div id="content">
@@ -63,15 +62,8 @@
 			        'table_open'            => '<table class="content-item table table-bordered table-hover table-responsive bahanbaku">'
 				);
 				$this->table->set_template($template);
-				$this->table->set_heading('No. LPB', 'Tanggal Terima', 'Kode Bahan', 'Nomor Batch', 'Nama Supplier', 'Nama Manufacturer', 'Jumlah', 'Satuan', 'Status');
-				//print_r($lpb);
-				//$b = 0;
-				foreach ($lpb as $row) {
-					//print_r($row);
-					$a = $row->Nomor_LPB;
-					$this->table->add_row($row->Nomor_LPB, $row->Tanggal_Terima, $row->Kode_Bahan, $lpb_batch[$a], $row->Nama_Supplier, $row->Nama_Manufacturer, $row->Jumlah, $row->Satuan, $row->Status);
-				}
-				echo $this->table->generate();
+				$this->table->set_heading('No. LPB', 'Tanggal Terima', 'Kode Bahan', 'Nomor Batch','Jumlah Sampel', 'Satuan', 'Nomor Instruksi Sampling', 'Nomor Analisa', 'Sisa Sampel Pertinggal');
+				echo $this->table->generate($lps);
 			?>
 			<!--<table class="content-item table table-bordered table-hover table-responsive bahanbaku">
 				<thead>
@@ -99,28 +91,6 @@
 				</tbody>
 			</table>
 			-->
-			<table class="content-item table table-bordered table-hover table-responsive bahanjadi" style="display: none;">
-				<thead>
-			        <tr>
-				        <th>No.</th>
-				        <th>Tanggal Release</th>
-				        <th>No. Analisa</th>
-				        <th>Kode Produk</th>
-				        <th>Jumlah</th>
-				    </tr>
-				</thead>
-				<tbody>
-				    <tr>
-				        <td>Test</td>
-				        <td>Test</td>
-				        <td>Test</td>
-				        <td>Test</td>
-				        <td>Test</td>
-				    </tr>
-				</tbody>
-			</table>
-			<button onclick="location.href='<?php echo base_url();?>Gudang/print_lpb_show'" type="button submit" class="content-item btn btn-block bahanjadi" style="display: none;"><i class="fas fa-plus fa-fw fa-lg"></i> Terbitkan Surat Jalan</button>
-			<button onclick="location.href='<?php echo base_url();?>Gudang/tambah_lpb_show'" type="button submit" class="content-item btn btn-block bahanbaku"><i class="fas fa-plus fa-fw fa-lg"></i> Tambah LPB</button>
 		</div>
 	</div>
 </body>
