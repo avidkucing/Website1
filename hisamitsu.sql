@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 27 Des 2017 pada 07.11
+-- Generation Time: 28 Des 2017 pada 00.14
 -- Versi Server: 10.1.21-MariaDB
 -- PHP Version: 5.6.30
 
@@ -40,19 +40,8 @@ CREATE TABLE `akun` (
 
 INSERT INTO `akun` (`Username`, `Password`, `Nama`, `Email`, `Tipe_Pegawai`) VALUES
 ('admin', '6036902a177b5ecb6e41472be922257a', 'Admin', 'mhabibullah14@yahoo.com', 'Administrator'),
+('avidkucing', '6036902a177b5ecb6e41472be922257a', 'Avid', 'avidkucing@gmail.com', 'Quality Control'),
 ('muhabibull', '6036902a177b5ecb6e41472be922257a', 'Habib', 'haha@gmail.com', 'Gudang');
-
--- --------------------------------------------------------
-
---
--- Struktur dari tabel `analisa_sampel`
---
-
-CREATE TABLE `analisa_sampel` (
-  `Nomor_Analisa` varchar(100) NOT NULL,
-  `Tanggal_Pemeriksaan` date NOT NULL,
-  `Status` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -89,7 +78,10 @@ CREATE TABLE `bahan_terima` (
 
 INSERT INTO `bahan_terima` (`Nomor_LPB`, `ID_Bahan`, `Tanggal_Terima`, `Nomor_Surat`, `Jumlah`, `Status`) VALUES
 ('1', 1, '2017-12-27', '1', 1000, 'QUARANTINE'),
-('2', 11, '2017-12-27', '2', 1000, 'QUARANTINE');
+('2', 11, '2017-12-27', '2', 1000, 'QUARANTINE'),
+('3', 13, '2017-12-26', '3', 100, 'QUARANTINE'),
+('4', 13, '2017-12-27', '4', 111, 'QUARANTINE'),
+('5', 2, '2017-12-28', '5', 1000, 'QUARANTINE');
 
 -- --------------------------------------------------------
 
@@ -99,10 +91,17 @@ INSERT INTO `bahan_terima` (`Nomor_LPB`, `ID_Bahan`, `Tanggal_Terima`, `Nomor_Su
 
 CREATE TABLE `hasil_analisa_sampel` (
   `Nomor_Analisa` varchar(100) NOT NULL,
-  `Parameter` text NOT NULL,
-  `Spesifikasi` text NOT NULL,
+  `No` int(11) NOT NULL,
   `Hasil` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `hasil_analisa_sampel`
+--
+
+INSERT INTO `hasil_analisa_sampel` (`Nomor_Analisa`, `No`, `Hasil`) VALUES
+('1q', 1, 'Good'),
+('1q', 2, 'Not Good');
 
 -- --------------------------------------------------------
 
@@ -150,7 +149,14 @@ CREATE TABLE `nomor_batch_bahan` (
 
 INSERT INTO `nomor_batch_bahan` (`Nomor_LPB`, `Nomor_Batch`) VALUES
 ('2', '11'),
-('2', '22');
+('2', '22'),
+('3', '123'),
+('3', '234'),
+('4', '111'),
+('4', '222'),
+('1', '1'),
+('1', '2'),
+('5', '111');
 
 -- --------------------------------------------------------
 
@@ -222,19 +228,28 @@ CREATE TABLE `permintaan_bahan` (
 
 CREATE TABLE `sampel_bahan_terima` (
   `Nomor_LPB` varchar(100) NOT NULL,
-  `Nomor_Intruksi` varchar(100) NOT NULL,
+  `Nomor_Instruksi` varchar(100) NOT NULL,
   `Nomor_Analisa` varchar(100) NOT NULL,
-  `Tanggal` date NOT NULL,
+  `Tanggal_Instruksi` date NOT NULL,
   `EXP_Date` date NOT NULL,
   `Doc_COA` tinyint(1) NOT NULL,
   `Pola_Sampling` varchar(100) NOT NULL,
   `Jumlah_Wadah` float NOT NULL,
   `Jumlah_Sampel` float NOT NULL,
-  `Sisa_Sampel` float NOT NULL,
   `Petugas_Sampling` varchar(100) NOT NULL,
   `Rencana_Sampling` varchar(100) NOT NULL,
-  `Catatan` text NOT NULL
+  `Catatan` text NOT NULL,
+  `Tanggal_Pemeriksaan` date NOT NULL,
+  `Sisa_Sampel` float NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `sampel_bahan_terima`
+--
+
+INSERT INTO `sampel_bahan_terima` (`Nomor_LPB`, `Nomor_Instruksi`, `Nomor_Analisa`, `Tanggal_Instruksi`, `EXP_Date`, `Doc_COA`, `Pola_Sampling`, `Jumlah_Wadah`, `Jumlah_Sampel`, `Petugas_Sampling`, `Rencana_Sampling`, `Catatan`, `Tanggal_Pemeriksaan`, `Sisa_Sampel`) VALUES
+('1', '1', '1q', '2017-12-28', '2019-12-28', 1, 'POLA p (bahan baku homogen, semua wadah)', 12, 100, 'Avid', 'FULL TEST', 'Sip', '2017-12-29', 1),
+('2', '2', '2', '2017-12-28', '2022-12-28', 1, 'POLA p (bahan baku homogen, semua wadah)', 12, 1, 'Habib', 'FULL TEST', 'Sip', '0000-00-00', 0);
 
 --
 -- Indexes for dumped tables
@@ -245,12 +260,6 @@ CREATE TABLE `sampel_bahan_terima` (
 --
 ALTER TABLE `akun`
   ADD PRIMARY KEY (`Username`);
-
---
--- Indexes for table `analisa_sampel`
---
-ALTER TABLE `analisa_sampel`
-  ADD KEY `Nomor_Analisa` (`Nomor_Analisa`);
 
 --
 -- Indexes for table `bahan_minta`
@@ -330,12 +339,6 @@ ALTER TABLE `jenis_bahan`
 --
 
 --
--- Ketidakleluasaan untuk tabel `analisa_sampel`
---
-ALTER TABLE `analisa_sampel`
-  ADD CONSTRAINT `analisa_sampel_ibfk_1` FOREIGN KEY (`Nomor_Analisa`) REFERENCES `sampel_bahan_terima` (`Nomor_Analisa`);
-
---
 -- Ketidakleluasaan untuk tabel `bahan_minta`
 --
 ALTER TABLE `bahan_minta`
@@ -352,7 +355,7 @@ ALTER TABLE `bahan_terima`
 -- Ketidakleluasaan untuk tabel `hasil_analisa_sampel`
 --
 ALTER TABLE `hasil_analisa_sampel`
-  ADD CONSTRAINT `hasil_analisa_sampel_ibfk_1` FOREIGN KEY (`Nomor_Analisa`) REFERENCES `analisa_sampel` (`Nomor_Analisa`);
+  ADD CONSTRAINT `hasil_analisa_sampel_ibfk_1` FOREIGN KEY (`Nomor_Analisa`) REFERENCES `sampel_bahan_terima` (`Nomor_Analisa`);
 
 --
 -- Ketidakleluasaan untuk tabel `nomor_batch_bahan`
