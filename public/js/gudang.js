@@ -1,6 +1,6 @@
 $(document).ready(function(){
-	$(".bahanbaku tbody tr").addClass("klik");
-	$(".klik").attr("data-href","print-lpb.html");
+	//$(".bahanbaku tbody tr").addClass("klik");
+    $(".klik").attr("data-href","print_lpb.php");
 	$(".klik").click(function() {
         window.location = $(this).data("href");
     });
