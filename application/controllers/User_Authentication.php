@@ -65,6 +65,8 @@ Class User_Authentication extends CI_Controller {
 						redirect(base_url("Gudang"));
 					} else if ($result[0]->Tipe_Pegawai == 'Quality Control') {
 						redirect(base_url("Quality_Control"));
+					} else if ($result[0]->Tipe_Pegawai == 'Kepala Bagian Quality Control') {
+						redirect(base_url("Ka_Quality_Control"));
 					}
 				}
 			} else {
