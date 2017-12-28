@@ -26,7 +26,7 @@
 	<div class="wrapper">
 		<nav id="sidebar">
 			<div class="sidebar-header">
-				<h2>Quality Control</h2>
+				<h2>Head of Quality Control</h2>
 				<h4>Halo, <?php echo $nama;?></h4>
 			</div>
 			<ul class="links list-unstyled">
@@ -62,7 +62,7 @@
 			        'table_open'            => '<table class="content-item table table-bordered table-hover table-responsive bahanbaku">'
 				);
 				$this->table->set_template($template);
-				$this->table->set_heading('No. LPB',  'Nomor Instruksi Sampling', 'Tanggal Terima', 'Kode Bahan', 'Nomor Batch', 'Jumlah Sampel', 'Satuan','Nomor Analisa', 'Sisa Sampel Pertinggal');
+				$this->table->set_heading('No. LPB',  'Nomor Instruksi Sampling', 'Tanggal Terima', 'Kode Bahan', 'Nomor Batch', 'Jumlah Sampel', 'Satuan','Nomor Analisa', 'Sisa Sampel Pertinggal', 'Status');
 				
 				//print_r($lps_analisa); baru bisa dilihat setelah fungsi tambahnya jadi
 				
@@ -73,8 +73,8 @@
 					$a = $row->Nomor_LPB;
 					
 					//link untuk isi form
-					$link_instruksi = anchor('quality_control/instruksi_sampling_bahan_show/'.$a ,'Isi');
-					$link_analisa = anchor('quality_control/analisa_sampling_bahan_show/'.$a ,'Isi');
+					$link_status = anchor('ka_quality_control/status_sampling_bahan_show/'.$a ,'Ubah Status');
+					$cek_status = $row->Status;
 
 					////////////////////////////////////////////////////////
 					//convert $lps_instruksi
@@ -99,13 +99,14 @@
 
 					//cek form apa sudah diisi
 					if (!(isset($lps_ins[$a]))) {
-						$this->table->add_row($row->Nomor_LPB, $link_instruksi , $row->Tanggal_Terima, $row->Kode_Bahan, $lps_batch[$a], $link_instruksi, $row->Satuan, 'Isi instruksi terlebih dahulu', 'Isi instruksi terlebih dahulu');
+						$this->table->add_row($row->Nomor_LPB, 'Belum Diinstruksikan' , $row->Tanggal_Terima, $row->Kode_Bahan, $lps_batch[$a], 'Belum Diinstruksikan', $row->Satuan, 'Belum Dianalisa', 'Belum Dianalisa', $row->Status);
 					} else if (($lps_ana[$a]) == ($lps_ins[$a])) {
-						$this->table->add_row($row->Nomor_LPB, $lps_ins[$a] , $row->Tanggal_Terima, $row->Kode_Bahan, $lps_batch[$a], $lps_ins_j[$a], $row->Satuan, $link_analisa, $link_analisa);
+						$this->table->add_row($row->Nomor_LPB, $lps_ins[$a] , $row->Tanggal_Terima, $row->Kode_Bahan, $lps_batch[$a], $lps_ins_j[$a], $row->Satuan, 'Belum Dianalisa', 'Belum Dianalisa', $row->Status);
+					} else if ($cek_status == 'QUARANTINE') {
+						$this->table->add_row($row->Nomor_LPB, $lps_ins[$a] , $row->Tanggal_Terima, $row->Kode_Bahan, $lps_batch[$a], $lps_ins_j[$a], $row->Satuan, $lps_ana[$a], $lps_ana_s[$a], $link_status);
 					} else {
-						$this->table->add_row($row->Nomor_LPB, $lps_ins[$a] , $row->Tanggal_Terima, $row->Kode_Bahan, $lps_batch[$a], $lps_ins_j[$a], $row->Satuan, $lps_ana[$a], $lps_ana_s[$a]);
+						$this->table->add_row($row->Nomor_LPB, $lps_ins[$a] , $row->Tanggal_Terima, $row->Kode_Bahan, $lps_batch[$a], $lps_ins_j[$a], $row->Satuan, $lps_ana[$a], $lps_ana_s[$a], $row->Status);
 					}
-					
 				}
 				echo $this->table->generate();
 			?>
