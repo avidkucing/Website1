@@ -24,30 +24,60 @@
 			echo "</div>";
 		}
 		
-		echo form_open('gudang/new_lpb');
+		$form_attr = array('class' => 'form-horizontal');
+		echo form_open('gudang/new_lpb', $form_attr);
 	
 		echo "<div class='left-item'>";
-			echo "<p>";
-			echo form_label('No. LPB :');
-			echo ' ';
-			echo form_input('lpb');
-			echo "</p>";
-			echo"<br/>";
-			echo "<p>";
-			$date = array(
-		        'type'          => 'date',
-		        'name'          => 'tgl',
-			);
-			echo form_label('Tanggal Terima :');
-			echo ' ';
-			echo form_input($date);
-			echo "</p>";
-			echo"<br/>";
-			echo "<p>";
-			echo form_label('No. Surat Pesanan :');
-			echo ' ';
-			echo form_input('surat');
-			echo "</p>";
+			echo "<div class='form-group'>";
+			$label_attr = array('class' => 'control-label col-sm-4 text-left');
+			echo form_label('No. LPB:', ' ', $label_attr);
+				echo "<div class='col-sm-8'>";
+				$input_attr = array('class' => 'form-control');
+				echo form_input('lpb', ' ', $input_attr);
+				echo "</div>";
+			echo "</div>";
+
+			echo "<div class='form-group'>";
+			$label_attr = array('class' => 'control-label col-sm-4 text-left');
+			echo form_label('Tgl Terima:', ' ', $label_attr);
+				echo "<div class='col-sm-8'>";
+				$date = array(
+			        'type'          => 'date',
+			        'name'          => 'tgl',
+				);
+				$input_attr = array('class' => 'form-control');
+				echo form_input($date, ' ', $input_attr);
+				echo "</div>";
+			echo "</div>";
+
+			echo "<div class='form-group'>";
+			$label_attr = array('class' => 'control-label col-sm-4 text-left');
+			echo form_label('No. Surat Pesanan:', ' ', $label_attr);
+				echo "<div class='col-sm-8'>";
+				$input_attr = array('class' => 'form-control');
+				echo form_input('surat', ' ', $input_attr);
+				echo "</div>";
+			echo "</div>";
+		echo "</div>";
+
+		echo "<div class='right-item'>";
+			echo "<div class='form-group'>";
+			$label_attr = array('class' => 'control-label col-sm-4 text-left');
+			echo form_label('Nama Supplier:', ' ', $label_attr);
+				echo "<div class='col-sm-8'>";
+				$input_attr = array('class' => 'form-control');
+				echo form_input('supplier', ' ', $input_attr);
+				echo "</div>";
+			echo "</div>";
+
+			echo "<div class='form-group'>";
+			$label_attr = array('class' => 'control-label col-sm-4 text-left');
+			echo form_label('Nama Manufacturer:', ' ', $label_attr);
+				echo "<div class='col-sm-8'>";
+				$input_attr = array('class' => 'form-control');
+				echo form_input('manufacturer', ' ', $input_attr);
+				echo "</div>";
+			echo "</div>";
 		echo "</div>";
 
 		//tabel form LPB bahan baku
