@@ -57,23 +57,7 @@
 			}
 			?>
 			<input type="text" class="content-item form-control" placeholder="Search" style="display: none;">
-
-			<?php
-				$template = array(
-			        'table_open'            => '<table class="content-item table table-bordered table-hover table-responsive bahanbaku">'
-				);
-				$this->table->set_template($template);
-				$this->table->set_heading('No. LPB', 'Tanggal Terima', 'Kode Bahan', 'Nomor Batch', 'Nama Supplier', 'Nama Manufacturer', 'Jumlah', 'Satuan', 'Status');
-				//print_r($lpb);
-				//$b = 0;
-				foreach ($lpb as $row) {
-					//print_r($row);
-					$a = $row->Nomor_LPB;
-					$this->table->add_row($row->Nomor_LPB, $row->Tanggal_Terima, $row->Kode_Bahan, $lpb_batch[$a], $row->Nama_Supplier, $row->Nama_Manufacturer, $row->Jumlah, $row->Satuan, $row->Status);
-				}
-				echo $this->table->generate();
-			?>
-			<!--<table class="content-item table table-bordered table-hover table-responsive bahanbaku">
+			<table class="content-item table table-bordered table-hover table-responsive bahanbaku">
 				<thead>
 			        <tr>
 				        <th>No.</th>
@@ -98,7 +82,6 @@
 				    <tr><td>Test</td><td>Test</td><td>Test</td><td>Test</td><td>Test</td><td>Test</td><td>Test</td><td>Test</td><td>Test</td><td>Test</td></tr>
 				</tbody>
 			</table>
-			-->
 			<table class="content-item table table-bordered table-hover table-responsive bahanjadi" style="display: none;">
 				<thead>
 			        <tr>
