@@ -29,7 +29,7 @@ Class Qc_Database extends CI_Model {
 	public function homepage_sampel(){
 		$this->db->select('Nomor_Batch, Nomor_Instruksi, Nomor_Analisa, Sisa_Sampel, Jumlah_Sampel');
 		$this->db->from('sampel_bahan_terima');
-
+		//gagal add .
 		$o_lps_rows = $this->db->get()->result();
 		
 		return $o_lps_rows;
