@@ -45,7 +45,7 @@
 			</ul>
 			<ul class="links2 list-unstyled">
 				<li><a href="#"><i class="fas fa-bell fa-fw fa-lg"></i> Notifikasi</a></li>
-				<li><a href="gudang/logout"><i class="fas fa-power-off fa-fw fa-lg"></i> Logout</a></li>
+				<li><a href="<?php echo base_url(); ?>gudang/logout"><i class="fas fa-power-off fa-fw fa-lg"></i> Logout</a></li>
 			</ul>
 		</nav>
 		<div id="content">

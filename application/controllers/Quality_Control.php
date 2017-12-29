@@ -65,7 +65,7 @@ class Quality_Control extends CI_Controller{
 			$data = array(
 				'Nomor_LPB' => $this->input->post('lpb'),
 				'Nomor_Instruksi' => $this->input->post('no_ins'),
-				'Nomor_Analisa' => $this->input->post('lpb'), //sementara
+				'Nomor_Analisa' => $this->input->post('no_ins'), //sementara
 				'Tanggal_Instruksi' => $this->input->post('tgl'),
 				'EXP_Date' => $this->input->post('tgl2'),
 				'Doc_COA' => $this->input->post('coa'),
@@ -127,7 +127,7 @@ class Quality_Control extends CI_Controller{
 				
 			} else {
 				$data['message_display'] = 'Data sudah pernah diinput!';
-				$this->load->view('qc/qc_analisa_form', $data);
+				$this->load->view('qc/qc_homepage', $data);
 			}
 		}
 	}
