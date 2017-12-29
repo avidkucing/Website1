@@ -30,8 +30,7 @@ class Quality_Control extends CI_Controller{
  	public function index(){
 		$data['lps'] = $this->qc_database->homepage();
 		$data['lps_batch'] =$this->qc_database->homepage_batch();
-		$data['lps_instruksi'] =$this->qc_database->homepage_instruksi();
-		$data['lps_analisa'] =$this->qc_database->homepage_analisa();
+		$data['lps_sampel'] =$this->qc_database->homepage_sampel();
 		$this->load->view('qc/qc_homepage', $data);
 	}
 
@@ -81,8 +80,7 @@ class Quality_Control extends CI_Controller{
 				$data['message_display'] = 'Instruksi berhasil disimpan !';
 				$data['lps'] = $this->qc_database->homepage();
 				$data['lps_batch'] =$this->qc_database->homepage_batch();
-				$data['lps_instruksi'] =$this->qc_database->homepage_instruksi();
-				$data['lps_analisa'] =$this->qc_database->homepage_analisa();
+				$data['lps_instruksi'] =$this->qc_database->homepage_sampel();
 				$this->load->view('qc/qc_homepage', $data);
 			} else {
 				$data['message_display'] = 'Data sudah pernah diinput!';
@@ -121,8 +119,7 @@ class Quality_Control extends CI_Controller{
 				}
 				$data['lps'] = $this->qc_database->homepage();
 				$data['lps_batch'] =$this->qc_database->homepage_batch();
-				$data['lps_instruksi'] =$this->qc_database->homepage_instruksi();
-				$data['lps_analisa'] =$this->qc_database->homepage_analisa();
+				$data['lps_instruksi'] =$this->qc_database->homepage_sampel();
 				$this->load->view('qc/qc_homepage', $data);	
 				
 			} else {

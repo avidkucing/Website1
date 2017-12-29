@@ -19,7 +19,7 @@
     <script defer src="<?php echo base_url(); ?>public/js/fontawesome-all.js"></script>
     <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script src="<?php echo base_url(); ?>public/js/gudang.js"></script>
+    <!--<script src="<?php echo base_url(); ?>public/js/gudang.js"></script>-->
 </head>
 
 <body>
@@ -65,76 +65,37 @@
 				$this->table->set_heading('No. LPB',  'Nomor Instruksi Sampling', 'Tanggal Terima', 'Kode Bahan', 'Nomor Batch', 'Jumlah Sampel', 'Satuan','Nomor Analisa', 'Sisa Sampel Pertinggal');
 				
 				//print_r($lps_analisa); baru bisa dilihat setelah fungsi tambahnya jadi
-				
-				
+					
+				foreach ($lps_sampel as $x) {
+					$kode = $x->Nomor_Batch;
+					$ins[$kode] = $x->Nomor_Instruksi;
+					$jum[$kode] = $x->Jumlah_Sampel;
+					$ana[$kode] = $x->Nomor_Analisa;
+					$sisa[$kode] = $x->Sisa_Sampel;
+				}
+
 				foreach ($lps as $row) {
-					
-					//indeks nomor batch & form
-					$a = $row->Nomor_LPB;
-					
-					//link untuk isi form
-					$link_instruksi = anchor('quality_control/instruksi_sampling_bahan_show/'.$a ,'Isi');
-					$link_analisa = anchor('quality_control/analisa_sampling_bahan_show/'.$a ,'Isi');
-
-					////////////////////////////////////////////////////////
-					//convert $lps_instruksi
-					$b = 0;
-					$lps_ins = array();
-
-					foreach ($lps_instruksi as $x => $b) {
-						$kode = $lps_instruksi[$x]['Nomor_LPB'];
-						$lps_ins[$kode] = $lps_instruksi[$x]['Nomor_Instruksi'];
-						$lps_ins_j[$kode] = $lps_instruksi[$x]['Jumlah_Sampel'];
+					foreach ($lps_batch as $rowb) {
+						$a = $row->Nomor_LPB;
+ 						$b = $rowb->Nomor_LPB;
+ 						$c = $rowb->Nomor_Batch;
+ 						
+ 						$link_instruksi = anchor('quality_control/instruksi_sampling_bahan_show/'.$c ,'Isi');
+						$link_analisa = anchor('quality_control/analisa_sampling_bahan_show/'.$c ,'Isi');
+ 						if ($b == $a) {
+ 							if (!(isset($ins[$c]))) {
+ 								$this->table->add_row($row->Nomor_LPB, $link_instruksi, $row->Tanggal_Terima, $row->Kode_Bahan, $rowb->Nomor_Batch, $link_instruksi, $row->Satuan, 'analisa', 'sisa');	
+ 							} else if (($ana[$c] == $ins[$c])) {
+ 								$this->table->add_row($row->Nomor_LPB, $ins[$c], $row->Tanggal_Terima, $row->Kode_Bahan, $rowb->Nomor_Batch, $jum[$c], $row->Satuan, $link_analisa, $link_analisa);
+ 							} else {
+ 								$this->table->add_row($row->Nomor_LPB, $ins[$c], $row->Tanggal_Terima, $row->Kode_Bahan, $rowb->Nomor_Batch, $ins[$c], $row->Satuan, $ana[$c], $sisa[$c]);
+ 							}
+ 							
+ 						}
 					}
-					//convert $lps_analisa
-					$b = 0;
-					$lps_ana = array();
-
-					foreach ($lps_analisa as $y => $b) {
-						$kode = $lps_analisa[$y]['Nomor_LPB'];
-						$lps_ana[$kode] = $lps_analisa[$y]['Nomor_Analisa'];
-						$lps_ana_s[$kode] = $lps_analisa[$y]['Sisa_Sampel'];
-					}
-					////////////////////////////////////////////////////////
-
-					//cek form apa sudah diisi
-					if (!(isset($lps_ins[$a]))) {
-						$this->table->add_row($row->Nomor_LPB, $link_instruksi , $row->Tanggal_Terima, $row->Kode_Bahan, $lps_batch[$a], $link_instruksi, $row->Satuan, 'Isi instruksi terlebih dahulu', 'Isi instruksi terlebih dahulu');
-					} else if (($lps_ana[$a]) == ($lps_ins[$a])) {
-						$this->table->add_row($row->Nomor_LPB, $lps_ins[$a] , $row->Tanggal_Terima, $row->Kode_Bahan, $lps_batch[$a], $lps_ins_j[$a], $row->Satuan, $link_analisa, $link_analisa);
-					} else {
-						$this->table->add_row($row->Nomor_LPB, $lps_ins[$a] , $row->Tanggal_Terima, $row->Kode_Bahan, $lps_batch[$a], $lps_ins_j[$a], $row->Satuan, $lps_ana[$a], $lps_ana_s[$a]);
-					}
-					
 				}
 				echo $this->table->generate();
 			?>
-			<!--<table class="content-item table table-bordered table-hover table-responsive bahanbaku">
-				<thead>
-			        <tr>
-				        <th>No.</th>
-				        <th>No. LPB</th>
-				        <th>Tanggal Terima</th>
-				        <th>Kode Bahan</th>
-				        <th>No. Batch</th>
-				        <th>Nama Supplier</th>
-				        <th>Nama Manufacturer</th>
-				        <th>Jumlah</th>
-				        <th>Satuan</th>
-				        <th>Status</th>
-				    </tr>
-				</thead>
-				<tbody>
-				    <tr><td>Test</td><td>Test</td><td>Test</td><td>Test</td><td>Test</td><td>Test</td><td>Test</td><td>Test</td><td>Test</td><td>Test</td></tr>
-				    <tr><td>Test</td><td>Test</td><td>Test</td><td>Test</td><td>Test</td><td>Test</td><td>Test</td><td>Test</td><td>Test</td><td>Test</td></tr>
-				    <tr><td>Test</td><td>Test</td><td>Test</td><td>Test</td><td>Test</td><td>Test</td><td>Test</td><td>Test</td><td>Test</td><td>Test</td></tr>
-				    <tr><td>Test</td><td>Test</td><td>Test</td><td>Test</td><td>Test</td><td>Test</td><td>Test</td><td>Test</td><td>Test</td><td>Test</td></tr>
-				    <tr><td>Test</td><td>Test</td><td>Test</td><td>Test</td><td>Test</td><td>Test</td><td>Test</td><td>Test</td><td>Test</td><td>Test</td></tr>
-				    <tr><td>Test</td><td>Test</td><td>Test</td><td>Test</td><td>Test</td><td>Test</td><td>Test</td><td>Test</td><td>Test</td><td>Test</td></tr>
-				    <tr><td>Test</td><td>Test</td><td>Test</td><td>Test</td><td>Test</td><td>Test</td><td>Test</td><td>Test</td><td>Test</td><td>Test</td></tr>
-				</tbody>
-			</table>
-			-->
 		</div>
 	</div>
 </body>
