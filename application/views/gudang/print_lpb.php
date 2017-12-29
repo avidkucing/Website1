@@ -4,11 +4,11 @@
   <title>Print LPB</title>
   <meta charset="utf-8">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" href="print-lpb.css">
-    <script defer src="fontawesome-all.js"></script>
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>public/css/gudang.css">
+    <script defer src="<?php echo base_url(); ?>public/js/fontawesome-all.js"></script>
     <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script src="gudang.js"></script>
+    <script src="<?php echo base_url(); ?>public/js/gudang.js"></script>
 </head>
 
 <body>

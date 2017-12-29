@@ -21,9 +21,9 @@ Class Qc_Database extends CI_Model {
 		$o_batch_rows = $query->result();
 
 		//convert object to multiple-array
-		$a_batch_rows = json_decode(json_encode($o_batch_rows), True);
+		//$a_batch_rows = json_decode(json_encode($o_batch_rows), True);
 
-		//convert multiple-array to array of string per nomor_LPB
+		/*/convert multiple-array to array of string per nomor_LPB
 		$b = 0;
 		$batch_rows = array();
 		$str_tmp = '';
@@ -42,12 +42,12 @@ Class Qc_Database extends CI_Model {
 			}
 			$batch_rows[$kode] = $str_tmp;
 			$cek = $kode;
-		}
-		return $batch_rows;
+		}*/
+		return $o_batch_rows;
 	}
 
 	public function homepage_instruksi(){
-		$this->db->select('Nomor_LPB, Nomor_Instruksi, Jumlah_Sampel');
+		$this->db->select('Nomor_Batch, Nomor_Instruksi, Jumlah_Sampel');
 		$this->db->from('sampel_bahan_terima');
 
 		$o_lps_rows = $this->db->get()->result();
@@ -58,7 +58,7 @@ Class Qc_Database extends CI_Model {
 	}
 
 	public function homepage_analisa(){
-		$this->db->select('Nomor_LPB, Nomor_Analisa, Sisa_Sampel');
+		$this->db->select('Nomor_Batch, Nomor_Analisa, Sisa_Sampel');
 		$this->db->from('sampel_bahan_terima');
 
 		$o_lps_rows = $this->db->get()->result();

@@ -4,9 +4,10 @@ Class Gudang_Database extends CI_Model {
 
 	//show data LPB
  	public function homepage() {
- 		$this->db->select('bahan_terima.Nomor_LPB, bahan_terima.Tanggal_Terima, jenis_bahan.Kode_Bahan, jenis_bahan.Nama_Supplier, jenis_bahan.Nama_Manufacturer, bahan_terima.Jumlah, jenis_bahan.Satuan, bahan_terima.Status');
+ 		$this->db->select('bahan_terima.Nomor_LPB, bahan_terima.Tanggal_Terima, jenis_bahan.Kode_Bahan, jenis_bahan.Nama_Supplier, jenis_bahan.Nama_Manufacturer, jenis_bahan.Satuan');
  		$this->db->from('bahan_terima');
  		$this->db->join('jenis_bahan', 'bahan_terima.ID_Bahan = jenis_bahan.ID_Bahan', 'inner');
+ 		$this->db->order_by('Tanggal_Terima desc, Nomor_LPB desc');
  		
  		$o_lpb_rows = $this->db->get()->result();
  		
@@ -17,14 +18,16 @@ Class Gudang_Database extends CI_Model {
  	public function homepage_batch() {
  		$this->db->select('*');
  		$this->db->from('nomor_batch_bahan');
+ 		$this->db->order_by('Nomor_LPB', 'desc');
  		
  		$query = $this->db->get();
  		$o_batch_rows = $query->result();
  
  		//convert object to multiple-array
- 		$a_batch_rows = json_decode(json_encode($o_batch_rows), True);
- 
- 		//convert multiple-array to array of string per nomor_LPB
+ 		//$a_batch_rows = json_decode(json_encode($o_batch_rows), True);
+		return $o_batch_rows; 
+ 		
+ 		/*/convert multiple-array to array of string per nomor_LPB
  		$b = 0;
  		$batch_rows = array();
  		$str_tmp = '';
@@ -45,6 +48,7 @@ Class Gudang_Database extends CI_Model {
  			$cek = $kode;
  		}
  		return $batch_rows;
+ 		*/
  	}
  
 	
@@ -111,8 +115,20 @@ Class Gudang_Database extends CI_Model {
 	    
 	    return $this->db->get()->result();		
 	 }
-
-	 public function cari_id_bahan($cari) {
+	 public function cek_batch_bahan($cari) {
+	 	// Query to check whether batch already exist or not
+		$condition = "Nomor_Batch =" . "'" . $cari . "'";
+		$this->db->select('*');
+		$this->db->from('nomor_batch_bahan');
+		$this->db->where($condition);
+		$query = $this->db->get();
+		if ($query->num_rows() == 0) {
+			return true;
+		} else {
+			return false;
+		}
+	 }
+	 public function get_id_bahan($cari) {
 	 	$this->db->select('ID_Bahan');
 	    $this->db->distinct();
 	    $this->db->from('jenis_bahan');
@@ -146,6 +162,7 @@ Class Gudang_Database extends CI_Model {
 	 }
 
 	 public function insert_batch_bahan_baku($data){
+	 	
 	 	$this->db->insert('nomor_batch_bahan', $data);
 		if ($this->db->affected_rows() > 0) {
 			return true;

@@ -1,6 +1,6 @@
 $(document).ready(function(){
-	//$(".bahanbaku tbody tr").addClass("klik");
-    $(".klik").attr("data-href","print_lpb.php");
+	$(".bahanbaku tbody tr").addClass("klik");
+    $(".klik").attr("data-href","gudang/print_lpb_show/");
 	$(".klik").click(function() {
         window.location = $(this).data("href");
     });
@@ -17,14 +17,14 @@ $(document).ready(function(){
 		$(".bahanjadi").fadeIn("fast");
 	});
 
-	$("#kodebahan").on("change",function(){
+	$(".kodebahan").on("change",function(){
     var value = $(this).val();
     $.ajax({
          url : "get_data_nama_bahan",
          type: "post",
          data: {"value":value},
          success : function(data){
-             $("#namabahan").html(data);
+             $(".namabahan").html(data);
          },
     });
 
@@ -33,7 +33,7 @@ $(document).ready(function(){
          type: "post",
          data: {"value":value},
          success : function(data){
-             $("#manufaktur").html(data);
+             $(".manufaktur").html(data);
          },
     });
 
@@ -42,7 +42,7 @@ $(document).ready(function(){
          type: "post",
          data: {"value":value},
          success : function(data){
-             $("#supplier").html(data);
+             $(".supplier").html(data);
          },
     });
 
@@ -51,7 +51,7 @@ $(document).ready(function(){
          type: "post",
          data: {"value":value},
          success : function(data){
-             $("#satuan").html(data);
+             $(".satuan").html(data);
          },
     });
 

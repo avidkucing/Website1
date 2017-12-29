@@ -27,7 +27,7 @@
 		$form_attr = array('class' => 'form-horizontal');
 		echo form_open('gudang/new_lpb', $form_attr);
 	
-		echo "<div class='left-item'>";
+		echo "<div class='content-item'>";
 			echo "<div class='form-group'>";
 			$label_attr = array('class' => 'control-label col-sm-4 text-left');
 			echo form_label('No. LPB:', ' ', $label_attr);
@@ -60,13 +60,38 @@
 			echo "</div>";
 		echo "</div>";
 
-		echo "<div class='right-item'>";
+		echo "<div class='content-item'>";
+			//get object return from gudang database model & initial array kosong untuk form
+			$kode_rows = $this->gudang_database->get_kode_bahan();
+			$nama_rows = array();
+
+			echo "<div class='form-group'>";
+			$label_attr = array('class' => 'control-label col-sm-4 text-left');
+			echo form_label('Kode Bahan:', ' ', $label_attr);
+				echo "<div class='col-sm-8'>";
+				echo form_dropdown('kode', $kode_rows,'', 'class="form-control kodebahan"'); 
+				echo "</div>";
+			echo "</div>";
+
+			echo "<div class='form-group'>";
+			$label_attr = array('class' => 'control-label col-sm-4 text-left');
+			echo form_label('Nama Bahan:', ' ', $label_attr);
+				echo "<div class='col-sm-8'>";
+				echo form_dropdown('nama', $nama_rows, '', 'class="form-control namabahan"');
+				echo "</div>";
+			echo "</div>";
+		echo "</div>";
+
+
+		echo "<div class='content-item'>";
+			$manu_rows = array();
+			$supp_rows = array();
+		
 			echo "<div class='form-group'>";
 			$label_attr = array('class' => 'control-label col-sm-4 text-left');
 			echo form_label('Nama Supplier:', ' ', $label_attr);
 				echo "<div class='col-sm-8'>";
-				$input_attr = array('class' => 'form-control');
-				echo form_input('supplier', ' ', $input_attr);
+				echo form_dropdown('supp', $supp_rows, '', 'class="form-control supplier"'); 
 				echo "</div>";
 			echo "</div>";
 
@@ -74,50 +99,30 @@
 			$label_attr = array('class' => 'control-label col-sm-4 text-left');
 			echo form_label('Nama Manufacturer:', ' ', $label_attr);
 				echo "<div class='col-sm-8'>";
-				$input_attr = array('class' => 'form-control');
-				echo form_input('manufacturer', ' ', $input_attr);
+				echo form_dropdown('manu', $manu_rows, '', 'class="form-control manufaktur"');
 				echo "</div>";
 			echo "</div>";
 		echo "</div>";
 
-		//tabel form LPB bahan baku
-		$template = array(
-	        'table_open'            => '<table class="content-item table table-bordered table-responsive">'
-		);
-
-		echo "<div class='error_msg'>";
-		echo validation_errors();
-		echo "</div>";
+		echo "<div class='content-item'>";
 		
-		$this->table->set_template($template);
-		$this->table->set_heading('Kode', 'Nama Bahan', 'Manufacturer', 'Supplier', 'Jumlah', 'Satuan');
-		
-		//get object return from gudang database model & initial array kosong untuk form
-		$kode_rows = $this->gudang_database->get_kode_bahan();
-		$nama_rows = array();
-		$manu_rows = array();
-		$supp_rows = array();
-		$sat_rows = array();
-		$ID_rows = array();
+		//nomor batch
+		?>
 
-		$this->table->add_row( (form_dropdown('kode', $kode_rows,'','id="kodebahan"')), (form_dropdown('nama', $nama_rows,'','id="namabahan"')), (form_dropdown('manu', $manu_rows,'','id="manufaktur"')), (form_dropdown('supp', $supp_rows,'','id="supplier"')), (form_input('jumlah')), (form_dropdown('satuan', $sat_rows,'','id="satuan"')) );
-		
-		echo $this->table->generate();
-
-		echo "<div class='left-item'>";
-		//nomor batch?>
-		<input type="button" class="btn" id="tambah" value="Tambah Nomor Batch" onClick="addRow('dataTable')" /> 
- 		<input type="button" class="btn" id="back" value="Hapus Nomor Batch" onClick="deleteRow('dataTable')" />
- 		<br>
+		<div class="button-container">
+			<input type="button" class="btn" id="tambah" value="Tambah Nomor Batch" onClick="addRow('dataTable')" /> 
+	 		<input type="button" class="btn" id="back" value="Hapus Nomor Batch" onClick="deleteRow('dataTable')" />
+	 		<br><br>
+	 	</div>
 
 		<?php
 		$template_batch = array(
 	        'table_open'            => '<table id="dataTable" class="content-item table table-bordered table-responsive">'
 		);
 		$this->table->set_template($template_batch);
-		$this->table->set_heading('Pilih', 'Nomor Batch');
+		$this->table->set_heading('Pilih', 'Nomor Batch', 'Jumlah', 'Satuan');
 		$batch = array(
-            array(form_checkbox('chk[]', 'accept', TRUE), form_input('batch[]') )
+            array(form_checkbox('chk[]', 'accept', TRUE), form_input('batch[]', '', 'class="form-control"'), form_input('jumlah[]', '', 'class="form-control"'),  form_dropdown('satuan', $manu_rows, '', 'class="form-control satuan"'))
         );
 
 		echo $this->table->generate($batch);
@@ -131,8 +136,10 @@
 
 	<!--<p class="right-item sign">Signed By (Electronic Sign)</p>-->
 	<div class="button-container">
-		<button onclick="location.href='<?php echo base_url();?>gudang'" type="button" class="btn" id="back">Back</button>
 		<button type="button submit" class="btn" id="tambah">Tambah</button>
+		<button onclick="location.href='<?php echo base_url();?>gudang'" type="button" class="btn" id="back">Back</button>
+		<br>
+		<br>
 		<!--<form class="button-item" action="gudang.html"><button type="button submit" class="btn" id="print">Print</button></form>-->
 	</div>
 	<?php

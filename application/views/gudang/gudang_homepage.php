@@ -64,62 +64,21 @@
  				);
  				$this->table->set_template($template);
  				$this->table->set_heading('No. LPB', 'Tanggal Terima', 'Kode Bahan', 'Nomor Batch', 'Nama Supplier', 'Nama Manufacturer', 'Jumlah', 'Satuan', 'Status');
- 				//print_r($lpb);
+ 				//print_r($lpb_batch);
  				//$b = 0;
  				foreach ($lpb as $row) {
- 					//print_r($row);
- 					$a = $row->Nomor_LPB;
- 					$this->table->add_row($row->Nomor_LPB, $row->Tanggal_Terima, $row->Kode_Bahan, $lpb_batch[$a], $row->Nama_Supplier, $row->Nama_Manufacturer, $row->Jumlah, $row->Satuan, $row->Status);
+ 					foreach ($lpb_batch as $rowb) {
+ 						$a = $row->Nomor_LPB;
+ 						$b = $rowb->Nomor_LPB;
+ 						if ($b == $a) {
+ 							$this->table->add_row($row->Nomor_LPB, $row->Tanggal_Terima, $row->Kode_Bahan, $rowb->Nomor_Batch, $row->Nama_Supplier, $row->Nama_Manufacturer, $rowb->Jumlah, $row->Satuan, $rowb->Status);		
+ 						}
+ 						
+ 					}
+ 					
  				}
  				echo $this->table->generate();
  			?>
- 			<!--<table class="content-item table table-bordered table-hover table-responsive bahanbaku">
-			<table class="content-item table table-bordered table-hover table-responsive bahanbaku">
-				<thead>
-			        <tr>
-				        <th>No.</th>
-				        <th>No. LPB</th>
-				        <th>Tanggal Terima</th>
-				        <th>Kode Bahan</th>
-				        <th>No. Batch</th>
-				        <th>Nama Supplier</th>
-				        <th>Nama Manufacturer</th>
-				        <th>Jumlah</th>
-				        <th>Satuan</th>
-				        <th>Status</th>
-				    </tr>
-				</thead>
-				<tbody>
-				    <tr><td>Test</td><td>Test</td><td>Test</td><td>Test</td><td>Test</td><td>Test</td><td>Test</td><td>Test</td><td>Test</td><td>Test</td></tr>
-				    <tr><td>Test</td><td>Test</td><td>Test</td><td>Test</td><td>Test</td><td>Test</td><td>Test</td><td>Test</td><td>Test</td><td>Test</td></tr>
-				    <tr><td>Test</td><td>Test</td><td>Test</td><td>Test</td><td>Test</td><td>Test</td><td>Test</td><td>Test</td><td>Test</td><td>Test</td></tr>
-				    <tr><td>Test</td><td>Test</td><td>Test</td><td>Test</td><td>Test</td><td>Test</td><td>Test</td><td>Test</td><td>Test</td><td>Test</td></tr>
-				    <tr><td>Test</td><td>Test</td><td>Test</td><td>Test</td><td>Test</td><td>Test</td><td>Test</td><td>Test</td><td>Test</td><td>Test</td></tr>
-				    <tr><td>Test</td><td>Test</td><td>Test</td><td>Test</td><td>Test</td><td>Test</td><td>Test</td><td>Test</td><td>Test</td><td>Test</td></tr>
-				    <tr><td>Test</td><td>Test</td><td>Test</td><td>Test</td><td>Test</td><td>Test</td><td>Test</td><td>Test</td><td>Test</td><td>Test</td></tr>
-				</tbody>
-			</table>
-			<table class="content-item table table-bordered table-hover table-responsive bahanjadi" style="display: none;">
-				<thead>
-			        <tr>
-				        <th>No.</th>
-				        <th>Tanggal Release</th>
-				        <th>No. Analisa</th>
-				        <th>Kode Produk</th>
-				        <th>Jumlah</th>
-				    </tr>
-				</thead>
-				<tbody>
-				    <tr>
-				        <td>Test</td>
-				        <td>Test</td>
-				        <td>Test</td>
-				        <td>Test</td>
-				        <td>Test</td>
-				    </tr>
-				</tbody>
-			</table>
-			-->
 			<button onclick="location.href='<?php echo base_url();?>Gudang/print_lpb_show'" type="button submit" class="content-item btn btn-block bahanjadi" style="display: none;"><i class="fas fa-plus fa-fw fa-lg"></i> Terbitkan Surat Jalan</button>
 			<button onclick="location.href='<?php echo base_url();?>Gudang/tambah_lpb_show'" type="button submit" class="content-item btn btn-block bahanbaku"><i class="fas fa-plus fa-fw fa-lg"></i> Tambah LPB</button>
 		</div>
