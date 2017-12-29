@@ -1,11 +1,11 @@
 $(document).ready(function(){
-	//$(".bahanbaku tbody tr").addClass("klik");
+	$(".bahanbaku tbody tr td").addClass("klik");
     //$(".klik").attr("data-href","gudang/print_lpb_show/");
 	//$(".klik").click(function() {
     //    window.location = $(this).data("href");
     //});
     //$("td").attr("data-href","gudang/print_lpb_show/");
-    $('td').click(function(){
+    $('.klik').click(function(){
         $link = "gudang/print_lpb_show/" + (this.id);
         window.location.href=$link ;
         /*$.ajax({
