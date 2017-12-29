@@ -12,7 +12,7 @@
 	?>
 
 <head>
-  <title>Quality Control</title>
+  <title>Quality Control Branch</title>
   <meta charset="utf-8">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>public/css/gudang.css">
