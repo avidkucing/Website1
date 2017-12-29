@@ -51,7 +51,30 @@ Class Gudang_Database extends CI_Model {
  		*/
  	}
  
-	
+	public function print_lpb($nolpb) {
+		$this->db->select('bahan_terima.Nomor_LPB, bahan_terima.Tanggal_Terima, jenis_bahan.Kode_Bahan, jenis_bahan.Nama_Bahan, jenis_bahan.Nama_Supplier, jenis_bahan.Nama_Manufacturer, bahan_terima.Nomor_Surat, jenis_bahan.Satuan');
+ 		$this->db->from('bahan_terima');
+ 		$this->db->where("Nomor_LPB", $nolpb);
+ 		$this->db->join('jenis_bahan', 'bahan_terima.ID_Bahan = jenis_bahan.ID_Bahan', 'inner');
+ 		$this->db->order_by('Tanggal_Terima desc, Nomor_LPB desc');
+ 		
+ 		$o_lpb_rows = $this->db->get()->result();
+ 		$a_lpb_rows = json_decode(json_encode($o_lpb_rows), True);
+ 		return $a_lpb_rows;
+	}
+
+	public function print_batch_lpb($nolpb) {
+		$this->db->select('*');
+ 		$this->db->from('nomor_batch_bahan');
+ 		$this->db->where("Nomor_LPB", $nolpb);
+ 		$this->db->order_by('Nomor_LPB', 'desc');
+ 		
+ 		$query = $this->db->get();
+ 		$o_batch_rows = $query->result();
+ 		$a_batch_rows = json_decode(json_encode($o_batch_rows), True);
+		return $a_batch_rows; 
+	}
+
 	public function get_kode_bahan() {
 
 		$this->db->select('Kode_Bahan');
@@ -115,6 +138,27 @@ Class Gudang_Database extends CI_Model {
 	    
 	    return $this->db->get()->result();		
 	 }
+
+	 public function get_data_nama_manufaktur_from_supplier($value, $value2) {
+	 	$condition = "Kode_Bahan = " . "'" . $value . "'" . " AND Nama_Supplier = " . "'" . $value2 . "'";
+	 	$this->db->select('Nama_Manufacturer');
+	    $this->db->distinct();
+	    $this->db->from('jenis_bahan');
+	    $this->db->where($condition);
+
+	    return $this->db->get()->result();	
+	 }
+
+	public function get_data_nama_supplier_from_manufaktur($value, $value2) {
+	 	$condition = "Kode_Bahan = " . "'" . $value . "'" . " AND Nama_Manufacturer = " . "'" . $value2 . "'";
+	 	$this->db->select('Nama_Supplier');
+	    $this->db->distinct();
+	    $this->db->from('jenis_bahan');
+	    $this->db->where($condition);
+
+	    return $this->db->get()->result();	
+	 }
+
 	 public function cek_batch_bahan($cari) {
 	 	// Query to check whether batch already exist or not
 		$condition = "Nomor_Batch =" . "'" . $cari . "'";

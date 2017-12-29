@@ -33,8 +33,11 @@ class Gudang extends CI_Controller{
  		$this->load->view('gudang/gudang_homepage', $data);
 	}
 
-	public function print_lpb_show(){
-		$this->load->view('gudang/print_lpb');	
+	public function print_lpb_show($value){
+		//$value = $this->input->post("value");
+		$data['lpb'] = $this->gudang_database->print_lpb($value);
+ 		$data['lpb_batch'] =$this->gudang_database->print_batch_lpb($value);
+		$this->load->view('gudang/print_lpb', $data);	
 	}
 	
 	public function tambah_lpb_show(){
@@ -85,13 +88,37 @@ class Gudang extends CI_Controller{
 	      echo $option;		
 	}
 
+	public function get_data_manufaktur_from_supplier(){
+		  $kodebahan = $this->input->post("kode");
+		  $supplier = $this->input->post("supp");
+	      $data = $this->gudang_database->get_data_nama_manufaktur_from_supplier($kodebahan, $supplier);
+	      $option ="";
+	      foreach($data as $d)
+	      {
+	         $option .= "<option value='".$d->Nama_Manufacturer."' >".$d->Nama_Manufacturer."</option>";
+	      }
+	      echo $option;
+	}
+	public function get_data_supplier_from_manufaktur(){
+		  $kodebahan = $this->input->post("kode");
+		  $manufaktur = $this->input->post("manu");
+	      $data = $this->gudang_database->get_data_nama_supplier_from_manufaktur($kodebahan, $manufaktur);
+	      $option ="";
+	      foreach($data as $d)
+	      {
+	         $option .= "<option value='".$d->Nama_Supplier."' >".$d->Nama_Supplier."</option>";
+	      }
+	      echo $option;
+	}
+	
+
 	public function new_lpb(){
 		// Check validation for user input in SignUp form
 		$this->form_validation->set_rules('lpb', 'Nomor LPB', 'trim|required');
 		$this->form_validation->set_rules('tgl', 'Tanggal Terima', 'trim|required');
 		$this->form_validation->set_rules('surat', 'No. Surat Pesanan', 'trim|required');
 		$this->form_validation->set_rules('kode', 'Kode Bahan', 'trim|required');
-		$this->form_validation->set_rules('nama', 'Nama Bahan', 'trim|required');
+		$this->form_validation->set_rules('nama', 'Nama Batch', 'trim|required');
 		$this->form_validation->set_rules('manu', 'Nama Manufaktur', 'trim|required');
 		$this->form_validation->set_rules('supp', 'Nama Supplier', 'trim|required');
 		$this->form_validation->set_rules('satuan', 'Satuan', 'trim|required');
@@ -100,7 +127,7 @@ class Gudang extends CI_Controller{
 
 		if ($this->form_validation->run() == FALSE) {
 			$data['message_display'] = 'Input kosong!';
-			$this->load->view('gudang/tambah_lpb');
+			$this->load->view('gudang/tambah_lpb', $data);
 		} else {
 			
 			$batch = $this->input->post('batch[]');
@@ -114,7 +141,7 @@ class Gudang extends CI_Controller{
 			///////sudah dicek
 			if ($result_cek == FALSE) {
 				$data['message_display'] = 'Nomor batch sudah ada!';
-				$this->load->view('gudang/tambah_lpb');
+				$this->load->view('gudang/tambah_lpb', $data);
 			} else {
 				//cari id_bahan di database
 				$cari = array(

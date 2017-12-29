@@ -69,7 +69,9 @@
 			$label_attr = array('class' => 'control-label col-sm-4 text-left');
 			echo form_label('Kode Bahan:', ' ', $label_attr);
 				echo "<div class='col-sm-8'>";
-				echo form_dropdown('kode', $kode_rows,'', 'class="form-control kodebahan"'); 
+				$dump_kode = array ('' => '--Pilih Opsi Bahan Baku--');
+				$kode_rows = $kode_rows + $dump_kode;
+				echo my_form_dropdown('kode', $kode_rows,'', '', '', 'class="form-control kodebahan"'); 
 				echo "</div>";
 			echo "</div>";
 
@@ -110,8 +112,8 @@
 		?>
 
 		<div class="button-container">
-			<input type="button" class="btn" id="tambah" value="Tambah Nomor Batch" onClick="addRow('dataTable')" /> 
-	 		<input type="button" class="btn" id="back" value="Hapus Nomor Batch" onClick="deleteRow('dataTable')" />
+			<button type="button" class="btn" id="tambah" onClick="addRow('dataTable')">Tambah Nomor Batch</button>
+	 		<button type="button" class="btn" id="back" onClick="deleteRow('dataTable')">Hapus Nomor Batch</button>
 	 		<br><br>
 	 	</div>
 
@@ -137,7 +139,7 @@
 	<!--<p class="right-item sign">Signed By (Electronic Sign)</p>-->
 	<div class="button-container">
 		<button type="button submit" class="btn" id="tambah">Tambah</button>
-		<button onclick="location.href='<?php echo base_url();?>gudang'" type="button" class="btn" id="back">Back</button>
+		<button onclick="location.href='<?php echo base_url();?>gudang'" type="button" class="btn" id="back">Kembali</button>
 		<br>
 		<br>
 		<!--<form class="button-item" action="gudang.html"><button type="button submit" class="btn" id="print">Print</button></form>-->

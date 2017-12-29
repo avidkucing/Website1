@@ -14,35 +14,34 @@
 <body>
 	<p class="title">PT. Hisamitsu Pharma Indonesia</p>
 	<div class="left-item">
-		<p>No. LPB: Test</p>
-		<p>Tanggal Terima: Test</p>
-		<p>No. Surat Pesanan: Test</p>
+		<p>No. LPB: <?php echo $lpb[0]['Nomor_LPB']?></p>
+		<p>Tanggal Terima: <?php echo $lpb[0]['Tanggal_Terima']?></p>
+		<p>No. Surat Pesanan: <?php echo $lpb[0]['Nomor_Surat']?></p>
 	</div>
 	<div class="right-item">
-		<p>Nama Supplier: Test</p>
-		<p>Nama Manufacturer: Test</p>
+		<p>Nama Supplier: <?php echo $lpb[0]['Nama_Supplier']?></p>
+		<p>Nama Manufacturer: <?php echo $lpb[0]['Nama_Manufacturer']?></p>
 	</div>
-	<table class="content-item table table-bordered table-responsive">
-		<thead>
-	        <tr>
-		        <th>Kode</th>
-		        <th>Nama Bahan</th>
-		        <th>No. Batch</th>
-		        <th>Jumlah</th>
-		    </tr>
-		</thead>
-		<tbody>
-		    <tr>
-		        <td>Test</td>
-		        <td>Test</td>
-		        <td>Test</td>
-		        <td>Test</td>
-		    </tr>
-		</tbody>
-	</table>
+	<?php
+	$template = array(
+	    'table_open'            => '<table class="content-item table table-bordered table-responsive">'
+		);
+		$this->table->set_template($template);
+		$this->table->set_heading('Kode', 'Nama Bahan', 'Nomor Batch', 'Jumlah', 'Satuan');
+
+		foreach ($lpb_batch as $row) {
+			$this->table->add_row( $lpb[0]['Kode_Bahan'], $lpb[0]['Nama_Bahan'], $row['Nomor_Batch'], $row['Jumlah'], $lpb[0]['Satuan']);
+		}
+		echo $this->table->generate();
+ 	?>
+
 	<p class="right-item sign">Signed By (Electronic Sign)</p>
+	
 	<div class="button-container">
-		<form class="button-item" action="gudang.html"><button type="button submit" class="btn" id="back">Back</button></form>
-		<form class="button-item" action="gudang.html"><button type="button submit" class="btn" id="print">Print</button></form>
+		<button  onclick="location.href='<?php echo base_url();?>gudang/print'" type="button" class="button-item btn" id="print">belum</button>
+		<button onclick="location.href='<?php echo base_url();?>gudang'" type="button" class="button-item btn" id="back">Kembali</button>
+		<br>
+		<br>
+		<!--<form class="button-item" action="gudang.html"><button type="button submit" class="btn" id="print">Print</button></form>-->
 	</div>
 </body>

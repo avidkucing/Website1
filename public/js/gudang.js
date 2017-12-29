@@ -1,10 +1,24 @@
 $(document).ready(function(){
-	$(".bahanbaku tbody tr").addClass("klik");
-    $(".klik").attr("data-href","gudang/print_lpb_show/");
-	$(".klik").click(function() {
-        window.location = $(this).data("href");
+	//$(".bahanbaku tbody tr").addClass("klik");
+    //$(".klik").attr("data-href","gudang/print_lpb_show/");
+	//$(".klik").click(function() {
+    //    window.location = $(this).data("href");
+    //});
+    //$("td").attr("data-href","gudang/print_lpb_show/");
+    $('td').click(function(){
+        $link = "gudang/print_lpb_show/" + (this.id);
+        window.location.href=$link ;
+        /*$.ajax({
+            url: "gudang/print_lpb_show",  // define here controller then function name
+            method: 'POST',
+            data: { "value": (this.id) },    // pass here your date variable into controller
+            success:function(result) {
+                alert(this.id); // alert your date variable value here
+            }
+        });*/
     });
-	$("#bahanbakutab").click(function(){
+
+    $("#bahanbakutab").click(function(){
 		$("#bahanjaditab").removeClass("active");
 		$("#bahanbakutab").addClass("active");
 		$(".bahanjadi").hide();
@@ -57,6 +71,38 @@ $(document).ready(function(){
 
 	});
 
+    $(".supplier").on("change",function(){
+    var supplier = $(this).val();
+    var kodebahan = $(".kodebahan").val();
+    $.ajax({
+         url : "get_data_manufaktur_from_supplier",
+         type: "post",
+         data: {"kode": kodebahan,
+                "supp": supplier
+                },
+         success : function(data){
+             $(".manufaktur").html(data);
+         },
+    });
+
+    });
+
+    $(".manufaktur").on("change",function(){
+    var manufaktur = $(this).val();
+    var kodebahan = $(".kodebahan").val();
+    $.ajax({
+         url : "get_data_supplier_from_manufaktur",
+         type: "post",
+         data: {"kode": kodebahan,
+                "manu": manufaktur
+                },
+         success : function(data){
+             $(".supplier").html(data);
+         },
+    });
+
+    });
+
 });	    
 
 
@@ -78,8 +124,8 @@ function deleteRow(tableID) {
         var row = table.rows[i];
         var chkbox = row.cells[0].childNodes[0];
         if(null != chkbox && true == chkbox.checked) {
-            if(rowCount <= 1) {               // limit the user from removing all the fields
-                alert("Cannot Remove all the No. Batch.");
+            if(rowCount <= 2) {               // limit the user from removing all the fields
+                alert("Tidak dapat menghapus seluruh form nomor batch!");
                 break;
             }
             table.deleteRow(i);
