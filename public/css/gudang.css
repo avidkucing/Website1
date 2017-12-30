@@ -30,9 +30,18 @@ a, a:hover, a:focus {
     transition: all 0.3s;
 }
 
+table {
+    position: relative;
+    top: 40px;
+}
+
 thead {
 	background: #1584B2;
 	color: white;
+}
+
+tr {
+    cursor: pointer;
 }
 
 .wrapper {
@@ -102,7 +111,10 @@ ul.links2 a {
 }
 
 #content button {
-	margin-top: 20px;
+	position: fixed;
+    top: 0px;
+    width: 81%;
+    margin-top: 10px;
 	background: green;
 	color: white;
 	font-weight: bold;

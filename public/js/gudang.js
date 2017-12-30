@@ -18,6 +18,22 @@ $(document).ready(function(){
         });*/
     });
 
+    $('#print').click(function () {
+                var doc = new jsPDF();
+                var specialElementHandlers = {
+                    '.button-container': function (element, renderer) {
+                        return true;
+                    }
+                };
+   
+                doc.fromHTML($('body').get(0), 15, 15, {
+                    'width': 170,
+                    'elementHandlers': specialElementHandlers
+                });
+                doc.save('sample-file.pdf');
+            });
+
+
     $("#bahanbakutab").click(function(){
 		$("#bahanjaditab").removeClass("active");
 		$("#bahanbakutab").addClass("active");
