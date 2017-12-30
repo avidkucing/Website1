@@ -56,8 +56,6 @@
 				echo "</div>";
 			}
 			?>
-			<input type="text" class="content-item form-control" placeholder="Search" style="display: none;">
-			
  			<?php
  				$template = array(
  			        'table_open'            => '<table class="content-item table table-bordered table-hover table-responsive bahanbaku">'
@@ -85,8 +83,9 @@
  				}
  				echo $this->table->generate();
  			?>
+
+ 			<button onclick="location.href='<?php echo base_url();?>Gudang/tambah_lpb_show'" type="button submit" class="content-item btn btn-block bahanbaku"><i class="fas fa-plus fa-fw fa-lg"></i> Tambah LPB</button>
 			<button onclick="location.href='<?php echo base_url();?>Gudang/print_lpb_show'" type="button submit" class="content-item btn btn-block bahanjadi" style="display: none;"><i class="fas fa-plus fa-fw fa-lg"></i> Terbitkan Surat Jalan</button>
-			<button onclick="location.href='<?php echo base_url();?>Gudang/tambah_lpb_show'" type="button submit" class="content-item btn btn-block bahanbaku"><i class="fas fa-plus fa-fw fa-lg"></i> Tambah LPB</button>
 		</div>
 	</div>
 </body>
