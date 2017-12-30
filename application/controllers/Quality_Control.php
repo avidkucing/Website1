@@ -97,7 +97,11 @@ class Quality_Control extends CI_Controller{
 		$this->form_validation->set_rules('sisa', 'Sisa Pertinggal :', 'trim|required');
 
 		if ($this->form_validation->run() == FALSE) {
-			$this->load->view('Quality_Control/qc_instruksi_form');
+			$data['message_display'] = 'Input kosong!';
+			$data['lps'] = $this->qc_database->homepage();
+			$data['lps_batch'] =$this->qc_database->homepage_batch();
+			$data['lps_sampel'] =$this->qc_database->homepage_sampel();
+			$this->load->view('qc/qc_homepage', $data);
 		} else {
 			$data = array(
 				'Nomor_LPB' => $this->input->post('lpb'),

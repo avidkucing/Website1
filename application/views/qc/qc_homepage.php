@@ -82,10 +82,10 @@
  						
  						if ($b == $a) {
  							if (!(isset($ins[$c]))) {
- 								$form_ins = array('id' => $c, 'class' => 'instruksi');
+ 								$form_ins = array('data' => '--isi--','id' => $c, 'class' => 'instruksi');
  								$this->table->add_row($row->Nomor_LPB, $form_ins, $row->Tanggal_Terima, $row->Kode_Bahan, $rowb->Nomor_Batch, $form_ins, $row->Satuan, '', '');	
  							} else if (($ana[$c] == $ins[$c])) {
- 								$form_ana = array('id' => $c, 'class' => 'analisa');
+ 								$form_ana = array('data' => '--isi--', 'id' => $c, 'class' => 'analisa');
  								$this->table->add_row($row->Nomor_LPB, $ins[$c], $row->Tanggal_Terima, $row->Kode_Bahan, $rowb->Nomor_Batch, $jum[$c], $row->Satuan, $form_ana, $form_ana);
  							} else {
  								$this->table->add_row($row->Nomor_LPB, $ins[$c], $row->Tanggal_Terima, $row->Kode_Bahan, $rowb->Nomor_Batch, $ins[$c], $row->Satuan, $ana[$c], $sisa[$c]);

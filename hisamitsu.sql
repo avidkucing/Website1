@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 29 Des 2017 pada 14.13
+-- Generation Time: 30 Des 2017 pada 15.20
 -- Versi Server: 10.1.21-MariaDB
 -- PHP Version: 5.6.30
 
@@ -83,7 +83,8 @@ INSERT INTO `bahan_terima` (`Nomor_LPB`, `ID_Bahan`, `Tanggal_Terima`, `Nomor_Su
 ('2', 11, '2017-12-27', '2'),
 ('333', 13, '2017-12-29', '333'),
 ('49', 1, '2017-12-04', '44'),
-('5', 2, '2017-12-28', '5');
+('5', 2, '2017-12-28', '5'),
+('5555', 13, '2017-12-07', '555');
 
 -- --------------------------------------------------------
 
@@ -146,6 +147,7 @@ CREATE TABLE `nomor_batch_bahan` (
 INSERT INTO `nomor_batch_bahan` (`Nomor_Batch`, `Nomor_LPB`, `Jumlah`, `Status`) VALUES
 ('1', '13', 111, 'QUARANTINE'),
 ('12', '12', 12, 'QUARANTINE'),
+('1212', '5555', 22, 'QUARANTINE'),
 ('122', '1212', 222, 'QUARANTINE'),
 ('123', '49', 21, 'QUARANTINE'),
 ('13', '1', 120, 'QUARANTINE'),
@@ -233,13 +235,26 @@ CREATE TABLE `sampel_bahan_terima` (
   `Doc_COA` tinyint(1) NOT NULL,
   `Pola_Sampling` varchar(100) NOT NULL,
   `Jumlah_Wadah` float NOT NULL,
-  `Jumlah_Sampel` float NOT NULL,
+  `Jumlah_Sampel` varchar(10) NOT NULL,
   `Petugas_Sampling` varchar(100) NOT NULL,
   `Rencana_Sampling` varchar(100) NOT NULL,
   `Catatan` text NOT NULL,
   `Tanggal_Pemeriksaan` date NOT NULL,
   `Sisa_Sampel` float NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `sampel_bahan_terima`
+--
+
+INSERT INTO `sampel_bahan_terima` (`Nomor_Batch`, `Nomor_Instruksi`, `Nomor_Analisa`, `Tanggal_Instruksi`, `EXP_Date`, `Doc_COA`, `Pola_Sampling`, `Jumlah_Wadah`, `Jumlah_Sampel`, `Petugas_Sampling`, `Rencana_Sampling`, `Catatan`, `Tanggal_Pemeriksaan`, `Sisa_Sampel`) VALUES
+('1', '5', '5', '2017-12-30', '2024-12-30', 1, 'POLA n(1+(N)^-1/2)', 12, '1', 'Habib', 'FULL TEST', 'd', '0000-00-00', 0),
+('12', '6', '6', '2017-12-30', '2017-12-30', 1, 'POLA n(1+(N)^-1/2)', 11, '11', 'Habib', 'FULL TEST', '1', '0000-00-00', 0),
+('123', '11', '11', '2017-12-28', '2027-12-22', 1, 'POLA n(1+(N)^-1/2)', 1, '1', 'Avid', 'FULL TEST', '', '0000-00-00', 0),
+('15', '7', '7', '2018-01-31', '2022-02-28', 1, 'POLA n(1+(N)^-1/2)', 1, '1', 'Avid', 'FULL TEST', '', '0000-00-00', 0),
+('2', '4', '4', '2017-12-30', '2024-12-30', 1, 'POLA n(1+(N)^-1/2)', 1, '1', 'Habib', 'FULL TEST', '', '0000-00-00', 0),
+('3333', '3', '3', '2017-12-29', '2021-11-30', 1, 'POLA n(1+(N)^-1/2)', 1, '1', 'Habib', 'FULL TEST', 'saae', '0000-00-00', 0),
+('3334', '1', '1', '2017-12-30', '2021-12-30', 1, 'POLA n(1+(N)^-1/2)', 1, '1', 'Avid', 'FULL TEST', 'sae', '0000-00-00', 0);
 
 --
 -- Indexes for dumped tables
