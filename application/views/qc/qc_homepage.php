@@ -15,7 +15,7 @@
   <title>Quality Control Branch</title>
   <meta charset="utf-8">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>public/css/gudang.css">
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>public/css/qc.css">
     <script defer src="<?php echo base_url(); ?>public/js/fontawesome-all.js"></script>
     <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -55,7 +55,6 @@
 				echo "</div>";
 			}
 			?>
-			<input type="text" class="content-item form-control" placeholder="Search" style="display: none;">
 
 			<?php
 				$template = array(
@@ -80,13 +79,21 @@
  						$b = $rowb->Nomor_LPB;
  						$c = $rowb->Nomor_Batch;
  						
+ 						$link_instruksi = anchor('quality_control/instruksi_sampling_bahan_show/'.$c ,'Isi');
+						$link_analisa = anchor('quality_control/analisa_sampling_bahan_show/'.$c ,'Isi');
  						if ($b == $a) {
  							if (!(isset($ins[$c]))) {
+<<<<<<< HEAD
  								$form_ins = array('data' => '--isi--','id' => $c, 'class' => 'instruksi');
  								$this->table->add_row($row->Nomor_LPB, $form_ins, $row->Tanggal_Terima, $row->Kode_Bahan, $rowb->Nomor_Batch, $form_ins, $row->Satuan, '', '');	
  							} else if (($ana[$c] == $ins[$c])) {
  								$form_ana = array('data' => '--isi--', 'id' => $c, 'class' => 'analisa');
  								$this->table->add_row($row->Nomor_LPB, $ins[$c], $row->Tanggal_Terima, $row->Kode_Bahan, $rowb->Nomor_Batch, $jum[$c], $row->Satuan, $form_ana, $form_ana);
+=======
+ 								$this->table->add_row($row->Nomor_LPB, $link_instruksi, $row->Tanggal_Terima, $row->Kode_Bahan, $rowb->Nomor_Batch, $link_instruksi, $row->Satuan, 'analisa', 'sisa');	
+ 							} else if (($ana[$c] == $ins[$c])) {
+ 								$this->table->add_row($row->Nomor_LPB, $ins[$c], $row->Tanggal_Terima, $row->Kode_Bahan, $rowb->Nomor_Batch, $jum[$c], $row->Satuan, $link_analisa, $link_analisa);
+>>>>>>> e968e80a12c6b4268372a7e8e04e829aab11001d
  							} else {
  								$this->table->add_row($row->Nomor_LPB, $ins[$c], $row->Tanggal_Terima, $row->Kode_Bahan, $rowb->Nomor_Batch, $ins[$c], $row->Satuan, $ana[$c], $sisa[$c]);
  							}
