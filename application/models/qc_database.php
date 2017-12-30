@@ -66,7 +66,7 @@ Class Qc_Database extends CI_Model {
 	}
 
 	public function get_data_param_bahan_terima($value) {
-		$condition = "Kode_Bahan = (SELECT Kode_Bahan FROM jenis_bahan WHERE ID_Bahan = (SELECT ID_Bahan FROM bahan_terima WHERE Nomor_LPB = " . "'" . $value . "'" . "))";
+		$condition = "Kode_Bahan = (SELECT Kode_Bahan FROM jenis_bahan WHERE ID_Bahan = (SELECT ID_Bahan FROM bahan_terima WHERE Nomor_LPB = (SELECT Nomor_LPB FROM nomor_batch_bahan WHERE Nomor_Batch =" . "'" . $value . "'" . ")))";
 		$this->db->select('*');
 		$this->db->from('parameter_bahan');
 		$this->db->where($condition);
@@ -77,7 +77,7 @@ Class Qc_Database extends CI_Model {
 	}
 
 	public function instruksi_insert($data) {
-		$condition = "Nomor_LPB =" . "'" . $data['Nomor_LPB'] . "'";
+		$condition = "Nomor_Instruksi =" . "'" . $data['Nomor_Instruksi'] . "'";
 		$this->db->select('*');
 		$this->db->from('sampel_bahan_terima');
 		$this->db->where($condition);
@@ -96,7 +96,21 @@ Class Qc_Database extends CI_Model {
 	}
 
 	public function instruksi_update($data) {
-		return $this->db->query("UPDATE sampel_bahan_terima SET Nomor_Analisa = " . "'" . $data['Nomor_Analisa'] . "'" . ", Tanggal_Pemeriksaan = " . "'" . $data['Tanggal_Pemeriksaan'] . "'" . ", Sisa_Sampel = " . "'" . $data['Sisa_Sampel'] . "'" . " WHERE Nomor_LPB = " . "'" . $data['Nomor_LPB'] . "'" . "");
+		$condition = "Nomor_Analisa =" . "'" . $data['Nomor_Analisa'] . "'";
+		$this->db->select('*');
+		$this->db->from('sampel_bahan_terima');
+		$this->db->where($condition);
+		$this->db->limit(1);
+		$query = $this->db->get();
+		if ($query->num_rows() == 0) {
+			return $this->db->query("UPDATE sampel_bahan_terima SET Nomor_Analisa = " . "'" . $data['Nomor_Analisa'] . "'" . ", Tanggal_Pemeriksaan = " . "'" . $data['Tanggal_Pemeriksaan'] . "'" . ", Sisa_Sampel = " . "'" . $data['Sisa_Sampel'] . "'" . " WHERE Nomor_LPB = " . "'" . $data['Nomor_LPB'] . "'" . "");
+		} else {
+			return FALSE;
+		}
+
+
+
+		
 	}
 
 	public function hasil_insert($data) {

@@ -62,7 +62,7 @@ class Quality_Control extends CI_Controller{
 			$this->load->view('Quality_Control/qc_instruksi_form');
 		} else {
 			$data = array(
-				'Nomor_LPB' => $this->input->post('lpb'),
+				'Nomor_Batch' => $this->input->post('bat'),
 				'Nomor_Instruksi' => $this->input->post('no_ins'),
 				'Nomor_Analisa' => $this->input->post('no_ins'), //sementara
 				'Tanggal_Instruksi' => $this->input->post('tgl'),
@@ -77,13 +77,15 @@ class Quality_Control extends CI_Controller{
 			);
 			$result = $this->qc_database->instruksi_insert($data);
 			if ($result == TRUE) {
-				$data['message_display'] = 'Instruksi berhasil disimpan !';
+				$data['message_display'] = 'Instruksi berhasil disimpan !'; // belum bisa tampil
 				$data['lps'] = $this->qc_database->homepage();
 				$data['lps_batch'] =$this->qc_database->homepage_batch();
-				$data['lps_instruksi'] =$this->qc_database->homepage_sampel();
+				$data['lps_sampel'] =$this->qc_database->homepage_sampel();
 				$this->load->view('qc/qc_homepage', $data);
 			} else {
-				$data['message_display'] = 'Data sudah pernah diinput!';
+				$data['message_display'] = 'Nomor instruksi sudah pernah diinput!';
+				$data['bahan'] = $this->qc_database->get_data_bahan_terima($data['Nomor_Batch']);
+				$data['batch'] = $this->qc_database->get_data_batch_bahan_terima($data['Nomor_Batch']);
 				$this->load->view('qc/qc_instruksi_form', $data);
 			}
 		}
@@ -119,11 +121,11 @@ class Quality_Control extends CI_Controller{
 				}
 				$data['lps'] = $this->qc_database->homepage();
 				$data['lps_batch'] =$this->qc_database->homepage_batch();
-				$data['lps_instruksi'] =$this->qc_database->homepage_sampel();
+				$data['lps_sampel'] =$this->qc_database->homepage_sampel();
 				$this->load->view('qc/qc_homepage', $data);	
 				
 			} else {
-				$data['message_display'] = 'Data sudah pernah diinput!';
+				$data['message_display'] = 'Nomor Analisa sudah pernah diinput!';
 				$this->load->view('qc/qc_homepage', $data);
 			}
 		}

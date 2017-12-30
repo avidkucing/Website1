@@ -4,7 +4,7 @@
   <title>Tambah Instruksi Pemeriksaan Sampel Bahan</title>
   <meta charset="utf-8">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>public/css/print-lpb.css">
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>public/css/print_lpb.css">
     <script defer src="<?php echo base_url(); ?>public/js/fontawesome-all.js"></script>
     <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -139,14 +139,14 @@
 				echo form_label('Nomor Batch :');
 				echo ' ';
 				$a = $row['Nomor_LPB'];
-				echo $batch[$a];
+				echo $batch[0]['Nomor_Batch'];
 				echo"<br/>";
 				echo form_label('Jumlah Terima :');
 				echo ' ';
-				echo $row['Jumlah'];
+				echo $batch[0]['Jumlah'];
 				echo"<br/>";
 				echo form_label('Nomor LPB :');
-				echo form_hidden('lpb', $row['Nomor_LPB']);
+				echo form_hidden('bat', $batch[0]['Nomor_Batch']);
 				echo ' ';
 				echo $row['Nomor_LPB'];
 				echo"<br/>";

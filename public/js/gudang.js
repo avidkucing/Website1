@@ -1,21 +1,8 @@
 $(document).ready(function(){
 	$(".bahanbaku tbody tr td").addClass("klik");
-    //$(".klik").attr("data-href","gudang/print_lpb_show/");
-	//$(".klik").click(function() {
-    //    window.location = $(this).data("href");
-    //});
-    //$("td").attr("data-href","gudang/print_lpb_show/");
     $('.klik').click(function(){
         $link = "gudang/print_lpb_show/" + (this.id);
         window.location.href=$link ;
-        /*$.ajax({
-            url: "gudang/print_lpb_show",  // define here controller then function name
-            method: 'POST',
-            data: { "value": (this.id) },    // pass here your date variable into controller
-            success:function(result) {
-                alert(this.id); // alert your date variable value here
-            }
-        });*/
     });
 
     $("#bahanbakutab").click(function(){
