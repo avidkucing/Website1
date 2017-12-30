@@ -3,12 +3,12 @@ body {
 }
 
 thead {
-	background: #008fff;
+	background: #1584B2;
 	color: white;
 }
 
 button {
-	background: #008fff;
+	background: #1584B2;
 	color: white;
 }
 
@@ -30,7 +30,7 @@ button {
 }
 
 #tambah {
-	background: #008fff;
+	background: #1584B2;
 }
 
 .content-item {
@@ -49,13 +49,13 @@ button {
 .left-item {
 	display: inline-block;
 	position: relative;
-	left: 5%;
+	left: 10%;
 	padding-bottom: 20px;
 }
 .right-item {
 	display: inline-block;
 	position: absolute;
-	right: 5%;
+	right: 15%;
 }
 
 .sign {

@@ -37,8 +37,14 @@
 
 	<p class="right-item sign">Signed By (Electronic Sign)</p>
 	
+	<script type="text/javascript">
+		function print() {
+			window.print();
+		}
+	</script>
+
 	<div class="button-container">
-		<button  onclick="location.href='<?php echo base_url();?>gudang/print'" type="button" class="button-item btn" id="print">belum</button>
+		<button  onclick="print()" type="button" class="button-item btn" id="print">belum</button>
 		<button onclick="location.href='<?php echo base_url();?>gudang'" type="button" class="button-item btn" id="back">Kembali</button>
 		<br>
 		<br>
