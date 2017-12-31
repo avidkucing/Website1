@@ -19,7 +19,7 @@
     <script defer src="<?php echo base_url(); ?>public/js/fontawesome-all.js"></script>
     <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script src="<?php echo base_url(); ?>public/js/gudang.js"></script>
+    <script src="<?php echo base_url(); ?>public/js/kaqc.js"></script>
 </head>
 
 <body>
@@ -64,48 +64,35 @@
 				$this->table->set_template($template);
 				$this->table->set_heading('No. LPB',  'Nomor Instruksi Sampling', 'Tanggal Terima', 'Kode Bahan', 'Nomor Batch', 'Jumlah Sampel', 'Satuan','Nomor Analisa', 'Sisa Sampel Pertinggal', 'Status');
 				
-				//print_r($lps_analisa); baru bisa dilihat setelah fungsi tambahnya jadi
-				
-				
+				foreach ($lps_sampel as $x) {
+					$kode = $x->Nomor_Batch;
+					$ins[$kode] = $x->Nomor_Instruksi;
+					$jum[$kode] = $x->Jumlah_Sampel;
+				}
+				foreach ($lps_analisa as $x) {
+					$kode = $x->Nomor_Batch;
+					$ana[$kode] = $x->Nomor_Analisa;
+					$sisa[$kode] = $x->Sisa_Sampel;
+				}
 				foreach ($lps as $row) {
-					
-					//indeks nomor batch & form
-					$a = $row->Nomor_LPB;
-					
-					//link untuk isi form
-					$link_status = anchor('ka_quality_control/status_sampling_bahan_show/'.$a ,'Ubah Status');
-					$cek_status = $row->Status;
-
-					////////////////////////////////////////////////////////
-					//convert $lps_instruksi
-					$b = 0;
-					$lps_ins = array();
-
-					foreach ($lps_instruksi as $x => $b) {
-						$kode = $lps_instruksi[$x]['Nomor_LPB'];
-						$lps_ins[$kode] = $lps_instruksi[$x]['Nomor_Instruksi'];
-						$lps_ins_j[$kode] = $lps_instruksi[$x]['Jumlah_Sampel'];
-					}
-					//convert $lps_analisa
-					$b = 0;
-					$lps_ana = array();
-
-					foreach ($lps_analisa as $y => $b) {
-						$kode = $lps_analisa[$y]['Nomor_LPB'];
-						$lps_ana[$kode] = $lps_analisa[$y]['Nomor_Analisa'];
-						$lps_ana_s[$kode] = $lps_analisa[$y]['Sisa_Sampel'];
-					}
-					////////////////////////////////////////////////////////
-
-					//cek form apa sudah diisi
-					if (!(isset($lps_ins[$a]))) {
-						$this->table->add_row($row->Nomor_LPB, 'Belum Diinstruksikan' , $row->Tanggal_Terima, $row->Kode_Bahan, $lps_batch[$a], 'Belum Diinstruksikan', $row->Satuan, 'Belum Dianalisa', 'Belum Dianalisa', $row->Status);
-					} else if (($lps_ana[$a]) == ($lps_ins[$a])) {
-						$this->table->add_row($row->Nomor_LPB, $lps_ins[$a] , $row->Tanggal_Terima, $row->Kode_Bahan, $lps_batch[$a], $lps_ins_j[$a], $row->Satuan, 'Belum Dianalisa', 'Belum Dianalisa', $row->Status);
-					} else if ($cek_status == 'QUARANTINE') {
-						$this->table->add_row($row->Nomor_LPB, $lps_ins[$a] , $row->Tanggal_Terima, $row->Kode_Bahan, $lps_batch[$a], $lps_ins_j[$a], $row->Satuan, $lps_ana[$a], $lps_ana_s[$a], $link_status);
-					} else {
-						$this->table->add_row($row->Nomor_LPB, $lps_ins[$a] , $row->Tanggal_Terima, $row->Kode_Bahan, $lps_batch[$a], $lps_ins_j[$a], $row->Satuan, $lps_ana[$a], $lps_ana_s[$a], $row->Status);
+					foreach ($lps_batch as $rowb) {
+						$a = $row->Nomor_LPB;
+ 						$b = $rowb->Nomor_LPB;
+ 						$c = $rowb->Nomor_Batch;
+ 						$cek_status = $rowb->Status;
+ 						
+ 						if ($b == $a) {
+ 							if (!(isset($ins[$c]))) {
+								$this->table->add_row($row->Nomor_LPB, 'Belum Diinstruksikan' , $row->Tanggal_Terima, $row->Kode_Bahan, $c, 'Belum Diinstruksikan', $row->Satuan, 'Belum Dianalisa', 'Belum Dianalisa', $rowb->Status);
+							} else if (!(isset($ana[$c]))) {
+								$this->table->add_row($row->Nomor_LPB, $ins[$c] , $row->Tanggal_Terima, $row->Kode_Bahan, $c, $jum[$c], $row->Satuan, 'Belum Dianalisa', 'Belum Dianalisa', $rowb->Status);
+							} else if ($cek_status == 'QUARANTINE') {
+								$form_status = array('data' => '--isi--', 'id' => $c, 'class' => 'status');
+								$this->table->add_row($row->Nomor_LPB, $ins[$c] , $row->Tanggal_Terima, $row->Kode_Bahan, $c, $jum[$c], $row->Satuan, $ana[$c], $sisa[$c], $form_status);
+							} else {
+								$this->table->add_row($row->Nomor_LPB, $ins[$c] , $row->Tanggal_Terima, $row->Kode_Bahan, $c, $jum[$c], $row->Satuan, $ana[$c], $sisa[$c], $rowb->Status);
+							}
+ 						}
 					}
 				}
 				echo $this->table->generate();

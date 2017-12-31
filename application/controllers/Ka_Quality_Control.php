@@ -31,7 +31,7 @@ class Ka_Quality_Control extends CI_Controller{
  	public function index(){
 		$data['lps'] = $this->kaqc_database->homepage();
 		$data['lps_batch'] =$this->kaqc_database->homepage_batch();
-		$data['lps_instruksi'] =$this->kaqc_database->homepage_instruksi();
+		$data['lps_sampel'] =$this->kaqc_database->homepage_sampel();
 		$data['lps_analisa'] =$this->kaqc_database->homepage_analisa();
 		$this->load->view('kaqc/kaqc_homepage', $data);
 	}
@@ -54,22 +54,22 @@ class Ka_Quality_Control extends CI_Controller{
 		}
 		$data['lps'] = $this->kaqc_database->homepage();
 		$data['lps_batch'] =$this->kaqc_database->homepage_batch();
-		$data['lps_instruksi'] =$this->kaqc_database->homepage_instruksi();
+		$data['lps_sampel'] =$this->kaqc_database->homepage_sampel();
 		$data['lps_analisa'] =$this->kaqc_database->homepage_analisa();
 		$this->load->view('kaqc/kaqc_homepage', $data);
 	}
 	public function release_bahan($no) {
 		$result = $this->kaqc_database->update_status_bahan($no, 1);
 		if ($result == TRUE) {
-			$data['message_display'] = 'Reject Berhasil!';
+			$data['message_display'] = 'Release Berhasil!';
 		} else {
 			$data['message_display'] = 'Gagal reject!';
 		}
 		$data['lps'] = $this->kaqc_database->homepage();
 		$data['lps_batch'] =$this->kaqc_database->homepage_batch();
-		$data['lps_instruksi'] =$this->kaqc_database->homepage_instruksi();
+		$data['lps_sampel'] =$this->kaqc_database->homepage_sampel();
 		$data['lps_analisa'] =$this->kaqc_database->homepage_analisa();
-		$this->load->view('kaqc/kaqc_homepage', $data);	
+		$this->load->view('kaqc/kaqc_homepage', $data);
 	}
 	public function logout() {
 
