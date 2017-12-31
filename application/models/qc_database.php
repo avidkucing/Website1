@@ -27,9 +27,18 @@ Class Qc_Database extends CI_Model {
 	}
 
 	public function homepage_sampel(){
-		$this->db->select('Nomor_Batch, Nomor_Instruksi, Nomor_Analisa, Sisa_Sampel, Jumlah_Sampel');
+		$this->db->select('Nomor_Batch, Nomor_Instruksi, Jumlah_Sampel');
 		$this->db->from('sampel_bahan_terima');
-		//gagal add .
+		
+		$o_lps_rows = $this->db->get()->result();
+		
+		return $o_lps_rows;
+	}
+
+	public function homepage_analisa(){
+		$this->db->select('*');
+		$this->db->from('analisa_sampel');
+		
 		$o_lps_rows = $this->db->get()->result();
 		
 		return $o_lps_rows;
@@ -95,22 +104,22 @@ Class Qc_Database extends CI_Model {
 		}
 	}
 
-	public function instruksi_update($data) {
+	public function analisa_insert($data) {
 		$condition = "Nomor_Analisa =" . "'" . $data['Nomor_Analisa'] . "'";
 		$this->db->select('*');
-		$this->db->from('sampel_bahan_terima');
+		$this->db->from('analisa_sampel');
 		$this->db->where($condition);
 		$this->db->limit(1);
 		$query = $this->db->get();
 		if ($query->num_rows() == 0) {
-			return $this->db->query("UPDATE sampel_bahan_terima SET Nomor_Analisa = " . "'" . $data['Nomor_Analisa'] . "'" . ", Tanggal_Pemeriksaan = " . "'" . $data['Tanggal_Pemeriksaan'] . "'" . ", Sisa_Sampel = " . "'" . $data['Sisa_Sampel'] . "'" . " WHERE Nomor_LPB = " . "'" . $data['Nomor_LPB'] . "'" . "");
+			// Query to insert data in database
+			$this->db->insert('analisa_sampel', $data);
+			if ($this->db->affected_rows() > 0) {
+				return true;
+			}
 		} else {
 			return FALSE;
-		}
-
-
-
-		
+		}	
 	}
 
 	public function hasil_insert($data) {

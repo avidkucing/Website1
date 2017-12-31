@@ -1,24 +1,24 @@
 $(document).ready(function(){
 	$(".bahanbaku tbody tr td").addClass("klik");
     $('.klik').click(function(){
-        $link = "gudang/print_lpb_show/" + (this.id);
+        $link = window.location.origin + "/hisamitsu/gudang/print_lpb_show/" + (this.id);
         window.location.href=$link ;
     });
 
     $('#print').click(function () {
-                var doc = new jsPDF();
-                var specialElementHandlers = {
-                    '.button-container': function (element, renderer) {
-                        return true;
-                    }
-                };
-   
-                doc.fromHTML($('body').get(0), 15, 15, {
-                    'width': 170,
-                    'elementHandlers': specialElementHandlers
-                });
-                doc.save('sample-file.pdf');
-            });
+        var doc = new jsPDF();
+        var specialElementHandlers = {
+            '.button-container': function (element, renderer) {
+                return true;
+            }
+        };
+
+        doc.fromHTML($('body').get(0), 15, 15, {
+            'width': 170,
+            'elementHandlers': specialElementHandlers
+        });
+        doc.save('sample-file.pdf');
+    });
 
 
     $("#bahanbakutab").click(function(){

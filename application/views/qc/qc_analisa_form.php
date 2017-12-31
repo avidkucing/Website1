@@ -30,7 +30,7 @@
 			foreach ($bahan as $row) {
 				echo "<p>";
 				echo form_label('Nomor LPB :');
-				echo form_hidden('lpb', $row['Nomor_LPB']);
+				//echo form_hidden('lpb', $row['Nomor_LPB']);
 				echo ' ';
 				echo $row['Nomor_LPB'];
 				echo"<br/>";
@@ -67,8 +67,8 @@
 				echo"<br/>";
 				echo form_label('Nomor Batch :');
 				echo ' ';
-				$a = $row['Nomor_LPB'];
 				echo $batch[0]['Nomor_Batch'];
+				echo form_hidden('batch', $batch[0]['Nomor_Batch']);
 				echo"<br/>";
 				echo form_label('Sisa Pertinggal :');
 				echo ' ';

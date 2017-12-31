@@ -111,7 +111,11 @@ class Gudang extends CI_Controller{
 	      echo $option;
 	}
 	
-
+	public function get_tahun_lpb() {
+		$date = $this->input->post("value");
+		$year = substr($date, 0, 4);
+		return $year;
+	}
 	public function new_lpb(){
 		// Check validation for user input in SignUp form
 		$this->form_validation->set_rules('lpb', 'Nomor LPB', 'trim|required');

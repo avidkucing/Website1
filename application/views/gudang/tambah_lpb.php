@@ -32,7 +32,7 @@
 			$label_attr = array('class' => 'control-label col-sm-4 text-left');
 			echo form_label('No. LPB:', ' ', $label_attr);
 				echo "<div class='col-sm-8'>";
-				$input_attr = array('class' => 'form-control');
+				$input_attr = array('class' => 'form-control nolpb');
 				echo form_input('lpb', ' ', $input_attr);
 				echo "</div>";
 			echo "</div>";
@@ -45,7 +45,7 @@
 			        'type'          => 'date',
 			        'name'          => 'tgl',
 				);
-				$input_attr = array('class' => 'form-control');
+				$input_attr = array('class' => 'form-control tglterima');
 				echo form_input($date, ' ', $input_attr);
 				echo "</div>";
 			echo "</div>";

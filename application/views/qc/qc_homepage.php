@@ -63,12 +63,17 @@
 				$this->table->set_template($template);
 				$this->table->set_heading('No. LPB',  'Nomor Instruksi Sampling', 'Tanggal Terima', 'Kode Bahan', 'Nomor Batch', 'Jumlah Sampel', 'Satuan','Nomor Analisa', 'Sisa Sampel Pertinggal');
 				
-				//print_r($lps_analisa); baru bisa dilihat setelah fungsi tambahnya jadi
+				//print_r($lps_analisa); //baru bisa dilihat setelah fungsi tambahnya jadi
 					
 				foreach ($lps_sampel as $x) {
 					$kode = $x->Nomor_Batch;
 					$ins[$kode] = $x->Nomor_Instruksi;
 					$jum[$kode] = $x->Jumlah_Sampel;
+					//$ana[$kode] = $x->Nomor_Analisa;
+					//$sisa[$kode] = $x->Sisa_Sampel;
+				}
+				foreach ($lps_analisa as $x) {
+					$kode = $x->Nomor_Batch;
 					$ana[$kode] = $x->Nomor_Analisa;
 					$sisa[$kode] = $x->Sisa_Sampel;
 				}
@@ -83,7 +88,7 @@
  							if (!(isset($ins[$c]))) {
  								$form_ins = array('data' => '--isi--','id' => $c, 'class' => 'instruksi');
  								$this->table->add_row($row->Nomor_LPB, $form_ins, $row->Tanggal_Terima, $row->Kode_Bahan, $rowb->Nomor_Batch, $form_ins, $row->Satuan, '', '');	
- 							} else if (($ana[$c] == $ins[$c])) {
+ 							} else if (!(isset($ana[$c]))) {
  								$form_ana = array('data' => '--isi--', 'id' => $c, 'class' => 'analisa');
  								$this->table->add_row($row->Nomor_LPB, $ins[$c], $row->Tanggal_Terima, $row->Kode_Bahan, $rowb->Nomor_Batch, $jum[$c], $row->Satuan, $form_ana, $form_ana);
  							} else {

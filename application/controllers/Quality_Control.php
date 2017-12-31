@@ -31,6 +31,7 @@ class Quality_Control extends CI_Controller{
 		$data['lps'] = $this->qc_database->homepage();
 		$data['lps_batch'] =$this->qc_database->homepage_batch();
 		$data['lps_sampel'] =$this->qc_database->homepage_sampel();
+		$data['lps_analisa'] =$this->qc_database->homepage_analisa();
 		$this->load->view('qc/qc_homepage', $data);
 	}
 
@@ -64,7 +65,6 @@ class Quality_Control extends CI_Controller{
 			$data = array(
 				'Nomor_Batch' => $this->input->post('bat'),
 				'Nomor_Instruksi' => $this->input->post('no_ins'),
-				'Nomor_Analisa' => $this->input->post('no_ins'), //sementara
 				'Tanggal_Instruksi' => $this->input->post('tgl'),
 				'EXP_Date' => $this->input->post('tgl2'),
 				'Doc_COA' => $this->input->post('coa'),
@@ -81,6 +81,7 @@ class Quality_Control extends CI_Controller{
 				$data['lps'] = $this->qc_database->homepage();
 				$data['lps_batch'] =$this->qc_database->homepage_batch();
 				$data['lps_sampel'] =$this->qc_database->homepage_sampel();
+				$data['lps_analisa'] =$this->qc_database->homepage_analisa();
 				$this->load->view('qc/qc_homepage', $data);
 			} else {
 				$data['message_display'] = 'Nomor instruksi sudah pernah diinput!';
@@ -94,26 +95,31 @@ class Quality_Control extends CI_Controller{
 	public function new_hasil_analisa_bahan() {
 		$this->form_validation->set_rules('no_ana', 'Nomor Analisa', 'trim|required');
 		$this->form_validation->set_rules('tgl1', 'Tanggal Pemeriksaan', 'trim|required');
-		$this->form_validation->set_rules('sisa', 'Sisa Pertinggal :', 'trim|required');
+		$this->form_validation->set_rules('sisa', 'Sisa Pertinggal', 'trim|required');
+		$j = $this->input->post('hasil_row');
+			for ($i=1; $i <= $j; $i++) { 
+				$this->form_validation->set_rules('hasil'.$i, 'Hasil Pemeriksaan', 'trim|required');
+			}
+
 
 		if ($this->form_validation->run() == FALSE) {
 			$data['message_display'] = 'Input kosong!';
 			$data['lps'] = $this->qc_database->homepage();
 			$data['lps_batch'] =$this->qc_database->homepage_batch();
 			$data['lps_sampel'] =$this->qc_database->homepage_sampel();
+			$data['lps_analisa'] =$this->qc_database->homepage_analisa();
 			$this->load->view('qc/qc_homepage', $data);
 		} else {
 			$data = array(
-				'Nomor_LPB' => $this->input->post('lpb'),
+				'Nomor_Batch' => $this->input->post('batch'),
 				'Nomor_Analisa' => $this->input->post('no_ana'),
 				'Tanggal_Pemeriksaan' => $this->input->post('tgl1'),
 				'Sisa_Sampel' => $this->input->post('sisa'),
 			);
-			$result = $this->qc_database->instruksi_update($data);
+			$result = $this->qc_database->analisa_insert($data);
 
 			if ($result == TRUE) {
 				$j = $this->input->post('hasil_row');
-
 
 				for ($i=1; $i <= $j; $i++) { 
 					$data = array(
@@ -123,14 +129,18 @@ class Quality_Control extends CI_Controller{
 					);
 					$result = $this->qc_database->hasil_insert($data);
 				}
+				$data['message_display'] = 'Input hasil pemeriksaan sukses!';
 				$data['lps'] = $this->qc_database->homepage();
 				$data['lps_batch'] =$this->qc_database->homepage_batch();
 				$data['lps_sampel'] =$this->qc_database->homepage_sampel();
+				$data['lps_analisa'] =$this->qc_database->homepage_analisa();
 				$this->load->view('qc/qc_homepage', $data);	
-				
 			} else {
 				$data['message_display'] = 'Nomor Analisa sudah pernah diinput!';
-				$this->load->view('qc/qc_homepage', $data);
+				$data['bahan'] = $this->qc_database->get_data_bahan_terima($no);
+				$data['batch'] = $this->qc_database->get_data_batch_bahan_terima($no);
+				$data['param'] = $this->qc_database->get_data_param_bahan_terima($no);
+				$this->load->view('qc/qc_analisa_form', $data);		
 			}
 		}
 	}

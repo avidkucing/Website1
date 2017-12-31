@@ -47,12 +47,12 @@
 				<div id="text-input" class="col-sm-4">
 					<div class="input-group">
 						<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-						<input type="text" name="username" id="name" class="form-control" placeholder="Username"/>
+						<input type="text" name="username" value="<?php echo set_value('username'); ?>" id="name" class="form-control" placeholder="Username"/>
 					</div>
 					<br>
 					<div class="input-group">
 						<span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-						<input type="password" name="password" id="password" class="form-control" placeholder="Password"/>
+						<input type="password" name="password" value="<?php echo set_value('password'); ?>" id="password" class="form-control" placeholder="Password"/>
 					</div>
 					<br>
 					<button type="button submit" class="btn">Login</button>
