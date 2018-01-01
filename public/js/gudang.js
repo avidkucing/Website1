@@ -9,10 +9,10 @@ $(document).ready(function(){
         "lengthChange" : false
     } );
 
-    $('#print').click(function () {
+    function print() {
         var doc = new jsPDF();
         var specialElementHandlers = {
-            '.button-container': function (element, renderer) {
+            '#print': function (element, renderer) {
                 return true;
             }
         };
@@ -22,7 +22,7 @@ $(document).ready(function(){
             'elementHandlers': specialElementHandlers
         });
         doc.save('sample-file.pdf');
-    });
+    };
 
 
     $("#bahanbakutab").click(function(){
