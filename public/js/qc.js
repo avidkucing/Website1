@@ -8,5 +8,9 @@ $(document).ready(function(){
      	 $link = window.location.origin + "/hisamitsu/quality_control/analisa_sampling_bahan_show/" + (this.id);
          window.location.href=$link ;
      });
+
+     $('#tabel').DataTable( {
+        
+    } );
  
  });
