@@ -62,7 +62,7 @@
 	</script>
 
 	<div class="button-container">
-		<button  onclick="print()" type="button" class="button-item btn" id="print">belum</button>
+		<button  onclick="print()" type="button" class="button-item btn" id="print">Print</button>
 		<button onclick="location.href='<?php echo base_url();?>gudang'" type="button" class="button-item btn" id="back">Kembali</button>
 		<br>
 		<br>
