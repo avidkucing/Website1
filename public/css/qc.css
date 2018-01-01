@@ -101,12 +101,13 @@ ul.links2 a {
 
 #content {
 	width: 100%;
-	margin-left: 220px;
+	margin-left: 240px;
 	padding-right: 40px;
+    margin-top: 10px;
 }
 
 .content-item {
-	margin: 20px;
+	
 }
 
 #content button {

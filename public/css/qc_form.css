@@ -1,0 +1,38 @@
+button {
+    background: #1584B2;
+    color: white;
+}
+
+.button-item {
+    display: inline-block;
+    margin-top: 20%;
+}
+
+.button-container {
+    text-align: center;
+}
+
+#back {
+    background: red;
+}
+
+#tambah {
+    background: #1584B2;
+}
+
+.content-item {
+    margin-right: auto;
+    margin-left: auto;
+    width: 80%;
+}
+
+.title {
+    padding: 20px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.form-horizontal .control-label.text-left{
+    text-align: left;
+}

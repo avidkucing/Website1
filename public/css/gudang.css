@@ -31,8 +31,7 @@ a, a:hover, a:focus {
 }
 
 table {
-    position: relative;
-    top: 40px;
+
 }
 
 thead {
@@ -110,11 +109,15 @@ ul.links2 a {
 	margin: 20px;
 }
 
+.content-table {
+    margin-left: 20px;
+    margin-top: 10px; 
+}
+
 #content button {
 	position: fixed;
-    top: 0px;
-    width: 81%;
-    margin-top: 10px;
+    width: 1085px;
+    bottom: 10px;
 	background: green;
 	color: white;
 	font-weight: bold;

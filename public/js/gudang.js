@@ -5,6 +5,10 @@ $(document).ready(function(){
         window.location.href=$link ;
     });
 
+    $('#tabel').DataTable( {
+        "lengthChange" : false
+    } );
+
     $('#print').click(function () {
         var doc = new jsPDF();
         var specialElementHandlers = {
