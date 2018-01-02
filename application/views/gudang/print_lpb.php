@@ -40,7 +40,7 @@
 	</div>
 
 	<div class="button-container">
-		<button onclick="printThis()" type="button" class="button-item btn" id="print">belum</button>
+		<button onclick="printThis()" type="button" class="button-item btn" id="print">Print</button>
 		<button onclick="location.href='<?php echo base_url();?>gudang'" type="button" class="button-item btn" id="back">Kembali</button>
 		<br>
 	</div>
@@ -49,6 +49,7 @@
 		function printThis() {
 			$('.button-container').hide();
 			window.print();
+			$('.button-container').show();
 		}
 	</script>
 </body>
