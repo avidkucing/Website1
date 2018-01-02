@@ -8,7 +8,7 @@
     <script defer src="<?php echo base_url(); ?>public/js/fontawesome-all.js"></script>
     <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script src="<?php echo base_url(); ?>public/js/gudang.js"></script>
+    <script src="<?php echo base_url(); ?>public/js/lpb.js"></script>
 </head>
 
 <body>
