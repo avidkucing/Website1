@@ -9,8 +9,10 @@ $(document).ready(function(){
         "lengthChange" : false
     } );
 
-    function print() {
-        var doc = new jsPDF();
+    //$('#print').click(function(){
+        //$link = window.location.origin + "/hisamitsu/gudang/print_lpb_no_tombol_show/" + (this.id);
+        //window.location.href=$link ;
+        /*var doc = new jsPDF();
         var specialElementHandlers = {
             '#print': function (element, renderer) {
                 return true;
@@ -21,8 +23,11 @@ $(document).ready(function(){
             'width': 170,
             'elementHandlers': specialElementHandlers
         });
-        doc.save('sample-file.pdf');
-    };
+        doc.save('sample-file.pdf');*/
+        //window.history.back();
+        //$(".button-container").hide();
+        //window.print();
+    //});
 
 
     $("#bahanbakutab").click(function(){
