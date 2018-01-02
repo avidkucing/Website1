@@ -1,0 +1,72 @@
+body {
+
+}
+
+thead {
+	background: #1584B2;
+	color: white;
+}
+
+button {
+	background: #1584B2;
+	color: white;
+}
+
+.button-item {
+	display: inline-block;
+	margin-top: 20%;
+}
+
+.button-container {
+	text-align: center;
+}
+
+#print {
+	background: green;
+}
+
+#back {
+	background: red;
+}
+
+#tambah {
+	background: #1584B2;
+}
+
+.content-item {
+	margin-right: auto;
+	margin-left: auto;
+	width: 80%;
+}
+
+.title {
+	padding: 20px;
+	text-align: center;
+	font-weight: bold;
+	font-size: 20px;
+}
+
+.subtitle {
+	text-align: center;
+	font-weight: bold;
+}
+
+.left-item {
+	display: inline-block;
+	position: relative;
+	left: 10%;
+	padding-bottom: 20px;
+}
+.right-item {
+	display: inline-block;
+	position: absolute;
+	right: 15%;
+}
+
+.sign {
+	padding-top: 20px;
+}
+
+.form-horizontal .control-label.text-left{
+    text-align: left;
+}

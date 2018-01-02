@@ -1,18 +1,20 @@
 <!doctype html>
 
 <head>
-  <title>Tambah Instruksi Pemeriksaan Sampel Bahan</title>
-  <meta charset="utf-8">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>public/css/print_lpb.css">
+	<title>Tambah Instruksi Pemeriksaan Sampel Bahan</title>
+	<meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>public/css/instruksi.css">
+    <script src="https://code.jquery.com/jquery-1.12.3.min.js"></script>
+    <script src="<?php echo base_url(); ?>public/js/qc-form.js"></script>
+    <!--Icons-->
     <script defer src="<?php echo base_url(); ?>public/js/fontawesome-all.js"></script>
-    <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+    <!--Bootstrap-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script src="<?php echo base_url(); ?>public/js/gudang.js"></script>
 </head>
 
 <body>
-	<p class="title">PT. Hisamitsu Pharma Indonesia</p>
+	<p class="title">INSTRUKSI SAMPLING DAN PENGISIAN BAHAN BAKU</p>
 	<?php
 		echo "<div class='error_msg'>";
 		echo validation_errors();
@@ -26,23 +28,77 @@
 		
 		echo form_open('quality_control/new_instruksi_bahan');
 		
-		echo "<div class='left-item'>";
-			echo "<p>";
-			echo form_label('No. Instruksi :');
-			echo ' ';
-			echo form_input('no_ins');
-			echo "</p>";
-			echo"<br/>";
-			echo "<p>";
+		echo "<div class='row'>";
+			echo "<div class='form-group col-sm-4 col-sm-offset-1'>";
+			$label_attr = array('class' => 'control-label col-sm-4 text-left');
+			echo form_label('No. Instruksi:', ' ', $label_attr);
+				echo "<div class='col-sm-8'>";
+				$input_attr = array('class' => 'form-control input-sm');
+				echo form_input('no_ins', ' ', $input_attr);
+				echo "</div>";
+			echo "</div>";
+			echo "<div class='col-sm-1'>";
+			echo "</div>";
+			echo "<div class='form-group col-sm-5'>";
 			$date1 = array(
-		        'type'          => 'date',
-		        'name'          => 'tgl',
-			);
-			echo form_label('Tanggal Instruksi :');
-			echo ' ';
-			echo form_input($date1);
-			echo "</p>";
-			echo"<br/>";
+			        'type'          => 'date',
+			        'name'          => 'tgl',
+				);
+			$label_attr = array('class' => 'control-label col-sm-4 text-left');
+			echo form_label('Tanggal Instruksi:', ' ', $label_attr);
+				echo "<div class='col-sm-8'>";
+				$input_attr = array('class' => 'form-control input-sm');
+				echo form_input($date1, ' ', $input_attr);
+				echo "</div>";
+			echo "</div>";
+			echo "<div class='col-sm-1'>";
+			echo "</div>";
+		echo "</div>";
+
+		echo "<div class='container'>";
+			foreach ($bahan as $row) {
+				echo "<p>";
+				echo form_label('Nama Bahan :');
+				echo ' ';
+				echo $row['Nama_Bahan'];
+				echo"<br/>";
+				echo form_label('Kode Bahan :');
+				echo ' ';
+				echo $row['Kode_Bahan'];
+				echo"<br/>";
+				echo form_label('Merk :');
+				echo ' ';
+				echo $row['Merk'];
+				echo"<br/>";
+				echo form_label('Pabrik Pembuat :');
+				echo ' ';
+				echo $row['Nama_Manufacturer'];
+				echo"<br/>";
+				echo form_label('Pemasok :');
+				echo ' ';
+				echo $row['Nama_Supplier'];
+				echo"<br/>";
+				echo form_label('Tanggal Terima :');
+				echo ' ';
+				echo $row['Tanggal_Terima'];
+				echo"<br/>";
+				echo form_label('Nomor Batch :');
+				echo ' ';
+				$a = $row['Nomor_LPB'];
+				echo $batch[0]['Nomor_Batch'];
+				echo"<br/>";
+				echo form_label('Jumlah Terima :');
+				echo ' ';
+				echo $batch[0]['Jumlah'];
+				echo"<br/>";
+				echo form_label('Nomor LPB :');
+				echo form_hidden('bat', $batch[0]['Nomor_Batch']);
+				echo ' ';
+				echo $row['Nomor_LPB'];
+				echo"<br/>";
+				echo "</p>";				
+			}
+
 			echo "<p>";
 			$date2 = array(
 		        'type'          => 'date',
@@ -52,6 +108,7 @@
 			echo ' ';
 			echo form_input($date2);
 			echo "</p>";
+
 			$coa = array(
 				1 => 'ADA',
 				0 => 'TIDAK ADA'
@@ -60,6 +117,11 @@
 			echo ' ';
 			echo form_dropdown('coa', $coa);
 			echo "</p>";
+		echo "</div>";
+
+		echo "<p class='subtitle'>RENCANA PENGAMBILAN SAMPEL</p>";
+
+		echo "<div class='container'>";
 			echo "<p>";
 			echo form_label('Pola Sampling :');
 			echo ' ';
@@ -106,52 +168,6 @@
 			echo form_input('catatan');
 			echo "</p>";
 			echo"<br/>";
-			
-		echo "</div>";
-
-		echo "<div class='right-item'>";
-			foreach ($bahan as $row) {
-				echo "<p>";
-				echo form_label('Nama Bahan :');
-				echo ' ';
-				echo $row['Nama_Bahan'];
-				echo"<br/>";
-				echo form_label('Kode Bahan :');
-				echo ' ';
-				echo $row['Kode_Bahan'];
-				echo"<br/>";
-				echo form_label('Merk :');
-				echo ' ';
-				echo $row['Merk'];
-				echo"<br/>";
-				echo form_label('Pabrik Pembuat :');
-				echo ' ';
-				echo $row['Nama_Manufacturer'];
-				echo"<br/>";
-				echo form_label('Pemasok :');
-				echo ' ';
-				echo $row['Nama_Supplier'];
-				echo"<br/>";
-				echo form_label('Tanggal Terima :');
-				echo ' ';
-				echo $row['Tanggal_Terima'];
-				echo"<br/>";
-				echo form_label('Nomor Batch :');
-				echo ' ';
-				$a = $row['Nomor_LPB'];
-				echo $batch[0]['Nomor_Batch'];
-				echo"<br/>";
-				echo form_label('Jumlah Terima :');
-				echo ' ';
-				echo $batch[0]['Jumlah'];
-				echo"<br/>";
-				echo form_label('Nomor LPB :');
-				echo form_hidden('bat', $batch[0]['Nomor_Batch']);
-				echo ' ';
-				echo $row['Nomor_LPB'];
-				echo"<br/>";
-				echo "</p>";				
-			}
 		echo "</div>";
 	?>
 	<!--<p class="right-item sign">Signed By (Electronic Sign)</p>-->
