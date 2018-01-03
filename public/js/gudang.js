@@ -5,15 +5,15 @@ $(document).ready(function(){
         window.location.href=$link ;
     });
 
-    $(".bahanjadi tbody tr td").addClass("klik");
-    $('.klik').click(function(){
+    $(".bahanjadi tbody tr td").addClass("klik2");
+    $('.klik2').click(function(){
         $link = window.location.origin + "/hisamitsu/gudang/print_permintaan_bahan_show/" + (this.id);
         window.location.href=$link ;
     });
 
-    /*$('#tabel').DataTable( {
-        "lengthChange" : false
-    } );*/
+    $('#tabel').DataTable( {
+        
+    } );
 
     //$('#print').click(function(){
         //$link = window.location.origin + "/hisamitsu/gudang/print_lpb_no_tombol_show/" + (this.id);
