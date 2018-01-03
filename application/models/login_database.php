@@ -1,7 +1,7 @@
 <?php
 
 Class Login_Database extends CI_Model {
-
+       
 	// Read data using username and password
 	public function login($data) {
 
