@@ -50,7 +50,21 @@ Class Gudang_Database extends CI_Model {
  		return $batch_rows;
  		*/
  	}
+ 	
+ 	public function homepage_instruksi(){
+ 		$this->db->select('*');
+ 		$this->db->from('permintaan_bahan');
+ 		$this->db->order_by('Nomor_Instruksi', 'desc');
+ 		
+ 		$query = $this->db->get();
+ 		$o_batch_rows = $query->result();
  
+ 		//convert object to multiple-array
+ 		//$a_batch_rows = json_decode(json_encode($o_batch_rows), True);
+		return $o_batch_rows; 
+ 		
+ 	}
+
 	public function print_lpb($nolpb) {
 		$this->db->select('bahan_terima.Nomor_LPB, bahan_terima.Tanggal_Terima, jenis_bahan.Kode_Bahan, jenis_bahan.Nama_Bahan, jenis_bahan.Nama_Supplier, jenis_bahan.Nama_Manufacturer, bahan_terima.Nomor_Surat, jenis_bahan.Satuan');
  		$this->db->from('bahan_terima');
@@ -74,6 +88,28 @@ Class Gudang_Database extends CI_Model {
  		$a_batch_rows = json_decode(json_encode($o_batch_rows), True);
 		return $a_batch_rows; 
 	}
+
+	public function print_instruksi_permintaan($noins) {
+		$this->db->select('*');
+ 		$this->db->from('permintaan_bahan');
+ 		$this->db->where("Nomor_Instruksi", $noins);
+ 		$this->db->order_by('Nomor_Instruksi', 'desc');
+ 		
+ 		$o_lpb_rows = $this->db->get()->result();
+ 		$a_lpb_rows = json_decode(json_encode($o_lpb_rows), True);
+ 		return $a_lpb_rows;
+ 	}
+
+ 	public function print_permintaan_bahan($noins) {
+ 		$this->db->select('*');
+ 		$this->db->from('bahan_minta');
+ 		$this->db->where("Nomor_Instruksi", $noins);
+ 		$this->db->order_by('Kode_Bahan', 'desc');
+ 		
+ 		$o_lpb_rows = $this->db->get()->result();
+ 		$a_lpb_rows = json_decode(json_encode($o_lpb_rows), True);
+ 		return $a_lpb_rows;
+ 	}
 
 	public function get_kode_bahan() {
 

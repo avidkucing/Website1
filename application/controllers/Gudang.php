@@ -29,7 +29,8 @@ class Gudang extends CI_Controller{
  
 	public function index(){
 		$data['lpb'] = $this->gudang_database->homepage();
- 		$data['lpb_batch'] =$this->gudang_database->homepage_batch();
+ 		$data['lpb_batch'] = $this->gudang_database->homepage_batch();
+ 		$data['ins'] = $this->gudang_database->homepage_instruksi();
  		$this->load->view('gudang/gudang_homepage', $data);
 	}
 
@@ -46,6 +47,12 @@ class Gudang extends CI_Controller{
 		$this->load->view('gudang/print_lpb_no_tombol', $data);		
 	}
 	
+	public function print_permintaan_bahan_show($value){
+		$data['ins'] = $this->gudang_database->print_instruksi_permintaan($value);
+		$data['ins_bahan'] = $this->gudang_database->print_permintaan_bahan($value);
+		$this->load->view('gudang/print_instruksi', $data);
+	}
+
 	public function tambah_lpb_show(){
 		$this->load->view('gudang/tambah_lpb');
 	}
@@ -213,6 +220,7 @@ class Gudang extends CI_Controller{
 							$data['message_display'] = 'Sukses menambahkan data!';
 							$data['lpb'] = $this->gudang_database->homepage();
 	 						$data['lpb_batch'] =$this->gudang_database->homepage_batch();
+	 						$data['ins'] = $this->gudang_database->homepage_instruksi();
 							$this->load->view('gudang/gudang_homepage', $data);	
 						}
 					} else {
