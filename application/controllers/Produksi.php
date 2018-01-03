@@ -166,7 +166,8 @@ class Produksi extends CI_Controller{
 							$this->load->view('produksi/form_bahan', $data);	
 						} else {
 							$data['message_display'] = 'Sukses menambahkan data permintaan!';
-							$this->load->view('produksi/produksi_homepage', $data);	
+							$data['ins'] = $this->produksi_database->homepage_instruksi();
+ 							$this->load->view('produksi/produksi_homepage', $data);	
 						}
 			} else {
 				$data['message_display'] = 'Nomor Instruksi sudah ada! Gunakan nomor yang lain!';
