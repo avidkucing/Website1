@@ -1,5 +1,5 @@
 body {
-	
+
 }
 
 thead {
@@ -46,6 +46,11 @@ button {
 	font-size: 20px;
 }
 
+.subtitle {
+	text-align: center;
+	font-weight: bold;
+}
+
 .left-item {
 	display: inline-block;
 	position: relative;
@@ -64,8 +69,4 @@ button {
 
 .form-horizontal .control-label.text-left{
     text-align: left;
-}
-
-@media print {
-	
 }

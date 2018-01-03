@@ -5,50 +5,6 @@ $(document).ready(function(){
         window.location.href=$link ;
     });
 
-    $(".bahanjadi tbody tr td").addClass("klik");
-    $('.klik').click(function(){
-        $link = window.location.origin + "/hisamitsu/gudang/print_permintaan_bahan_show/" + (this.id);
-        window.location.href=$link ;
-    });
-
-    /*$('#tabel').DataTable( {
-        "lengthChange" : false
-    } );*/
-
-    //$('#print').click(function(){
-        //$link = window.location.origin + "/hisamitsu/gudang/print_lpb_no_tombol_show/" + (this.id);
-        //window.location.href=$link ;
-        /*var doc = new jsPDF();
-        var specialElementHandlers = {
-            '#print': function (element, renderer) {
-                return true;
-            }
-        };
-
-        doc.fromHTML($('body').get(0), 15, 15, {
-            'width': 170,
-            'elementHandlers': specialElementHandlers
-        });
-        doc.save('sample-file.pdf');*/
-        //window.history.back();
-        //$(".button-container").hide();
-        //window.print();
-    //});
-
-
-    $("#bahanbakutab").click(function(){
-		$("#bahanjaditab").removeClass("active");
-		$("#bahanbakutab").addClass("active");
-		$(".bahanjadi").hide();
-		$(".bahanbaku").fadeIn("fast");
-	});
-	$("#bahanjaditab").click(function(){
-		$("#bahanbakutab").removeClass("active");
-		$("#bahanjaditab").addClass("active");
-		$(".bahanbaku").hide();
-		$(".bahanjadi").fadeIn("fast");
-	});
-
 	$(".kodebahan").on("change",function(){
     var value = $(this).val();
     $.ajax({

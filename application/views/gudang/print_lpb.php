@@ -8,11 +8,7 @@
     <script defer src="<?php echo base_url(); ?>public/js/fontawesome-all.js"></script>
     <script src="https://code.jquery.com/jquery-1.12.3.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script src="<?php echo base_url(); ?>public/js/gudang.js"></script>
-    <!--Print JS
-    <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>public/css/print.min.css">
-    <script src="<?php echo base_url(); ?>public/js/print.min.js"></script>-->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.5/jspdf.debug.js"></script>
+    <script src="<?php echo base_url(); ?>public/js/lpb.js"></script>
 </head>
 
 <body>
@@ -44,8 +40,16 @@
 	</div>
 
 	<div class="button-container">
-		<button onclick="print()" type="button" class="button-item btn" id="print">belum</button>
+		<button onclick="printThis()" type="button" class="button-item btn" id="print">Print</button>
 		<button onclick="location.href='<?php echo base_url();?>gudang'" type="button" class="button-item btn" id="back">Kembali</button>
 		<br>
 	</div>
+
+	<script type="text/javascript">
+		function printThis() {
+			$('.button-container').hide();
+			window.print();
+			$('.button-container').show();
+		}
+	</script>
 </body>
