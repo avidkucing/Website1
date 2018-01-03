@@ -2,7 +2,7 @@ $(document).ready(function(){
 
     $(".permintaan tbody tr td").addClass("klik");
     $('.klik').click(function(){
-        $link = window.location.origin + "/hisamitsu/produksi/print_permintaan_bahan_show/" + (this.id);
+        $link = window.location.origin + "/manufaktur/produksi/print_permintaan_bahan_show/" + (this.id);
         window.location.href=$link ;
     });
  	

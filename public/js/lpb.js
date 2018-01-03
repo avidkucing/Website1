@@ -1,7 +1,7 @@
 $(document).ready(function(){
 	$(".bahanbaku tbody tr td").addClass("klik");
     $('.klik').click(function(){
-        $link = window.location.origin + "/hisamitsu/gudang/print_lpb_show/" + (this.id);
+        $link = window.location.origin + "/manufaktur/gudang/print_lpb_show/" + (this.id);
         window.location.href=$link ;
     });
 
