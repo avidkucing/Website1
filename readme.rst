@@ -25,9 +25,9 @@ Requirements
 Installation
 ************
 
-1. Clone git pada directory server yang akan digunakan pada web server.
+1. Clone git pada directory server yang akan digunakan pada web server. Ubah nama folder menjadi 'manufaktur'.
 
-2. Buat database "hisamitsu" pada database MYSQL dan import file hisamitsu.sql.
+2. Buat database "manufaktur" pada database MYSQL dan import file manufaktur.sql.
 
 3. Konfigurasi pengaturan database pada application/config/database.php untuk pengaturan hostname, username, password, dan nama database.
 
@@ -42,7 +42,7 @@ Operation
 
 2. Buka web browser pada komputer klien.
 
-3. Buka halaman : {web base URL}/hisamitsu
+3. Buka halaman : {web base URL}/manufaktur
 
 4. Login menggunakan akses akun di bawah.
 
