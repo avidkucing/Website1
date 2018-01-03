@@ -31,6 +31,8 @@ Installation
 
 3. Konfigurasi pengaturan database pada application/config/database.php untuk pengaturan hostname, username, password, dan nama database.
 
+4. Konfigurasi url base pada application/config/config.php untuk pengaturan base_url.
+
 
 ************
 Operation
@@ -40,7 +42,7 @@ Operation
 
 2. Buka web browser pada komputer klien.
 
-3. Buka halaman {web server URL}/hisamitsu
+3. Buka halaman : {web base URL}/hisamitsu
 
 4. Login menggunakan akses akun di bawah.
 
