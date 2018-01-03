@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 31 Des 2017 pada 07.48
+-- Generation Time: 03 Jan 2018 pada 05.30
 -- Versi Server: 10.1.21-MariaDB
 -- PHP Version: 5.6.30
 
@@ -40,9 +40,10 @@ CREATE TABLE `akun` (
 
 INSERT INTO `akun` (`Username`, `Password`, `Nama`, `Email`, `Tipe_Pegawai`) VALUES
 ('admin', '6036902a177b5ecb6e41472be922257a', 'Admin', 'mhabibullah14@yahoo.com', 'Administrator'),
-('avidkucing', '6036902a177b5ecb6e41472be922257a', 'Avid', 'avidkucing@gmail.com', 'Quality Control'),
-('mizan', '6036902a177b5ecb6e41472be922257a', 'Mizan', 'mizan@gmail.com', 'Kepala Bagian Quality Control'),
-('muhabibull', '6036902a177b5ecb6e41472be922257a', 'Habib', 'haha@gmail.com', 'Gudang');
+('mr_gudang', '6036902a177b5ecb6e41472be922257a', 'Mr. Gudang', 'haha@gmail.com', 'Gudang'),
+('mr_head_qc', '6036902a177b5ecb6e41472be922257a', 'Mr. Head of QC', 'mizan@gmail.com', 'Kepala Bagian Quality Control'),
+('mr_produksi', '6036902a177b5ecb6e41472be922257a', 'Mr. Produksi', 'rifda@rifda.com', 'Produksi'),
+('mr_qc', '6036902a177b5ecb6e41472be922257a', 'Mr. QC', 'avidkucing@gmail.com', 'Quality Control');
 
 -- --------------------------------------------------------
 
@@ -62,10 +63,8 @@ CREATE TABLE `analisa_sampel` (
 --
 
 INSERT INTO `analisa_sampel` (`Nomor_Batch`, `Nomor_Analisa`, `Tanggal_Pemeriksaan`, `Sisa_Sampel`) VALUES
-('13', '1', '2017-12-31', 1),
-('76', '2', '2017-12-31', 1),
-('123', '3', '2017-12-31', 1),
-('1212', '4', '2017-12-31', 1);
+('Anggur-01', '0000002', '2018-01-03', 1),
+('Anggur-02', '0000002-2', '2018-01-03', 1);
 
 -- --------------------------------------------------------
 
@@ -80,6 +79,13 @@ CREATE TABLE `bahan_minta` (
   `Jumlah` float NOT NULL,
   `Keterangan` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `bahan_minta`
+--
+
+INSERT INTO `bahan_minta` (`Nomor_Instruksi`, `Kode_Bahan`, `Nomor_Analisa`, `Jumlah`, `Keterangan`) VALUES
+('0000001', '0000002', '0000002', 5, 'untuk produksi jus anggur');
 
 -- --------------------------------------------------------
 
@@ -99,18 +105,8 @@ CREATE TABLE `bahan_terima` (
 --
 
 INSERT INTO `bahan_terima` (`Nomor_LPB`, `ID_Bahan`, `Tanggal_Terima`, `Nomor_Surat`) VALUES
-('1', 1, '2017-12-27', '1'),
-('12', 2, '2017-12-29', '12'),
-('1212', 13, '2017-12-27', '1221'),
-('13', 1, '2017-12-29', '13'),
-('2', 11, '2017-12-27', '2'),
-('3', 13, '2017-12-31', '3'),
-('333', 13, '2017-12-29', '333'),
-('4', 13, '2017-12-31', '4'),
-('49', 1, '2017-12-04', '44'),
-('5', 2, '2017-12-28', '5'),
-('5555', 13, '2017-12-07', '555'),
-('6', 11, '2017-12-31', '6');
+('0000001', 14, '2018-01-03', 'JAN-01'),
+('0000002', 15, '2018-01-03', 'JAN-02');
 
 -- --------------------------------------------------------
 
@@ -129,14 +125,10 @@ CREATE TABLE `hasil_analisa_sampel` (
 --
 
 INSERT INTO `hasil_analisa_sampel` (`Nomor_Analisa`, `No`, `Hasil`) VALUES
-('1', 1, 'Good'),
-('1', 2, 'Not Good'),
-('2', 1, 'Good'),
-('2', 2, 'Not Good'),
-('3', 1, 'good'),
-('3', 2, 'Not Good'),
-('4', 1, 'Good'),
-('4', 2, 'Not Good');
+('0000002', 1, 'good'),
+('0000002', 2, 'Not Good'),
+('0000002-2', 1, 'Good'),
+('0000002-2', 2, 'Not Good');
 
 -- --------------------------------------------------------
 
@@ -159,13 +151,8 @@ CREATE TABLE `jenis_bahan` (
 --
 
 INSERT INTO `jenis_bahan` (`ID_Bahan`, `Kode_Bahan`, `Nama_Bahan`, `Nama_Manufacturer`, `Nama_Supplier`, `Merk`, `Satuan`) VALUES
-(1, '123', 'Permen', 'PT SAPI', 'PT PERAH', 'Milkita', 'gram'),
-(2, '789', 'Susu', 'PT SAPI', 'PT JAYA', 'Enak', 'cc'),
-(3, '123', 'Permen', 'PT BUAYA', 'PT MANTAP', 'Jagoan', 'gram'),
-(8, '123', 'Permen', 'PT BUAYA', 'PT JAYA', 'Enak', 'gram'),
-(11, '789', 'Susu', 'PT SUSU', 'PT ENAK', 'Ultramilk', 'cc'),
-(12, '123', 'Permen', 'PT SANGAR', 'PT APIK', 'Lolipoop', 'gram'),
-(13, '234', 'Roti', 'FPI', 'Sariroti', 'Sariroti', 'gram');
+(14, '0000001', 'Apel', 'PT BATU', 'PT PASAR ORO-ORO DOWO', 'Malang', 'Kilogram'),
+(15, '0000002', 'Anggur', 'PT BATU', 'PT JAYA', 'Hijau', 'Kilogram');
 
 -- --------------------------------------------------------
 
@@ -185,23 +172,10 @@ CREATE TABLE `nomor_batch_bahan` (
 --
 
 INSERT INTO `nomor_batch_bahan` (`Nomor_Batch`, `Nomor_LPB`, `Jumlah`, `Status`) VALUES
-('1', '13', 111, 'QUARANTINE'),
-('12', '12', 12, 'QUARANTINE'),
-('1212', '5555', 22, 'QUARANTINE'),
-('122', '1212', 222, 'QUARANTINE'),
-('123', '49', 21, 'QUARANTINE'),
-('13', '1', 120, 'QUARANTINE'),
-('14', '2', 1200, 'QUARANTINE'),
-('15', '5', 12000, 'QUARANTINE'),
-('2', '13', 111, 'QUARANTINE'),
-('222', '1212', 333, 'QUARANTINE'),
-('3', '3', 300, 'QUARANTINE'),
-('3333', '333', 3333, 'QUARANTINE'),
-('3334', '333', 3344, 'QUARANTINE'),
-('4', '3', 400, 'QUARANTINE'),
-('56', '4', 500, 'QUARANTINE'),
-('6645', '6', 345, 'QUARANTINE'),
-('76', '4', 500, 'QUARANTINE');
+('Anggur-01', '0000002', 5, 'RELEASE'),
+('Anggur-02', '0000002', 30, 'QUARANTINE'),
+('Apel-01', '0000001', 10, 'QUARANTINE'),
+('Apel-02', '0000001', 20, 'QUARANTINE');
 
 -- --------------------------------------------------------
 
@@ -246,12 +220,10 @@ CREATE TABLE `parameter_bahan` (
 --
 
 INSERT INTO `parameter_bahan` (`Kode_Bahan`, `No`, `Parameter`, `Spesifikasi`) VALUES
-('789', 1, 'Hehe', 'Hoho'),
-('789', 2, 'Hoho', 'Hehe'),
-('123', 1, 'Enak', 'Lezat'),
-('123', 2, 'Kenyal', 'Gurih'),
-('234', 1, 'Kenyal', 'Enak'),
-('234', 2, 'Banyak', 'Kenyang');
+('0000001', 1, 'Segar', 'Dingin'),
+('0000001', 2, 'Awet', '3 hari'),
+('0000002', 1, 'Segar', 'Dingin'),
+('0000002', 2, 'Awet', '5 hari');
 
 -- --------------------------------------------------------
 
@@ -264,6 +236,13 @@ CREATE TABLE `permintaan_bahan` (
   `Site_Produksi` varchar(100) NOT NULL,
   `Tanggal_Permintaan` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `permintaan_bahan`
+--
+
+INSERT INTO `permintaan_bahan` (`Nomor_Instruksi`, `Site_Produksi`, `Tanggal_Permintaan`) VALUES
+('0000001', '0000001', '2018-01-04');
 
 -- --------------------------------------------------------
 
@@ -290,23 +269,9 @@ CREATE TABLE `sampel_bahan_terima` (
 --
 
 INSERT INTO `sampel_bahan_terima` (`Nomor_Batch`, `Nomor_Instruksi`, `Tanggal_Instruksi`, `EXP_Date`, `Doc_COA`, `Pola_Sampling`, `Jumlah_Wadah`, `Jumlah_Sampel`, `Petugas_Sampling`, `Rencana_Sampling`, `Catatan`) VALUES
-('1', '5', '2017-12-30', '2024-12-30', 1, 'POLA n(1+(N)^-1/2)', 12, '1', 'Habib', 'FULL TEST', 'd'),
-('12', '6', '2017-12-30', '2017-12-30', 1, 'POLA n(1+(N)^-1/2)', 11, '11', 'Habib', 'FULL TEST', '1'),
-('1212', '18', '2017-12-31', '2017-12-31', 1, 'POLA p (bahan baku homogen, semua wadah)', 1, '1', 'Habib', 'FULL TEST', ''),
-('122', '16', '2017-12-31', '2017-12-31', 1, 'POLA n(1+(N)^-1/2)', 1, '1', 'Avid', 'FULL TEST', ''),
-('123', '11', '2017-12-28', '2027-12-22', 1, 'POLA n(1+(N)^-1/2)', 1, '1', 'Avid', 'FULL TEST', ''),
-('13', '17', '2017-12-31', '2017-12-31', 1, 'POLA n(1+(N)^-1/2)', 1, '1', 'Avid', 'FULL TEST', ''),
-('14', '14', '2017-12-31', '2024-12-31', 1, 'POLA n(1+(N)^-1/2)', 1, '1', 'Avid', 'FULL TEST', ''),
-('15', '7', '2018-01-31', '2022-02-28', 1, 'POLA n(1+(N)^-1/2)', 1, '1', 'Avid', 'FULL TEST', ''),
-('2', '4', '2017-12-30', '2024-12-30', 1, 'POLA n(1+(N)^-1/2)', 1, '1', 'Habib', 'FULL TEST', ''),
-('222', '15', '2017-12-31', '2017-12-31', 1, 'POLA n(1+(N)^-1/2)', 1, '1', 'Avid', 'FULL TEST', ''),
-('3', '13', '2017-12-31', '2026-12-31', 1, 'POLA n(1+(N)^-1/2)', 1, '1', 'Avid', 'FULL TEST', ''),
-('3333', '3', '2017-12-29', '2021-11-30', 1, 'POLA n(1+(N)^-1/2)', 1, '1', 'Habib', 'FULL TEST', 'saae'),
-('3334', '1', '2017-12-30', '2021-12-30', 1, 'POLA n(1+(N)^-1/2)', 1, '1', 'Avid', 'FULL TEST', 'sae'),
-('4', '12', '2017-12-31', '2023-12-31', 1, 'POLA n(1+(N)^-1/2)', 1, '1', 'Avid', 'FULL TEST', ''),
-('56', '9', '2017-12-31', '2021-12-31', 1, 'POLA n(1+(N)^-1/2)', 1, '1', 'Avid', 'FULL TEST', ''),
-('6645', '10', '2017-12-31', '2023-12-31', 1, 'POLA n(1+(N)^-1/2)', 1, '1', 'Avid', 'FULL TEST', ''),
-('76', '8', '2017-12-31', '2026-12-24', 1, 'POLA n(1+(N)^-1/2)', 1, '1', 'Avid', 'FULL TEST', '');
+('Anggur-01', '0000001', '2018-01-03', '2023-01-03', 1, 'POLA n(1+(N)^-1/2)', 1, '1', 'Mr. QC', 'SKIP TEST', 'OK'),
+('Anggur-02', '0000002', '2018-01-03', '2023-01-03', 0, 'POLA p (bahan baku homogen, semua wadah)', 1, '1', 'Mr. QC', 'FULL TEST', ''),
+('Apel-01', '0000003', '2018-01-03', '2022-01-03', 1, 'POLA r (beban baku tidak homogen/tidak terkualifikasi, semua wadah)', 1, '1', 'Mr. QC', 'LAIN_LAIN', '');
 
 --
 -- Indexes for dumped tables
@@ -397,7 +362,7 @@ ALTER TABLE `sampel_bahan_terima`
 -- AUTO_INCREMENT for table `jenis_bahan`
 --
 ALTER TABLE `jenis_bahan`
-  MODIFY `ID_Bahan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `ID_Bahan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 --
 -- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
 --

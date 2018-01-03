@@ -12,31 +12,52 @@ Masih dalam tahap pengembangan alur bahan baku.
 
 
 ************
-Account access
+Requirements
 ************
 
-Jenis akun ; username - password :
+- Web server (Apache)
 
-- Administrator ; admin - yoyomam@
-- Gudang ; muhabibull - yoyomam@
-- Quality-Control ; avidkucing - yoyomam@
-
-************
-Requirement
-************
-
-- Apache
 - MySQL database
-- PHP < 7
+
+- PHP 5.4
 
 ************
 Installation
 ************
 
-Clone pada directory server.
-Buat database "hisamitsu" pada database MYSQL dan import hisamitsu.sql
-Sesuaikan pengaturan pada application/config untuk pengaturan port database.
+1. Clone git pada directory server yang akan digunakan pada web server.
 
+2. Buat database "hisamitsu" pada database MYSQL dan import file hisamitsu.sql.
+
+3. Konfigurasi pengaturan database pada application/config/database.php untuk pengaturan hostname, username, password, dan nama database.
+
+
+************
+Operation
+************
+
+1. Jalankan mysql dan web server.
+
+2. Buka web browser pada komputer klien.
+
+3. Buka halaman {web server URL}/hisamitsu
+
+4. Login menggunakan akses akun di bawah.
+
+
+************
+Account access
+************
+
+Jenis akun -> username :
+
+- Administrator 			-> admin
+- Gudang 					-> mr_gudang
+- Quality-Control 			-> mr_qc
+- Kepala Quality-Control 	-> mr_head_qc
+- Produksi 					-> mr_produksi
+
+All password : yoyomam@
 
 *******
 License
