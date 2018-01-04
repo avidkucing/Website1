@@ -14,11 +14,13 @@ button {
 
 .button-item {
 	display: inline-block;
-	margin-top: 20%;
+	
 }
 
 .button-container {
 	text-align: center;
+	margin-top: 10px;
+	margin-bottom: 10px;
 }
 
 #print {
@@ -69,4 +71,8 @@ button {
 
 .form-horizontal .control-label.text-left{
     text-align: left;
+}
+
+.col-form-label {
+	font-weight: bold;
 }
