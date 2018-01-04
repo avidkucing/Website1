@@ -12,3 +12,11 @@
 	background: #008fff;
 	color: white;
 }
+
+.error_msg {
+	position: fixed;
+	top: 50px;
+	left: 43%;
+	z-index: 100;
+	color: red;
+}
