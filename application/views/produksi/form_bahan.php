@@ -68,7 +68,6 @@
 		<div class="button-container">
 		<!--	<button type="button" class="btn" id="tambah" onClick="addRow('dataTable')">Tambah Bahan Baku</button>-->
 	 		<button type="button" class="btn" id="back" onClick="deleteRow('dataTable')">Hapus Kolom</button>
-	 		<br><br>
 	 	</div>
 		
 		<?php
@@ -133,8 +132,6 @@
 	<div class="button-container">
 		<button type="button submit" class="btn" id="tambah">Tambah</button>
 		<button onclick="location.href='<?php echo base_url();?>produksi'" type="button" class="btn" id="back">Kembali</button>
-		<br>
-		<br>
 		<!--<form class="button-item" action="gudang.html"><button type="button submit" class="btn" id="print">Print</button></form>-->
 	</div>
 	<?php

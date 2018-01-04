@@ -45,8 +45,16 @@
 	</div>
 
 	<div class="button-container">
-		<button onclick="print()" type="button" class="button-item btn" id="print">Print</button>
+		<button onclick="printThis()" type="button" class="button-item btn" id="print">Print</button>
 		<button onclick="location.href='<?php echo base_url();?>produksi'" type="button" class="button-item btn" id="back">Kembali</button>
 		<br>
 	</div>
+
+	<script type="text/javascript">
+		function printThis() {
+			$('.button-container').hide();
+			window.print();
+			$('.button-container').show();
+		}
+	</script>
 </body>
