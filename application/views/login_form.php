@@ -23,22 +23,23 @@
 	<body>
 		<?php
 		if (isset($logout_message)) {
-			echo "<div class='message'>";
+			echo "<div class='message alert alert-danger'>";
 			echo $logout_message;
 			echo "</div>";
 		}
 		?>
 		<?php
 		if (isset($message_display)) {
-			echo "<div class='message'>";
+			echo "<div class='message alert alert-danger'>";
 			echo $message_display;
 			echo "</div>";
 		}
 		?>
 		<?php echo form_open('user_authentication/user_login_process'); ?>
 		<?php
-				echo "<div class='error_msg alert alert-danger'>";
+				
 				if (isset($error_message)) {
+					echo "<div class='error_msg alert alert-danger'>";
 				echo $error_message;
 			}
 			echo validation_errors();
