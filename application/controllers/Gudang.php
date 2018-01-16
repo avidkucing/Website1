@@ -239,7 +239,7 @@ class Gudang extends CI_Controller{
 		'username' => ''
 		);
 		$this->session->unset_userdata('logged_in', $sess_array);
-		$data['message_display'] = 'Successfully Logout';
+		$data['logout_message'] = 'Successfully Logout';
 		$this->load->view('login_form', $data);
 	}
 }

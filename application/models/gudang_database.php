@@ -1,6 +1,6 @@
 <?php
 
-Class Gudang_Database extends CI_Model {
+Class Gudang_database extends CI_Model {
 
 	//show data LPB
  	public function homepage() {

@@ -1,6 +1,6 @@
 <?php
 
-Class Admin_Database extends CI_Model {
+Class Admin_database extends CI_Model {
 
 	// Insert registration data in database
 	public function registration_insert($data) {

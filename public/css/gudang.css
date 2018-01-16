@@ -105,9 +105,6 @@ ul.links2 a {
 	padding-right: 40px;
 }
 
-.content-item {
-	margin: 20px;
-}
 
 .content-table {
     margin-left: 20px;
@@ -119,9 +116,19 @@ ul.links2 a {
 	background: green;
 	color: white;
 	font-weight: bold;
+    margin-left: 20px;
+    margin-bottom: 10px;
 }
 
 #content button:hover {
     background: #228B22;
+}
+
+.button-container {
+    width: 1099px;
+}
+
+#print-all {
+    margin-left: 0px;
 }
 

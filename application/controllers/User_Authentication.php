@@ -1,8 +1,6 @@
 <?php
 
-//session_start(); //we need to start session in order to access it through CI
-
-Class User_Authentication extends CI_Controller {
+Class User_authentication extends CI_Controller {
 
 	public function __construct() {
 		parent::__construct();
@@ -88,7 +86,7 @@ Class User_Authentication extends CI_Controller {
 		'username' => ''
 		);
 		$this->session->unset_userdata('logged_in', $sess_array);
-		$data['message_display'] = 'Successfully Logout';
+		$data['logout_message'] = 'Successfully Logout';
 		$this->load->view('login_form', $data);
 	}
 

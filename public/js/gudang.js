@@ -12,7 +12,7 @@ $(document).ready(function(){
     });
 
     $('#tabel').DataTable( {
-        
+
     } );
 
     //$('#print').click(function(){
