@@ -11,9 +11,14 @@ $(document).ready(function(){
         window.location.href=$link ;
     });
 
-    $('#tabel').DataTable( {
+    $("#other").click(function(){
+       $('.arrow').toggleClass("fa-angle-down");
+       $('.arrow').toggleClass("fa-angle-up");
+    });
 
-    } );
+    $('.decorated').DataTable( {
+
+    });
 
     //$('#print').click(function(){
         //$link = window.location.origin + "/hisamitsu/gudang/print_lpb_no_tombol_show/" + (this.id);
@@ -35,19 +40,27 @@ $(document).ready(function(){
         //window.print();
     //});
 
-
     $("#bahanbakutab").click(function(){
 		$("#bahanjaditab").removeClass("active");
 		$("#bahanbakutab").addClass("active");
-		$(".bahanjadi").hide();
-		$(".bahanbaku").fadeIn("fast");
+		$("#bahanjadi").hide();
+		$("#bahanbaku").fadeIn("fast");
 	});
+
 	$("#bahanjaditab").click(function(){
 		$("#bahanbakutab").removeClass("active");
 		$("#bahanjaditab").addClass("active");
-		$(".bahanbaku").hide();
-		$(".bahanjadi").fadeIn("fast");
+		$("#bahanbaku").hide();
+		$("#bahanjadi").fadeIn("fast");
 	});
+
+    $("#print-all").click(function(){
+        $("#for-web").hide();
+        $("#for-print").show();
+        window.print();
+        $("#for-web").show();
+        $("#for-print").hide();
+    });
 
 	$(".kodebahan").on("change",function(){
     var value = $(this).val();
