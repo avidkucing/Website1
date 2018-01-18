@@ -13,7 +13,8 @@
 
 <body>
 	<div id="print-content">
-		<p class="title">PT. Hisamitsu Pharma Indonesia</p>
+		<p class="title print-only" style="display: none;">PT. Hisamitsu Pharma Indonesia</p>
+		<br>
 		<div class="left-item">
 			<p>No. LPB: <?php echo $lpb[0]['Nomor_LPB']?></p>
 			<p>Tanggal Terima: <?php echo $lpb[0]['Tanggal_Terima']?></p>
@@ -36,7 +37,7 @@
 			echo $this->table->generate();
 	 	?>
 
-		<p class="right-item sign">Signed By (Electronic Sign)</p>
+		<p class="right-item sign print-only" style="display: none;">Signed By (Electronic Sign)</p>
 	</div>
 
 	<div class="button-container">
@@ -48,8 +49,10 @@
 	<script type="text/javascript">
 		function printThis() {
 			$('.button-container').hide();
+			$('.print-only').show();
 			window.print();
 			$('.button-container').show();
+			$('.print-only').hide();
 		}
 	</script>
 </body>

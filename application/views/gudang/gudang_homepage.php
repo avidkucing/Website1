@@ -14,46 +14,53 @@
 <head>
  	<title>Gudang</title>
 	<meta charset="utf-8">
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>public/css/gudang.css">
-    <script defer src="<?php echo base_url(); ?>public/js/fontawesome-all.js"></script>
-    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script src="<?php echo base_url(); ?>public/js/gudang.js"></script>
-    <!--Data Tables-->
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap.min.css">
-    <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<!-- jQuery library -->
+	<script src="<?php echo base_url(); ?>public/js/jquery-3.2.1.min.js"></script>
+	<!--Bootstrap 4-->
+	<link rel="stylesheet" href="<?php echo base_url(); ?>public/css/bootstrap.min.css">
+	<script src="<?php echo base_url(); ?>public/js/bootstrap.min.js"></script>
+	<!--Icons-->
+	<script defer src="<?php echo base_url(); ?>public/js/fontawesome-all.js"></script>
+	<!--Our Custom CSS & JS-->
+	<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>public/css/global.css">
+	<script src="<?php echo base_url(); ?>public/js/global.js"></script>
+	<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>public/css/gudang.css">
+	<script src="<?php echo base_url(); ?>public/js/gudang.js"></script>
+	<!--Data Tables-->
+	<link rel="stylesheet" href="<?php echo base_url(); ?>public/css/dataTables.min.css">
+    <script src="<?php echo base_url(); ?>public/js/dataTables.min.js"></script>
 </head>
 
 <body>
-	<div class="wrapper">
-		<nav id="sidebar">
-			<div class="sidebar-header">
-				<h2>Warehouse</h2>
-				<h4>Halo, <?php echo $nama;?></h4>
-			</div>
-			<ul class="links list-unstyled">
-				<li class="active" id="bahanbakutab"><a href="#">Stock Bahan Baku</a></li>
-				<li id="bahanjaditab"><a href="#">List Permintaan Bahan Baku</a></li>
-				<li>
-					<a href="#sublinks" data-toggle="collapse" aria-expanded="false">Lihat Lainnya</a>
-					<ul class="collapse list-unstyled" id="sublinks">
-						<li><a href="#">Page</a></li>
-						<li><a href="#">Page</a></li>
-						<li><a href="#">Page</a></li>
-						<li><a href="#">Page</a></li>
-						<li><a href="#">Page</a></li>
+	<div id="for-web">
+		<div class="row">
+			<div class="col-md-2 sidebar">
+				<div class="sidebar-header">
+					<h2>Warehouse</h2>
+					<p>Halo, <?php echo $nama;?></p>
+				</div>
+				<hr>
+				<ul class="links list-unstyled">
+					<li class="active" id="bahanbakutab"><a href="#">Stock Bahan Baku</a></li>
+					<li id="bahanjaditab"><a href="#">Permintaan Bahan Baku</a></li>
+					<li>
+						<a id="other" href="#sublinks" data-toggle="collapse" aria-expanded="false">Lihat Lainnya<i class="fas fa-angle-down fa-fw fa-lg arrow"></i></a>
+						<ul class="collapse list-unstyled" id="sublinks">
+							<li><a href="#">Page</a></li>
+							<li><a href="#">Page</a></li>
+							<li><a href="#">Page</a></li>
+						</ul>
+					</li>
+				</ul>
+				<div class="links2 col-md-12">
+					<ul class="list-unstyled">
+						<li><a href="#"><i class="fas fa-bell fa-fw fa-lg"></i> Notifikasi</a></li>
+						<li><a href="<?php echo base_url(); ?>gudang/logout"><i class="fas fa-power-off fa-fw fa-lg"></i> Logout</a></li>
 					</ul>
-				</li>
-			</ul>
-			<ul class="links2 list-unstyled">
-				<li><a href="#"><i class="fas fa-bell fa-fw fa-lg"></i> Notifikasi</a></li>
-				<li><a href="<?php echo base_url(); ?>gudang/logout"><i class="fas fa-power-off fa-fw fa-lg"></i> Logout</a></li>
-			</ul>
-		</nav>
-		<div id="content">
-			<div class="content-table">
+				</div>
+			</div>
+			<div class="col-md-10 offset-md-2 content">
 				<?php
 				if (isset($message_display)) {
 					echo "<div class='message'>";
@@ -61,13 +68,14 @@
 					echo "</div>";
 				}
 				?>
-	 			<?php
+				<div id="bahanbaku">
+					<?php
 	 				$template = array(
-	 			        'table_open'            => '<table id="tabel" class="table table-bordered table-hover table-responsive bahanbaku">'
+	 			        'table_open' => '<table class="table table-bordered table-hover decorated" cell-spacing="0">'
 	 				);
 	 				$this->table->set_template($template);
 	 				$this->table->set_heading('No LPB', 'Tanggal Terima', 'Kode Bahan', 'Nomor Batch', 'Nama Supplier', 'Nama Manufacturer', 'Jumlah', 'Satuan', 'Status');
-	 				
+
 	 				foreach ($lpb as $row) {
 	 					foreach ($lpb_batch as $rowb) {
 	 						$a = $row->Nomor_LPB;
@@ -88,28 +96,40 @@
 	 				}
 	 				echo $this->table->generate();
 	 				$this->table->clear();
-	 			?>
-	 			<?php
-	 				$template = array(
-	 			        'table_open'            => '<table id="tabel" class="table table-bordered table-hover table-responsive bahanjadi" style="display: none;">'
-	 				);
-	 				$this->table->set_template($template);
-	 				$this->table->set_heading('No Instruksi', 'Site Produksi', 'Tanggal Permintaan');
-	 				
-	 				foreach ($ins as $row) {
-	 					$a = $row->Nomor_Instruksi;
-						$no_ins = array('data' => $row->Nomor_Instruksi, 'id' => $a);
-						$site = array('data' => $row->Site_Produksi, 'id' => $a);
-						$tgl = array('data' => $row->Tanggal_Permintaan, 'id' => $a);
-						$this->table->add_row($no_ins, $site, $tgl);
-	 				}
+		 			?>
+			 		<div class="row button-container">
+						<div class="col-md-6">
+			 				<button onclick="location.href='<?php echo base_url();?>Gudang/tambah_lpb_show'" type="button" class="btn btn-block"><i class="fas fa-plus fa-fw fa-lg"></i> Tambah LPB</button>
+			 			</div>
+			 			<div class="col-md-6">
+			 				<button id="print-all" type="button" class="btn btn-block"><i class="fas fa-print fa-fw fa-lg"></i> Print All</button>
+			 			</div>
+					</div>
+				</div>
+				<div id="bahanjadi" style="display: none;">
+					<?php
+		 				$template = array(
+		 			        'table_open' => '<table class="table table-bordered table-hover decorated" cell-spacing="0">'
+		 				);
+		 				$this->table->set_template($template);
+		 				$this->table->set_heading('No Instruksi', 'Site Produksi', 'Tanggal Permintaan');
+		 				
+		 				foreach ($ins as $row) {
+		 					$a = $row->Nomor_Instruksi;
+							$no_ins = array('data' => $row->Nomor_Instruksi, 'id' => $a);
+							$site = array('data' => $row->Site_Produksi, 'id' => $a);
+							$tgl = array('data' => $row->Tanggal_Permintaan, 'id' => $a);
+							$this->table->add_row($no_ins, $site, $tgl);
+		 				}
 
-	 				echo $this->table->generate();
-	 				$this->table->clear();
-	 			?>
- 			</div>
- 			<button onclick="location.href='<?php echo base_url();?>Gudang/tambah_lpb_show'" type="button submit" class="content-item btn btn-block bahanbaku"><i class="fas fa-plus fa-fw fa-lg"></i> Tambah LPB</button>
-			<button onclick="location.href='<?php echo base_url();?>Gudang/print_lpb_show'" type="button submit" class="content-item btn btn-block bahanjadi" style="display: none;"><i class="fas fa-plus fa-fw fa-lg"></i> Terbitkan Surat Jalan</button>
+		 				echo $this->table->generate();
+		 				$this->table->clear();
+		 			?>
+				</div>
+			</div>
 		</div>
+	</div>
+	<div id="for-print" style="display: none;">
+		<h1>PT. Hisamitsu</h1>
 	</div>
 </body>

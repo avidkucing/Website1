@@ -1,6 +1,6 @@
 <?php 
  
-class Quality_Control extends CI_Controller{
+class Quality_control extends CI_Controller{
 	function __construct(){
 		parent::__construct();
 		

@@ -1,6 +1,6 @@
 <?php
 
-Class Produksi_Database extends CI_Model {
+Class Produksi_database extends CI_Model {
 
 	
  	public function homepage() {
