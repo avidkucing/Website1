@@ -10,11 +10,10 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 		<!-- jQuery library -->
-		<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+		<script src="<?php echo base_url(); ?>public/js/jquery-3.2.1.min.js"></script>
 		<!--Bootstrap 4-->
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css">
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js"></script>
+		<link rel="stylesheet" href="<?php echo base_url(); ?>public/css/bootstrap.min.css">
+		<script src="<?php echo base_url(); ?>public/js/bootstrap.min.js"></script>
 		<!--Icons-->
 		<script defer src="<?php echo base_url(); ?>public/js/fontawesome-all.js"></script>
 		<!--Our Custom CSS & JS-->

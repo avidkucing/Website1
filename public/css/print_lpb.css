@@ -10,12 +10,14 @@ thead {
 button {
 	background: #1584B2;
 	color: white;
-	margin-top: 50px;
+}
+
+.table {
+	text-align: center;
 }
 
 .button-item {
 	display: inline-block;
-
 }
 
 .button-container {
@@ -33,12 +35,6 @@ button {
 
 #tambah {
 	background: #1584B2;
-}
-
-.content-item {
-	margin-right: auto;
-	margin-left: auto;
-	width: 80%;
 }
 
 .title {
