@@ -14,7 +14,7 @@
 	<!--Our Custom CSS & JS-->
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>public/css/global.css">
 	<script src="<?php echo base_url(); ?>public/js/global.js"></script>
-    <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>public/css/print_lpb.css">
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>public/css/lpb.css">
     <script src="<?php echo base_url(); ?>public/js/lpb.js"></script>
 </head>
 
@@ -42,8 +42,8 @@
 		$label_attr = array('class' => 'col-form-label col-sm-2 offset-sm-1');
 		echo form_label('No. LPB:', ' ', $label_attr);
 			echo "<div class='col-sm-8'>";
-			$input_attr = array('class' => 'form-control nolpb');
-			echo form_input('lpb', ' ', $input_attr);
+			$input_attr = array('class' => 'form-control nolpb', 'pattern' => '[0-9]+/[a-zA-z]+/[a-zA-z]+/[0-9]{4}', 'required' => '');
+			echo form_input('lpb', '', $input_attr);
 			echo "</div>";
 		echo "</div>";
 
@@ -55,7 +55,7 @@
 		        'type'          => 'date',
 		        'name'          => 'tgl',
 			);
-			$input_attr = array('class' => 'form-control tglterima');
+			$input_attr = array('class' => 'form-control tglterima', 'required' => '');
 			echo form_input($date, ' ', $input_attr);
 			echo "</div>";
 		echo "</div>";
@@ -64,7 +64,7 @@
 		$label_attr = array('class' => 'col-form-label col-sm-2 offset-sm-1');
 		echo form_label('No. Surat Pesanan:', ' ', $label_attr);
 			echo "<div class='col-sm-8'>";
-			$input_attr = array('class' => 'form-control');
+			$input_attr = array('class' => 'form-control', 'required' => '');
 			echo form_input('surat', ' ', $input_attr);
 			echo "</div>";
 		echo "</div>";
@@ -120,12 +120,12 @@
 	 	<div class="col-sm-8 offset-sm-2">
 	 		<?php
 				$template_batch = array(
-			        'table_open'            => '<table id="dataTable" class="table table-bordered" cell-spacing="0">'
+			        'table_open' => '<table id="dataTable" class="table table-bordered" cell-spacing="0">'
 				);
 				$this->table->set_template($template_batch);
 				$this->table->set_heading('Pilih', 'Nomor Batch', 'Jumlah', 'Satuan');
 				$batch = array(
-		            array(form_checkbox('chk[]', 'accept', TRUE), form_input('batch[]', '', 'class="form-control"'), form_input('jumlah[]', '', 'class="form-control"'),  form_dropdown('satuan', $manu_rows, '', 'class="form-control satuan"'))
+		            array(form_checkbox('chk[]', 'accept', TRUE), form_input('batch[]', '', 'class="form-control" required'), form_input('jumlah[]', '', 'class="form-control" required'),  form_dropdown('satuan', $manu_rows, '', 'class="form-control satuan"'))
 		        );
 
 				echo $this->table->generate($batch);

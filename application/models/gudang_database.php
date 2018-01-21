@@ -7,7 +7,7 @@ Class Gudang_database extends CI_Model {
  		$this->db->select('bahan_terima.Nomor_LPB, bahan_terima.Tanggal_Terima, jenis_bahan.Kode_Bahan, jenis_bahan.Nama_Supplier, jenis_bahan.Nama_Manufacturer, jenis_bahan.Satuan');
  		$this->db->from('bahan_terima');
  		$this->db->join('jenis_bahan', 'bahan_terima.ID_Bahan = jenis_bahan.ID_Bahan', 'inner');
- 		$this->db->order_by('Tanggal_Terima asc, Nomor_LPB asc');
+ 		$this->db->order_by('Nomor_LPB', 'asc');
  		
  		$o_lpb_rows = $this->db->get()->result();
 
@@ -20,7 +20,7 @@ Class Gudang_database extends CI_Model {
  	public function homepage_batch() {
  		$this->db->select('*');
  		$this->db->from('nomor_batch_bahan');
- 		$this->db->order_by('Nomor_LPB', 'desc');
+ 		$this->db->order_by('Nomor_LPB', 'asc');
  		
  		$query = $this->db->get();
  		$o_batch_rows = $query->result();
