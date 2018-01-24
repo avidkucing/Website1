@@ -37,7 +37,9 @@
 	<center>
 		<button onclick="location.href='<?php echo base_url();?>Admin/user_registration_show'"; >Buat Akun Baru</button>
 		<br>
-		<button onclick="location.href='<?php echo base_url();?>Admin/add_data_bahan_show'"; >Tambah Data Bahan Baku</button>
+		<button onclick="location.href='<?php echo base_url();?>Admin/add_data_bahan_baku_show'"; >Tambah Data Bahan Baku</button>
+		<br>
+		<button onclick="location.href='<?php echo base_url();?>Admin/add_data_bahan_kemas_show'"; >Tambah Data Bahan Kemas</button>
 		<br>
 		<button onclick="location.href='<?php echo base_url();?>Admin/logout'"; >Logout</button>
 	</center>

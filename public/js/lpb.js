@@ -5,6 +5,18 @@ $(document).ready(function(){
         window.location.href=$link ;
     });
 
+    $(".jenisbahan").on("change",function(){
+    var value = $(this).val();
+    $.ajax({
+         url : "get_data_kode_bahan",
+         type: "post",
+         data: {"value":value},
+         success : function(data){
+             $(".kodebahan").html(data);
+         },
+    });
+    });
+
 	$(".kodebahan").on("change",function(){
     var value = $(this).val();
     $.ajax({
@@ -44,7 +56,7 @@ $(document).ready(function(){
     });
 
 	});
-
+    /*
     $(".supplier").on("change",function(){
     var supplier = $(this).val();
     var kodebahan = $(".kodebahan").val();
@@ -76,7 +88,7 @@ $(document).ready(function(){
     });
 
     });
-
+    */
 });	    
 
 

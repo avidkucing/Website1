@@ -4,16 +4,30 @@ Class Gudang_database extends CI_Model {
 
 	//show data LPB
  	public function homepage() {
- 		$this->db->select('bahan_terima.Nomor_LPB, bahan_terima.Tanggal_Terima, jenis_bahan.Kode_Bahan, jenis_bahan.Nama_Supplier, jenis_bahan.Nama_Manufacturer, jenis_bahan.Satuan');
+ 		$this->db->select('bahan_terima.Nomor_LPB, bahan_terima.Tanggal_Terima, jenis_bahan.Kode_Bahan, bahan_terima.Nama_Supplier, bahan_terima.Nama_Manufacturer, jenis_bahan.Satuan');
  		$this->db->from('bahan_terima');
  		$this->db->join('jenis_bahan', 'bahan_terima.ID_Bahan = jenis_bahan.ID_Bahan', 'inner');
  		$this->db->order_by('Tanggal_Terima desc, Nomor_LPB desc');
+ 		$this->db->where("jenis_bahan.Jenis", "Baku");
  		
  		$o_lpb_rows = $this->db->get()->result();
  		
  		return $o_lpb_rows;
  	}
- 
+ 	
+ 	//show data LPB bahan kemas
+ 	public function homepage_kemas() {
+ 		$this->db->select('bahan_terima.Nomor_LPB, bahan_terima.Tanggal_Terima, jenis_bahan.Kode_Bahan, bahan_terima.Nama_Supplier, bahan_terima.Nama_Manufacturer, jenis_bahan.Satuan');
+ 		$this->db->from('bahan_terima');
+ 		$this->db->join('jenis_bahan', 'bahan_terima.ID_Bahan = jenis_bahan.ID_Bahan', 'inner');
+ 		$this->db->order_by('Tanggal_Terima desc, Nomor_LPB desc');
+ 		$this->db->where("jenis_bahan.Jenis", "Kemas");
+ 		
+ 		$o_lpb_rows = $this->db->get()->result();
+ 		
+ 		return $o_lpb_rows;
+ 	}
+
  	//homepage batch show data batch
  	public function homepage_batch() {
  		$this->db->select('*');
@@ -139,6 +153,16 @@ Class Gudang_database extends CI_Model {
 		return $real_kode_rows;
 	}
 
+	public function get_data_kode_bahan($value){
+ 		$this->db->select('Kode_Bahan');
+	    $this->db->distinct();
+	    $this->db->from('jenis_bahan');
+	    $this->db->where("Jenis",$value);
+	    
+	    return $this->db->get()->result();
+ 	}
+ 	
+
 	 public function get_data_nama_bahan($value) {
 	    $this->db->select('Nama_Bahan');
 	    $this->db->distinct();
@@ -151,7 +175,7 @@ Class Gudang_database extends CI_Model {
 	 public function get_data_manufaktur($value) {
 	 	$this->db->select('Nama_Manufacturer');
 	    $this->db->distinct();
-	    $this->db->from('jenis_bahan');
+	    $this->db->from('manufaktur_bahan');
 	    $this->db->where("Kode_Bahan",$value);
 	    
 	    return $this->db->get()->result();	
@@ -160,7 +184,7 @@ Class Gudang_database extends CI_Model {
 	 public function get_data_supplier($value) {
 	 	$this->db->select('Nama_Supplier');
 	    $this->db->distinct();
-	    $this->db->from('jenis_bahan');
+	    $this->db->from('supplier_bahan');
 	    $this->db->where("Kode_Bahan",$value);
 	    
 	    return $this->db->get()->result();		
@@ -174,8 +198,8 @@ Class Gudang_database extends CI_Model {
 	    
 	    return $this->db->get()->result();		
 	 }
-
-	 public function get_data_nama_manufaktur_from_supplier($value, $value2) {
+	/*
+	public function get_data_nama_manufaktur_from_supplier($value, $value2) {
 	 	$condition = "Kode_Bahan = " . "'" . $value . "'" . " AND Nama_Supplier = " . "'" . $value2 . "'";
 	 	$this->db->select('Nama_Manufacturer');
 	    $this->db->distinct();
@@ -194,7 +218,7 @@ Class Gudang_database extends CI_Model {
 
 	    return $this->db->get()->result();	
 	 }
-
+	*/
 	 public function cek_batch_bahan($cari) {
 	 	// Query to check whether batch already exist or not
 		$condition = "Nomor_Batch =" . "'" . $cari . "'";

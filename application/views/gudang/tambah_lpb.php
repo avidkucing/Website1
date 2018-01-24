@@ -61,6 +61,16 @@
 		echo "</div>";
 
 		echo "<div class='content-item'>";
+			//opsi bahan baku/bahan kemas
+			echo "<div class='form-group'>";
+			$label_attr = array('class' => 'control-label col-sm-4 text-left');
+			echo form_label('Jenis Bahan:', ' ', $label_attr);
+				echo "<div class='col-sm-8'>";
+				$jenis_bahan = array ('' => '--Pilih Opsi Jenis Bahan--', 'Baku' => 'Bahan Baku', 'Kemas' => 'Bahan Kemas');
+				echo my_form_dropdown('jenis', $jenis_bahan,'', '', '', 'class="form-control jenisbahan"'); 
+				echo "</div>";
+			echo "</div>";
+
 			//get object return from gudang database model & initial array kosong untuk form
 			$kode_rows = $this->gudang_database->get_kode_bahan();
 			$nama_rows = array();

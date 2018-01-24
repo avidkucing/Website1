@@ -42,6 +42,24 @@ Class Admin_database extends CI_Model {
 		}	
 	}
 
+	public function insert_manu_bahan_baku($data) {
+		$this->db->insert('manufaktur_bahan', $data);
+		if ($this->db->affected_rows() > 0) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public function insert_supp_bahan_baku($data) {
+		$this->db->insert('supplier_bahan', $data);
+		if ($this->db->affected_rows() > 0) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
 }
 
 ?>

@@ -29,6 +29,7 @@ class Gudang extends CI_Controller{
  
 	public function index(){
 		$data['lpb'] = $this->gudang_database->homepage();
+		$data['lpb_kemas'] = $this->gudang_database->homepage_kemas();
  		$data['lpb_batch'] = $this->gudang_database->homepage_batch();
  		$data['ins'] = $this->gudang_database->homepage_instruksi();
  		$this->load->view('gudang/gudang_homepage', $data);
@@ -55,6 +56,16 @@ class Gudang extends CI_Controller{
 
 	public function tambah_lpb_show(){
 		$this->load->view('gudang/tambah_lpb');
+	}
+	public function get_data_kode_bahan(){
+		$value = $this->input->post("value");
+	      $data = $this->gudang_database->get_data_kode_bahan($value);
+	      $option ="<option value=''>--Pilih Kode Bahan--</option>";
+	      foreach($data as $d)
+	      {
+	         $option .= "<option value='".$d->Kode_Bahan."' >".$d->Kode_Bahan."</option>";
+	      }
+	      echo $option;
 	}
 
 	public function get_data_nama_bahan(){
@@ -100,7 +111,7 @@ class Gudang extends CI_Controller{
 	      }
 	      echo $option;		
 	}
-
+	/*
 	public function get_data_manufaktur_from_supplier(){
 		  $kodebahan = $this->input->post("kode");
 		  $supplier = $this->input->post("supp");
@@ -123,7 +134,7 @@ class Gudang extends CI_Controller{
 	      }
 	      echo $option;
 	}
-	
+	*/
 	public function get_tahun_lpb() {
 		$date = $this->input->post("value");
 		$year = substr($date, 0, 4);
@@ -164,12 +175,12 @@ class Gudang extends CI_Controller{
 				$cari = array(
 					'Kode_Bahan' => $this->input->post('kode'),
 					'Nama_Bahan' => $this->input->post('nama'),
-					'Nama_Manufacturer' => $this->input->post('manu'),
-					'Nama_Supplier' => $this->input->post('supp'),
+					//'Nama_Manufacturer' => $this->input->post('manu'),
+					//'Nama_Supplier' => $this->input->post('supp'),
 				);
 				$arr_id_bahan = $this->gudang_database->get_id_bahan($cari);
 				if ($arr_id_bahan == FALSE) {
-					$data['message_display'] = 'Nama Manufaktur dan Supplier tidak sesuai database!';
+					$data['message_display'] = 'Data kode bahan terduplikat! Tunggu admin memperbaiki!';
 					$this->load->view('gudang/tambah_lpb', $data);
 				} else {
 					//mulai input data
@@ -183,6 +194,8 @@ class Gudang extends CI_Controller{
 					$data = array(
 						'Nomor_LPB' => $this->input->post('lpb'),
 						'ID_Bahan' => $id_bahan,
+						'Nama_Manufacturer' => $this->input->post('manu'),
+						'Nama_Supplier' => $this->input->post('supp'),
 						'Tanggal_Terima' => $this->input->post('tgl'),
 						'Nomor_Surat' => $this->input->post('surat'),
 						//'Jumlah' => $this->input->post('jumlah'),
@@ -219,6 +232,7 @@ class Gudang extends CI_Controller{
 						} else {
 							$data['message_display'] = 'Sukses menambahkan data!';
 							$data['lpb'] = $this->gudang_database->homepage();
+							$data['lpb_kemas'] = $this->gudang_database->homepage_kemas();
 	 						$data['lpb_batch'] =$this->gudang_database->homepage_batch();
 	 						$data['ins'] = $this->gudang_database->homepage_instruksi();
 							$this->load->view('gudang/gudang_homepage', $data);	

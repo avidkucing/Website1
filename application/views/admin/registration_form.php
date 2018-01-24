@@ -23,6 +23,7 @@
 
 			$opsipegawai = array(
 		        'Gudang'         					=> 'Gudang',
+		        'Kepala Gudang'         			=> 'Kepala Gudang',
 		        'Quality Control'           		=> 'Quality Control',
 		        'Quality Assurance'         		=> 'Quality Assurance',
 		        'Produksi'       					=> 'Produksi',

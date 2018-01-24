@@ -65,37 +65,88 @@ class Admin extends CI_Controller{
 		}
 	}
 
-	public function add_data_bahan_show(){
-		$this->load->view('admin/add_data_bahan_form');
+	public function add_data_bahan_baku_show(){
+		$this->load->view('admin/add_data_bahan_baku_form');
+	}
+
+	public function add_data_bahan_kemas_show(){
+		$this->load->view('admin/add_data_bahan_kemas_form');	
 	}
 
 	public function new_data_bahan() {
 		// Check validation for user input in SignUp form
 		$this->form_validation->set_rules('kode', 'Kode Bahan Baku', 'trim|required');
 		$this->form_validation->set_rules('nama', 'Nama Bahan Baku', 'trim|required');
-		$this->form_validation->set_rules('merk', 'Merk', 'trim|required');
+		/*$this->form_validation->set_rules('merk', 'Merk', 'trim|required');
 		$this->form_validation->set_rules('manufacturer', 'Nama Manufacturer', 'trim|required');
-		$this->form_validation->set_rules('supplier', 'Nama Supplier', 'trim|required');
+		$this->form_validation->set_rules('supplier', 'Nama Supplier', 'trim|required');*/
 		$this->form_validation->set_rules('satuan', 'Satuan', 'trim|required');
+		$this->form_validation->set_rules('jenis', 'Jenis', 'trim|required');
 		if ($this->form_validation->run() == FALSE) {
 			$this->load->view('admin/add_data_bahan_form');
 		} else {
 			$data = array(
 				'Kode_Bahan' => $this->input->post('kode'),
 				'Nama_Bahan' => $this->input->post('nama'),
-				'Nama_Manufacturer' => $this->input->post('manufacturer'),
+				/*'Nama_Manufacturer' => $this->input->post('manufacturer'),
 				'Nama_Supplier' => $this->input->post('supplier'),
-				'Merk' => $this->input->post('merk'),
+				'Merk' => $this->input->post('merk'),*/
 				'Satuan' => $this->input->post('satuan'),
+				'Jenis' => $this->input->post('jenis'),
 				);
 			$result = $this->admin_database->insert_bahan_baku($data);
 			if ($result == TRUE) {
 				$data['message_display'] = 'Add Bahan Baku Sukses !';
-				$this->load->view('admin/add_parameter_spesifikasi_form', $data);
+				//$this->load->view('admin/add_parameter_spesifikasi_form', $data);
+				$this->load->view('admin/add_manu_supp_form', $data);
 			} else {
 				$data['message_display'] = 'Gagal menambahkan data!';
 				$this->load->view('admin/add_data_bahan_form', $data);
 			}
+		}
+	}
+
+	public function new_manu_supp_data_bahan() {
+		$this->form_validation->set_rules('kode', 'Kode Bahan Baku', 'trim|required');
+		
+		$kode = $this->input->post('kode');
+		$array_manu = $this->input->post('manu[]');
+		$array_supp = $this->input->post('supp[]');
+		$result =array();
+		$b = 0;
+		$results = 1;
+
+		foreach (($array_manu) as $a => $b) {
+			$data = array(
+			'Kode_Bahan' => $kode,
+			'Nama_Manufacturer' => $array_manu[$a],
+			);
+			$result[$a] = $this->admin_database->insert_manu_bahan_baku($data);
+			if ($result[$a] == FALSE) {
+				$data['message_display'] = 'Gagal menambahkan data!';
+				$results = 0;
+				break;
+			}
+		}
+
+		foreach (($array_supp) as $a => $b) {
+			$data = array(
+			'Kode_Bahan' => $kode,
+			'Nama_Supplier' => $array_supp[$a],
+			);
+			$result[$a] = $this->admin_database->insert_supp_bahan_baku($data);
+			if ($result[$a] == FALSE) {
+				$data['message_display'] = 'Gagal menambahkan data!';
+				$results = 0;
+				break;
+			}
+		}
+		
+		if ($results == 0) { //gagal tambah data setelah break;
+			$this->load->view('admin/add_manu_supp_form', $data);	
+		} else {
+			$data['message_display'] = 'Sukses menambahkan data!';
+			$this->load->view('admin/add_parameter_spesifikasi_form', $data);	
 		}
 	}
 

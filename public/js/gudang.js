@@ -42,17 +42,30 @@ $(document).ready(function(){
 
     $("#bahanbakutab").click(function(){
 		$("#bahanjaditab").removeClass("active");
+        $("#bahankemastab").removeClass("active");
 		$("#bahanbakutab").addClass("active");
 		$("#bahanjadi").hide();
+        $("#bahankemas").hide();
 		$("#bahanbaku").fadeIn("fast");
 	});
 
 	$("#bahanjaditab").click(function(){
 		$("#bahanbakutab").removeClass("active");
+        $("#bahankemastab").removeClass("active");
 		$("#bahanjaditab").addClass("active");
 		$("#bahanbaku").hide();
+        $("#bahankemas").hide();
 		$("#bahanjadi").fadeIn("fast");
 	});
+
+    $("#bahankemastab").click(function(){
+        $("#bahanbakutab").removeClass("active");
+        $("#bahanjaditab").removeClass("active");
+        $("#bahankemastab").addClass("active");
+        $("#bahanbaku").hide();
+        $("#bahanjadi").hide();
+        $("#bahankemas").fadeIn("fast");
+    });
 
     $("#print-all").click(function(){
         $("#for-web").hide();
@@ -60,6 +73,19 @@ $(document).ready(function(){
         window.print();
         $("#for-web").show();
         $("#for-print").hide();
+    });
+
+    $(".jenisbahan").on("change",function(){
+    var value = $(this).val();
+    $.ajax({
+         url : "get_data_kode_bahan",
+         type: "post",
+         data: {"value":value},
+         success : function(data){
+             $(".kodebahan").html(data);
+         },
+    });
+
     });
 
 	$(".kodebahan").on("change",function(){
@@ -101,7 +127,7 @@ $(document).ready(function(){
     });
 
 	});
-
+    /*
     $(".supplier").on("change",function(){
     var supplier = $(this).val();
     var kodebahan = $(".kodebahan").val();
@@ -117,7 +143,7 @@ $(document).ready(function(){
     });
 
     });
-
+    
     $(".manufaktur").on("change",function(){
     var manufaktur = $(this).val();
     var kodebahan = $(".kodebahan").val();
@@ -133,7 +159,7 @@ $(document).ready(function(){
     });
 
     });
-
+    */
 });	    
 
 
