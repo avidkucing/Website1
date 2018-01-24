@@ -1,6 +1,7 @@
 $(document).ready(function(){
-	$(".bahanbaku tbody tr td").addClass("klik");
+	$(".table tr td").addClass("klik");
     $('.klik').click(function(){
+        //$id=this.id.replace(/\//g, '\-');
         $link = window.location.origin + "/manufaktur/gudang/print_lpb_show/" + (this.id);
         window.location.href=$link ;
     });
@@ -90,6 +91,7 @@ $(document).ready(function(){
 
 	$(".kodebahan").on("change",function(){
     var value = $(this).val();
+    
     $.ajax({
          url : "get_data_nama_bahan",
          type: "post",

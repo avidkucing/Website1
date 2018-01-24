@@ -41,12 +41,6 @@ class Gudang extends CI_Controller{
  		$data['lpb_batch'] =$this->gudang_database->print_batch_lpb($value);
 		$this->load->view('gudang/print_lpb', $data);		
 	}
-
-	public function print_lpb_no_tombol_show($value){
-		$data['lpb'] = $this->gudang_database->print_lpb(rawurldecode($value));
- 		$data['lpb_batch'] =$this->gudang_database->print_batch_lpb(rawurldecode($value));
-		$this->load->view('gudang/print_lpb_no_tombol', $data);		
-	}
 	
 	public function print_permintaan_bahan_show($value){
 		$data['ins'] = $this->gudang_database->print_instruksi_permintaan(rawurldecode($value));
