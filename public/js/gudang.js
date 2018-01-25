@@ -1,12 +1,19 @@
 $(document).ready(function(){
-	$(".table tr td").addClass("klik");
+	$("#bahanbaku table tr td").addClass("klik");
     $('.klik').click(function(){
         //$id=this.id.replace(/\//g, '\-');
         $link = window.location.origin + "/manufaktur/gudang/print_lpb_show/" + (this.id);
         window.location.href=$link ;
     });
 
-    $(".bahanjadi tbody tr td").addClass("klik2");
+    $("#bahankemas table tr td").addClass("klik");
+    $('.klik').click(function(){
+        //$id=this.id.replace(/\//g, '\-');
+        $link = window.location.origin + "/manufaktur/gudang/print_lpb_show/" + (this.id);
+        window.location.href=$link ;
+    });
+
+    $("#bahanjadi tbody tr td").addClass("klik2");
     $('.klik2').click(function(){
         $link = window.location.origin + "/manufaktur/gudang/print_permintaan_bahan_show/" + (this.id);
         window.location.href=$link ;
