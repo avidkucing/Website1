@@ -42,9 +42,12 @@
 				</div>
 				<hr>
 				<ul class="links list-unstyled">
-					<li class="active" id="bahanbakutab"><a href="#">Stock Bahan Baku</a></li>
-					<li id="bahankemastab"><a href="#">Stock Bahan Kemas</a></li>
-					<li id="bahanjaditab"><a href="#">Permintaan Bahan Baku</a></li>
+					<li class="active" id="bahanbakutab"><a href="#">LPB Bahan Baku</a></li>
+					<li id="bahankemastab"><a href="#">LPB Bahan Kemas</a></li>
+					<li id="bahanbantutab"><a href="#">LPB Bahan Pembantu</a></li>
+					<li id="stockbakutab"><a href="#">Stock Bahan Baku</a></li>
+					<li id="stockkemastab"><a href="#">Stock Bahan Kemas</a></li>
+					<li id="mintabakutab"><a href="#">Permintaan Bahan Baku</a></li>
 					<li>
 						<a id="other" href="#sublinks" data-toggle="collapse" aria-expanded="false">Lihat Lainnya<i class="fas fa-angle-down fa-fw fa-lg arrow"></i></a>
 						<ul class="collapse list-unstyled" id="sublinks">
@@ -147,7 +150,108 @@
 					</div>
 				</div>
 				
-				<div id="bahanjadi" style="display: none;">
+				<div id="bahanbantu" style="display: none";>
+					<?php
+	 				$template = array(
+	 			        'table_open' => '<table class="table table-bordered table-hover decorated" cell-spacing="0">'
+	 				);
+	 				$this->table->set_template($template);
+	 				$this->table->set_heading('No LPB', 'Tanggal Terima', 'Kode Bahan', 'Nomor Batch', 'Nama Supplier', 'Nama Manufacturer', 'Jumlah', 'Satuan', 'Status');
+
+	 				foreach ($lpb_bantu as $row) {
+	 					foreach ($lpb_batch as $rowb) {
+	 						$a = $row->Nomor_LPB;
+	 						$b = $rowb->Nomor_LPB;
+	 						if ($b == $a) {
+	 							$nolpb = array('data' => $row->Nomor_LPB, 'id' => $a);
+	 							$tgl = array('data' => $row->Tanggal_Terima, 'id' => $a);
+	 							$kode = array('data' => $row->Kode_Bahan, 'id' => $a);
+	 							$btc = array('data' => $rowb->Nomor_Batch, 'id' => $a);
+	 							$sup = array('data' => $row->Nama_Supplier, 'id' => $a);
+	 							$mnf = array('data' => $row->Nama_Manufacturer, 'id' => $a);
+	 							$jml = array('data' => $rowb->Jumlah, 'id' => $a);
+	 							$sat = array('data' => $row->Satuan, 'id' => $a);
+	 							$sta = array('data' => $rowb->Status, 'id' => $a);
+	 							$this->table->add_row($nolpb, $tgl, $kode, $btc, $sup, $mnf, $jml, $sat, $sta);	
+	 						}
+	 					}
+	 				}
+	 				echo $this->table->generate();
+	 				$this->table->clear();
+		 			?>
+			 		<div class="row button-container">
+						<div class="col-md-6">
+			 				<button onclick="location.href='<?php echo base_url();?>Gudang/tambah_lpb_show'" type="button" class="btn btn-block"><i class="fas fa-plus fa-fw fa-lg"></i> Tambah LPB</button>
+			 			</div>
+			 			<div class="col-md-6">
+			 				<button id="print-all" type="button" class="btn btn-block"><i class="fas fa-print fa-fw fa-lg"></i> Print All</button>
+			 			</div>
+					</div>
+				</div>
+
+				<div id="stockbaku" style="display: none";>
+					<?php
+	 				$template = array(
+	 			        'table_open' => '<table class="table table-bordered table-hover decorated" cell-spacing="0">'
+	 				);
+	 				$this->table->set_template($template);
+	 				$this->table->set_heading('No Analisa', 'Kode Bahan', 'Nama Manufacturer', 'EXP. Date', 'Jumlah', 'Keterangan');
+
+	 				foreach ($stock_baku as $row) {
+	 					$a = $row->Nomor_LPB;
+ 						$noana = array('data' => $row->Nomor_Analisa, 'id' => $a);
+ 						$kode = array('data' => $row->Kode_Bahan, 'id' => $a);
+ 						$mnf = array('data' => $row->Nama_Manufacturer, 'id' => $a);
+ 						$exp = array('data' => $row->EXP_Date, 'id' => $a);
+ 						$jml = array('data' => $row->Jumlah, 'id' => $a);
+ 						$ket = array('data' => $row->Keterangan, 'id' => $a);
+ 						$this->table->add_row($noana, $kode, $mnf, $exp, $jml, $ket);	
+	 				}
+	 				echo $this->table->generate();
+	 				$this->table->clear();
+		 			?>
+			 		<!--<div class="row button-container">
+						<div class="col-md-6">
+			 				<button onclick="location.href='<?php echo base_url();?>Gudang/tambah_lpb_show'" type="button" class="btn btn-block"><i class="fas fa-plus fa-fw fa-lg"></i> Tambah LPB</button>
+			 			</div>
+			 			<div class="col-md-6">
+			 				<button id="print-all" type="button" class="btn btn-block"><i class="fas fa-print fa-fw fa-lg"></i> Print All</button>
+			 			</div>
+					</div>-->
+				</div>
+				
+				<div id="stockkemas" style="display: none";>
+					<?php
+	 				$template = array(
+	 			        'table_open' => '<table class="table table-bordered table-hover decorated" cell-spacing="0">'
+	 				);
+	 				$this->table->set_template($template);
+	 				$this->table->set_heading('No Analisa', 'Kode Bahan', 'Nama Manufacturer', 'EXP. Date', 'Jumlah', 'Keterangan');
+
+	 				foreach ($stock_kemas as $row) {
+	 					$a = $row->Nomor_LPB;
+ 						$noana = array('data' => $row->Nomor_Analisa, 'id' => $a);
+ 						$kode = array('data' => $row->Kode_Bahan, 'id' => $a);
+ 						$mnf = array('data' => $row->Nama_Manufacturer, 'id' => $a);
+ 						$exp = array('data' => $row->EXP_Date, 'id' => $a);
+ 						$jml = array('data' => $row->Jumlah, 'id' => $a);
+ 						$ket = array('data' => $row->Keterangan, 'id' => $a);
+ 						$this->table->add_row($noana, $kode, $mnf, $exp, $jml, $ket);	
+	 				}
+	 				echo $this->table->generate();
+	 				$this->table->clear();
+		 			?>
+			 		<!--<div class="row button-container">
+						<div class="col-md-6">
+			 				<button onclick="location.href='<?php echo base_url();?>Gudang/tambah_lpb_show'" type="button" class="btn btn-block"><i class="fas fa-plus fa-fw fa-lg"></i> Tambah LPB</button>
+			 			</div>
+			 			<div class="col-md-6">
+			 				<button id="print-all" type="button" class="btn btn-block"><i class="fas fa-print fa-fw fa-lg"></i> Print All</button>
+			 			</div>
+					</div>-->
+				</div>
+				
+				<div id="mintabaku" style="display: none;">
 					<?php
 		 				$template = array(
 		 			        'table_open' => '<table class="table table-bordered table-hover decorated" cell-spacing="0">'

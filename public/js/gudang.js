@@ -13,6 +13,13 @@ $(document).ready(function(){
         window.location.href=$link ;
     });
 
+    $("#bahanbantu table tr td").addClass("klik");
+    $('.klik').click(function(){
+        //$id=this.id.replace(/\//g, '\-');
+        $link = window.location.origin + "/manufaktur/gudang/print_lpb_show/" + (this.id);
+        window.location.href=$link ;
+    });
+
     $("#bahanjadi tbody tr td").addClass("klik2");
     $('.klik2').click(function(){
         $link = window.location.origin + "/manufaktur/gudang/print_permintaan_bahan_show/" + (this.id);
@@ -49,30 +56,93 @@ $(document).ready(function(){
     //});
 
     $("#bahanbakutab").click(function(){
-		$("#bahanjaditab").removeClass("active");
+		$("#mintabakutab").removeClass("active");
         $("#bahankemastab").removeClass("active");
+        $("#bahanbantutab").removeClass("active");
+        $("#stockbakutab").removeClass("active");
+        $("#stockkemastab").removeClass("active");
 		$("#bahanbakutab").addClass("active");
-		$("#bahanjadi").hide();
+		$("#mintabaku").hide();
         $("#bahankemas").hide();
+        $("#stockbaku").hide();
+        $("#stockkemas").hide();
+        $("#bahanbantu").hide();
 		$("#bahanbaku").fadeIn("fast");
 	});
 
-	$("#bahanjaditab").click(function(){
+	$("#mintabakutab").click(function(){
 		$("#bahanbakutab").removeClass("active");
         $("#bahankemastab").removeClass("active");
-		$("#bahanjaditab").addClass("active");
+        $("#bahanbantutab").removeClass("active");
+		$("#stockbakutab").removeClass("active");
+        $("#stockkemastab").removeClass("active");
+        $("#mintabakutab").addClass("active");
 		$("#bahanbaku").hide();
         $("#bahankemas").hide();
-		$("#bahanjadi").fadeIn("fast");
+        $("#bahanbantu").hide();
+        $("#stockbaku").hide();
+		$("#stockkemas").hide();
+        $("#mintabaku").fadeIn("fast");
 	});
 
     $("#bahankemastab").click(function(){
         $("#bahanbakutab").removeClass("active");
-        $("#bahanjaditab").removeClass("active");
+        $("#mintabakutab").removeClass("active");
+        $("#stockbakutab").removeClass("active");
+        $("#stockkemastab").removeClass("active");
+        $("#bahanbantutab").removeClass("active");
         $("#bahankemastab").addClass("active");
         $("#bahanbaku").hide();
-        $("#bahanjadi").hide();
+        $("#mintabaku").hide();
+        $("#bahanbantu").hide();
+        $("#stockbaku").hide();
+        $("#stockkemas").hide();
         $("#bahankemas").fadeIn("fast");
+    });
+
+    $("#bahanbantutab").click(function(){
+        $("#bahanbakutab").removeClass("active");
+        $("#stockbakutab").removeClass("active");
+        $("#stockkemastab").removeClass("active");
+        $("#mintabakutab").removeClass("active");
+        $("#bahankemastab").removeClass("active");
+        $("#bahanbantutab").addClass("active");
+        $("#bahanbaku").hide();
+        $("#mintabaku").hide();
+        $("#bahankemas").hide();
+        $("#stockbaku").hide();
+        $("#stockkemas").hide();
+        $("#bahanbantu").fadeIn("fast");
+    });
+
+    $("#stockbakutab").click(function(){
+        $("#bahanbakutab").removeClass("active");
+        $("#bahankemastab").removeClass("active");
+        $("#bahanbantutab").removeClass("active");
+        $("#mintabakutab").removeClass("active");
+        $("#stockkemastab").removeClass("active");
+        $("#stockbakutab").addClass("active");
+        $("#bahanbaku").hide();
+        $("#bahankemas").hide();
+        $("#bahanbantu").hide();
+        $("#mintabaku").hide();
+        $("#stockkemas").hide();
+        $("#stockbaku").fadeIn("fast");
+    });
+
+    $("#stockkemastab").click(function(){
+        $("#bahanbakutab").removeClass("active");
+        $("#bahankemastab").removeClass("active");
+        $("#bahanbantutab").removeClass("active");
+        $("#mintabakutab").removeClass("active");
+        $("#stockbakutab").removeClass("active");
+        $("#stockkemastab").addClass("active");
+        $("#bahanbaku").hide();
+        $("#bahankemas").hide();
+        $("#bahanbantu").hide();
+        $("#mintabaku").hide();
+        $("#stockbaku").hide();
+        $("#stockkemas").fadeIn("fast");
     });
 
     $("#print-all").click(function(){

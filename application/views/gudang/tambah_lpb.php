@@ -64,7 +64,7 @@
 		$label_attr = array('class' => 'col-form-label col-sm-2 offset-sm-1');
 		echo form_label('No. Surat Pesanan:', ' ', $label_attr);
 			echo "<div class='col-sm-8'>";
-			$input_attr = array('class' => 'form-control', 'required' => '');
+			$input_attr = array('class' => 'form-control', 'pattern' => '[0-9]+/[P]+[S]+/[a-zA-z]+/[0-9]{4}', 'required' => '');
 			echo form_input('surat', ' ', $input_attr);
 			echo "</div>";
 		echo "</div>";
@@ -74,7 +74,7 @@
 		$label_attr = array('class' => 'control-label col-sm-2 offset-sm-1');
 		echo form_label('Jenis Bahan:', ' ', $label_attr);
 			echo "<div class='col-sm-8'>";
-			$jenis_bahan = array ('' => '--Pilih Opsi Jenis Bahan--', 'Baku' => 'Bahan Baku', 'Kemas' => 'Bahan Kemas');
+			$jenis_bahan = array ('' => '--Pilih Opsi Jenis Bahan--', 'Baku' => 'Bahan Baku', 'Kemas' => 'Bahan Kemas', 'Pembantu' => 'Bahan Pembantu');
 			echo my_form_dropdown('jenis', $jenis_bahan,'', '', '', 'class="form-control jenisbahan"'); 
 			echo "</div>";
 		echo "</div>";
@@ -120,6 +120,12 @@
 
 		$manu_rows = array();
 		$supp_rows = array();
+		$jenis_rows = array(
+			'Normal' => 'Normal',
+			'Urgent' => 'Urgent',
+			'Very Urgent' => 'Very Urgent',
+		);
+		
 	
 		echo "<div class='form-group row'>";
 		$label_attr = array('class' => 'col-form-label col-sm-2 offset-sm-1');
@@ -136,22 +142,38 @@
 			echo form_dropdown('manu', $manu_rows, '', 'class="form-control manufaktur"');
 			echo "</div>";
 		echo "</div>";
-		?>
 
+		echo "<div class='form-group row'>";
+		$label_attr = array('class' => 'col-form-label col-sm-2 offset-sm-1');
+		echo form_label('Jenis Permintaan:', ' ', $label_attr);
+			echo "<div class='col-sm-8'>";
+			echo form_dropdown('jenis', $jenis_rows, '', 'class="form-control" required');
+			echo "</div>";
+		echo "</div>";
+		?>
+		
 		<div class="button-container p-3">
 			<button type="button" class="btn" id="tambah" onClick="addRow('dataTable')">Tambah Nomor Batch</button>
 	 		<button type="button" class="btn" id="back" onClick="deleteRow('dataTable')">Hapus Nomor Batch</button>
 	 	</div>
 
-	 	<div class="col-sm-8 offset-sm-2">
+	 	<div class="form-group row">
 	 		<?php
 				$template_batch = array(
 			        'table_open' => '<table id="dataTable" class="table table-bordered" cell-spacing="0">'
 				);
 				$this->table->set_template($template_batch);
-				$this->table->set_heading('Pilih', 'Nomor Batch', 'Jumlah', 'Satuan');
+				$this->table->set_heading('Pilih', 'Nomor Batch', 'Jumlah', 'Satuan', 'Keterangan', 'EXP. Date');
+				$exp_date = array(
+		        	'type'          => 'date',
+		        	'name'          => 'exp[]',
+				);
+				$ket = array(
+					'name' => 'keterangan[]',
+					'rows' => '1',
+				);
 				$batch = array(
-		            array(form_checkbox('chk[]', 'accept', TRUE), form_input('batch[]', '', 'class="form-control" required'), form_input('jumlah[]', '', 'class="form-control" required'),  form_dropdown('satuan', $manu_rows, '', 'class="form-control satuan"'))
+		            array(form_checkbox('chk[]', 'accept', TRUE), form_input('batch[]', '', 'class="form-control" required'), form_input('jumlah[]', '', 'class="form-control" required'),  form_dropdown('satuan', $manu_rows, '', 'class="form-control satuan"'), form_textarea($ket, '', 'class="form-control"'), form_input($exp_date, '', 'class="form-control" required'))
 		        );
 
 				echo $this->table->generate($batch);

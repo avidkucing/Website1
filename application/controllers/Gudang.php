@@ -30,15 +30,18 @@ class Gudang extends CI_Controller{
 	public function index(){
 		$data['lpb'] = $this->gudang_database->homepage();
 		$data['lpb_kemas'] = $this->gudang_database->homepage_kemas();
+ 		$data['lpb_bantu'] = $this->gudang_database->homepage_bantu();
  		$data['lpb_batch'] = $this->gudang_database->homepage_batch();
+ 		$data['stock_baku'] = $this->gudang_database->homepage_stock_baku();
+ 		$data['stock_kemas'] = $this->gudang_database->homepage_stock_kemas();
  		$data['ins'] = $this->gudang_database->homepage_instruksi();
  		$this->load->view('gudang/gudang_homepage', $data);
 	}
 
-	public function print_lpb_show($value){
+	public function print_lpb_show($a, $b, $c, $d){
 		//$value = $this->input->post("value");
-		$data['lpb'] = $this->gudang_database->print_lpb($value);
- 		$data['lpb_batch'] =$this->gudang_database->print_batch_lpb($value);
+		$data['lpb'] = $this->gudang_database->print_lpb($a, $b, $c, $d);
+ 		$data['lpb_batch'] =$this->gudang_database->print_batch_lpb($a, $b, $c, $d);
 		$this->load->view('gudang/print_lpb', $data);		
 	}
 	
@@ -144,9 +147,11 @@ class Gudang extends CI_Controller{
 		$this->form_validation->set_rules('manu', 'Nama Manufaktur', 'trim|required');
 		$this->form_validation->set_rules('supp', 'Nama Supplier', 'trim|required');
 		$this->form_validation->set_rules('satuan', 'Satuan', 'trim|required');
+		$this->form_validation->set_rules('jenis', 'Jenis Permintaan', 'trim|required');
 		$this->form_validation->set_rules('batch[]', 'Batch', 'trim|required');
 		$this->form_validation->set_rules('jumlah[]', 'Jumlah', 'trim|required');
-
+		$this->form_validation->set_rules('exp[]', 'EXP. Date', 'trim|required');
+		
 		if ($this->form_validation->run() == FALSE) {
 			$data['message_display'] = 'Input kosong!';
 			$this->load->view('gudang/tambah_lpb', $data);
@@ -192,8 +197,9 @@ class Gudang extends CI_Controller{
 						'Nama_Supplier' => $this->input->post('supp'),
 						'Tanggal_Terima' => $this->input->post('tgl'),
 						'Nomor_Surat' => $this->input->post('surat'),
+						'Status' => 'QUARANTINE',
+						'Jenis_Permintaan' => $this->input->post('jenis'),
 						//'Jumlah' => $this->input->post('jumlah'),
-						//'Status' => 'QUARANTINE',
 						);
 					//input ke database
 					$result = $this->gudang_database->bahan_terima_insert($data);
@@ -202,6 +208,8 @@ class Gudang extends CI_Controller{
 						
 						$array_batch = $this->input->post('batch[]');
 						$array_jumlah = $this->input->post('jumlah[]');
+						$array_exp_date = $this->input->post('exp[]');
+						$array_ket = $this->input->post('keterangan[]');
 						$result =array();
 						$b = 0;
 						$results = 1;
@@ -210,6 +218,8 @@ class Gudang extends CI_Controller{
 								'Nomor_LPB' => $this->input->post('lpb'),
 								'Nomor_Batch' => $array_batch[$a],
 								'Jumlah' => $array_jumlah[$a],
+								'EXP_Date' => $array_exp_date[$a],
+								'keterangan' => $array_ket[$a],
 								'Status' => 'QUARANTINE',
 							);
 
@@ -227,7 +237,8 @@ class Gudang extends CI_Controller{
 							$data['message_display'] = 'Sukses menambahkan data!';
 							$data['lpb'] = $this->gudang_database->homepage();
 							$data['lpb_kemas'] = $this->gudang_database->homepage_kemas();
-	 						$data['lpb_batch'] =$this->gudang_database->homepage_batch();
+	 						$data['lpb_bantu'] = $this->gudang_database->homepage_bantu();
+ 							$data['lpb_batch'] =$this->gudang_database->homepage_batch();
 	 						$data['ins'] = $this->gudang_database->homepage_instruksi();
 							$this->load->view('gudang/gudang_homepage', $data);	
 						}

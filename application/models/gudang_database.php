@@ -27,9 +27,25 @@ Class Gudang_database extends CI_Model {
  		
  		$o_lpb_rows = $this->db->get()->result();
  		
+ 		$this->ubah_format_tanggal($o_lpb_rows);
+	
  		return $o_lpb_rows;
  	}
 
+ 	//show data LPB bahan pembantu
+ 	public function homepage_bantu() {
+ 		$this->db->select('bahan_terima.Nomor_LPB, bahan_terima.Tanggal_Terima, jenis_bahan.Kode_Bahan, bahan_terima.Nama_Supplier, bahan_terima.Nama_Manufacturer, jenis_bahan.Satuan');
+ 		$this->db->from('bahan_terima');
+ 		$this->db->join('jenis_bahan', 'bahan_terima.ID_Bahan = jenis_bahan.ID_Bahan', 'inner');
+ 		$this->db->order_by('Tanggal_Terima desc, Nomor_LPB desc');
+ 		$this->db->where("jenis_bahan.Jenis", "Pembantu");
+ 		
+ 		$o_lpb_rows = $this->db->get()->result();
+ 		
+ 		$this->ubah_format_tanggal($o_lpb_rows);
+	
+ 		return $o_lpb_rows;	
+ 	}
  	//homepage batch show data batch
  	public function homepage_batch() {
  		$this->db->select('*');
@@ -67,6 +83,37 @@ Class Gudang_database extends CI_Model {
  		*/
  	}
  	
+ 	//revisi stock
+ 	public function homepage_stock_baku(){
+ 		$this->db->select('analisa_sampel.Nomor_Analisa, jenis_bahan.Kode_Bahan, bahan_terima.Nama_Manufacturer, nomor_batch_bahan.EXP_Date, nomor_batch_bahan.Jumlah, nomor_batch_bahan.Keterangan, bahan_terima.Nomor_LPB');
+ 		$this->db->from('nomor_batch_bahan');
+ 		$this->db->join('bahan_terima', 'bahan_terima.Nomor_LPB = nomor_batch_bahan.Nomor_LPB', 'inner');
+ 		$this->db->join('analisa_sampel', 'nomor_batch_bahan.Nomor_Batch = analisa_sampel.Nomor_Batch', 'inner');
+ 		$this->db->join('jenis_bahan', 'bahan_terima.ID_Bahan = jenis_bahan.ID_Bahan', 'inner');
+ 		$this->db->order_by('Nomor_Analisa desc');
+ 		$this->db->where("nomor_batch_bahan.Status", "RELEASE");
+ 		$this->db->where("jenis_bahan.Jenis", "Baku");
+ 		
+ 		$o_lpb_rows = $this->db->get()->result();
+ 		
+ 		return $o_lpb_rows;	
+ 	}
+
+ 	public function homepage_stock_kemas(){
+ 		$this->db->select('analisa_sampel.Nomor_Analisa, jenis_bahan.Kode_Bahan, bahan_terima.Nama_Manufacturer, nomor_batch_bahan.EXP_Date, nomor_batch_bahan.Jumlah, nomor_batch_bahan.Keterangan, bahan_terima.Nomor_LPB');
+ 		$this->db->from('nomor_batch_bahan');
+ 		$this->db->join('bahan_terima', 'bahan_terima.Nomor_LPB = nomor_batch_bahan.Nomor_LPB', 'inner');
+ 		$this->db->join('analisa_sampel', 'nomor_batch_bahan.Nomor_Batch = analisa_sampel.Nomor_Batch', 'inner');
+ 		$this->db->join('jenis_bahan', 'bahan_terima.ID_Bahan = jenis_bahan.ID_Bahan', 'inner');
+ 		$this->db->order_by('Nomor_Analisa desc');
+ 		$this->db->where("nomor_batch_bahan.Status", "RELEASE");
+ 		$this->db->where("jenis_bahan.Jenis", "Kemas");
+ 		
+ 		$o_lpb_rows = $this->db->get()->result();
+ 		
+ 		return $o_lpb_rows;	
+ 	}
+
  	public function homepage_instruksi(){
  		$this->db->select('*');
  		$this->db->from('permintaan_bahan');
@@ -83,7 +130,8 @@ Class Gudang_database extends CI_Model {
  		
  	}
 
-	public function print_lpb($nolpb) {
+	public function print_lpb($a, $b, $c, $d) {
+		$nolpb = $a . '/' . $b . '/' . $c . '/' . $d;
 		$this->db->select('bahan_terima.Nomor_LPB, bahan_terima.Tanggal_Terima, jenis_bahan.Kode_Bahan, jenis_bahan.Nama_Bahan, bahan_terima.Nama_Supplier, bahan_terima.Nama_Manufacturer, bahan_terima.Nomor_Surat, jenis_bahan.Satuan');
  		$this->db->from('bahan_terima');
  		$this->db->where("Nomor_LPB", $nolpb);
@@ -98,7 +146,8 @@ Class Gudang_database extends CI_Model {
  		return $a_lpb_rows;
 	}
 
-	public function print_batch_lpb($nolpb) {
+	public function print_batch_lpb($a, $b, $c, $d) {
+		$nolpb = $a . '/' . $b . '/' . $c . '/' . $d;
 		$this->db->select('*');
  		$this->db->from('nomor_batch_bahan');
  		$this->db->where("Nomor_LPB", $nolpb);
