@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 25 Jan 2018 pada 02.59
+-- Generation Time: 28 Jan 2018 pada 04.07
 -- Versi Server: 10.1.21-MariaDB
 -- PHP Version: 5.6.30
 
@@ -108,21 +108,23 @@ CREATE TABLE `bahan_terima` (
   `Nama_Supplier` varchar(100) NOT NULL,
   `Tanggal_Terima` date NOT NULL,
   `Nomor_Surat` varchar(100) NOT NULL,
-  `Status` varchar(100) NOT NULL
+  `Status` varchar(100) NOT NULL,
+  `Jenis_Permintaan` varchar(20) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data untuk tabel `bahan_terima`
 --
 
-INSERT INTO `bahan_terima` (`Nomor_LPB`, `ID_Bahan`, `Nama_Manufacturer`, `Nama_Supplier`, `Tanggal_Terima`, `Nomor_Surat`, `Status`) VALUES
-('002_BB_I_18', 20, 'Mermaid Textile', 'Sandratex', '2018-01-05', '002', 'QUARANTINE'),
-('003_BB_I_18', 21, 'Suzhou', 'PT. Jutarasa Abadi', '2018-01-05', '01', 'ACCEPTED'),
-('004_BB_I_18', 21, 'Suzhou', 'PT. Jutarasa Abadi', '2018-01-05', '001_PS_I_2018', 'ACCEPTED'),
-('005_BB_I_18', 21, 'Suzhou', 'PT. Jutarasa Abadi', '2018-01-06', '001_PS_I_2018', 'ACCEPTED'),
-('006_BB_I_18', 21, 'Suzhou', 'PT. Jutarasa Abadi', '2018-01-07', '001_PS_I_2018', 'ACCEPTED'),
-('007_BB_I_18', 21, 'Suzhou', 'PT. Jutarasa Abadi', '2018-01-09', '001_PS_I_2018', 'QUARANTINE'),
-('008_BB_I_18', 27, 'Anhui Great Nation Essential Oils Co., Ltd.', 'PT. Jutarasa Abadi', '2018-01-24', '002_PS_I_2018', 'ACCEPTED');
+INSERT INTO `bahan_terima` (`Nomor_LPB`, `ID_Bahan`, `Nama_Manufacturer`, `Nama_Supplier`, `Tanggal_Terima`, `Nomor_Surat`, `Status`, `Jenis_Permintaan`) VALUES
+('002/BP/I/18', 20, 'Mermaid Textile', 'Sandratex', '2018-01-05', '002', 'QUARANTINE', 'Normal'),
+('003/BB/I/18', 21, 'Suzhou', 'PT. Jutarasa Abadi', '2018-01-05', '01', 'ACCEPTED', 'Normal'),
+('004/BB/I/18', 21, 'Suzhou', 'PT. Jutarasa Abadi', '2018-01-05', '001_PS_I_2018', 'ACCEPTED', 'Urgent'),
+('005/BB/I/18', 21, 'Suzhou', 'PT. Jutarasa Abadi', '2018-01-06', '001_PS_I_2018', 'ACCEPTED', 'Very Urgent'),
+('006/BB/I/18', 21, 'Suzhou', 'PT. Jutarasa Abadi', '2018-01-07', '001_PS_I_2018', 'ACCEPTED', 'Urgent'),
+('007/BB/I/18', 21, 'Suzhou', 'PT. Jutarasa Abadi', '2018-01-09', '001_PS_I_2018', 'QUARANTINE', 'Normal'),
+('008/BK/I/18', 27, 'Anhui Great Nation Essential Oils Co., Ltd.', 'PT. Jutarasa Abadi', '2018-01-24', '002_PS_I_2018', 'ACCEPTED', 'Urgent'),
+('009/BK/I/18', 27, 'Anhui Great Nation Essential Oils Co., Ltd.', 'PT. Jutarasa Abadi', '2018-01-25', '003_PS_I_2018', 'QUARANTINE', 'Urgent');
 
 -- --------------------------------------------------------
 
@@ -167,7 +169,7 @@ CREATE TABLE `jenis_bahan` (
 --
 
 INSERT INTO `jenis_bahan` (`ID_Bahan`, `Kode_Bahan`, `Nama_Bahan`, `Satuan`, `Jenis`) VALUES
-(20, 'CLOTH S610', 'Kain', 'Meter', 'Baku'),
+(20, 'CLOTH S610', 'Kain', 'Meter', 'Pembantu'),
 (21, 'CAM', 'Camphor', 'Kg', 'Baku'),
 (27, 'MEN', 'l-Menthol', 'Kg', 'Kemas');
 
@@ -202,6 +204,8 @@ CREATE TABLE `nomor_batch_bahan` (
   `Nomor_Batch` varchar(100) NOT NULL,
   `Nomor_LPB` varchar(100) NOT NULL,
   `Jumlah` float NOT NULL,
+  `EXP_Date` date NOT NULL,
+  `Keterangan` varchar(100) NOT NULL,
   `Status` varchar(10) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
@@ -209,15 +213,17 @@ CREATE TABLE `nomor_batch_bahan` (
 -- Dumping data untuk tabel `nomor_batch_bahan`
 --
 
-INSERT INTO `nomor_batch_bahan` (`Nomor_Batch`, `Nomor_LPB`, `Jumlah`, `Status`) VALUES
-('3434', '006_BB_I_18', 0, 'RELEASE'),
-('2323', '005_BB_I_18', 2000, 'REJECT'),
-('1211', '004_BB_I_18', 1000, 'REJECT'),
-('1', '003_BB_I_18', 500, 'RELEASE'),
-('001', '002_BB_I_18', 1000, 'QUARANTINE'),
-('1111', '007_BB_I_18', 1000, 'QUARANTINE'),
-('3456', '008_BB_I_18', 100, 'QUARANTINE'),
-('2345', '008_BB_I_18', 100, 'QUARANTINE');
+INSERT INTO `nomor_batch_bahan` (`Nomor_Batch`, `Nomor_LPB`, `Jumlah`, `EXP_Date`, `Keterangan`, `Status`) VALUES
+('3434', '006/BB/I/18', 0, '2018-11-24', '', 'RELEASE'),
+('2323', '005/BB/I/18', 2000, '2019-01-21', '', 'REJECT'),
+('1211', '004/BB/I/18', 1000, '2020-01-27', '', 'REJECT'),
+('1', '003/BB/I/18', 500, '2018-01-31', '10 pcs * 50', 'RELEASE'),
+('001', '002/BP/I/18', 1000, '2018-07-27', '', 'RELEASE'),
+('1111', '007/BB/I/18', 1000, '2018-11-16', '', 'QUARANTINE'),
+('3456', '008/BK/I/18', 100, '2019-03-14', '', 'QUARANTINE'),
+('2345', '008/BK/I/18', 100, '2019-10-10', '', 'QUARANTINE'),
+('8769', '009/BK/I/18', 200, '2020-02-05', '8 pcs * 25', 'QUARANTINE'),
+('2388', '009/BK/I/18', 250, '2019-01-30', '10 pcs * 25', 'QUARANTINE');
 
 -- --------------------------------------------------------
 
@@ -306,7 +312,6 @@ CREATE TABLE `sampel_bahan_terima` (
   `Nomor_Batch` varchar(100) NOT NULL,
   `Nomor_Instruksi` varchar(100) NOT NULL,
   `Tanggal_Instruksi` date NOT NULL,
-  `EXP_Date` date NOT NULL,
   `Doc_COA` tinyint(1) NOT NULL,
   `Pola_Sampling` varchar(100) NOT NULL,
   `Jumlah_Wadah` float NOT NULL,
@@ -320,13 +325,13 @@ CREATE TABLE `sampel_bahan_terima` (
 -- Dumping data untuk tabel `sampel_bahan_terima`
 --
 
-INSERT INTO `sampel_bahan_terima` (`Nomor_Batch`, `Nomor_Instruksi`, `Tanggal_Instruksi`, `EXP_Date`, `Doc_COA`, `Pola_Sampling`, `Jumlah_Wadah`, `Jumlah_Sampel`, `Petugas_Sampling`, `Rencana_Sampling`, `Catatan`) VALUES
-('1211', '004_ISP-BA_2018', '2018-01-08', '2020-01-27', 1, 'POLA n(1+(N)^-1/2)', 5, '10', 'RISAL', 'FULL TEST', ''),
-('1', '003_ISP BA_18', '2018-01-05', '2018-01-31', 1, 'POLA n(1+(N)^-1/2)', 5, '100 gram', 'Risal', 'FULL TEST', ''),
-('2323', '005_ISP-BA_2018', '2018-01-08', '2019-01-21', 1, 'POLA n(1+(N)^-1/2)', 10, '10', 'RISAL', 'FULL TEST', ''),
-('3434', '006_ISP-BA_2018', '2018-01-15', '2020-12-01', 1, 'POLA n(1+(N)^-1/2)', 10, '10', 'RISAL', 'FULL TEST', ''),
-('5454', '007_ISP-BA_18', '2018-01-08', '2020-01-22', 1, 'POLA n(1+(N)^-1/2)', 10, '10', 'RISAL', 'FULL TEST', ''),
-('1111', '1', '2018-01-09', '2018-01-31', 1, 'POLA n(1+(N)^-1/2)', 1, '1.5 meter', 'Risal', 'FULL TEST', '');
+INSERT INTO `sampel_bahan_terima` (`Nomor_Batch`, `Nomor_Instruksi`, `Tanggal_Instruksi`, `Doc_COA`, `Pola_Sampling`, `Jumlah_Wadah`, `Jumlah_Sampel`, `Petugas_Sampling`, `Rencana_Sampling`, `Catatan`) VALUES
+('1211', '004_ISP-BA_2018', '2018-01-08', 1, 'POLA n(1+(N)^-1/2)', 5, '10', 'RISAL', 'FULL TEST', ''),
+('1', '003_ISP BA_18', '2018-01-05', 1, 'POLA n(1+(N)^-1/2)', 5, '100 gram', 'Risal', 'FULL TEST', ''),
+('2323', '005_ISP-BA_2018', '2018-01-08', 1, 'POLA n(1+(N)^-1/2)', 10, '10', 'RISAL', 'FULL TEST', ''),
+('3434', '006_ISP-BA_2018', '2018-01-15', 1, 'POLA n(1+(N)^-1/2)', 10, '10', 'RISAL', 'FULL TEST', ''),
+('5454', '007_ISP-BA_18', '2018-01-08', 1, 'POLA n(1+(N)^-1/2)', 10, '10', 'RISAL', 'FULL TEST', ''),
+('1111', '1', '2018-01-09', 1, 'POLA n(1+(N)^-1/2)', 1, '1.5 meter', 'Risal', 'FULL TEST', '');
 
 -- --------------------------------------------------------
 
