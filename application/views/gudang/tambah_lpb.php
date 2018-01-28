@@ -158,27 +158,30 @@
 	 	</div>
 
 	 	<div class="form-group row">
-	 		<?php
-				$template_batch = array(
-			        'table_open' => '<table id="dataTable" class="table table-bordered" cell-spacing="0">'
-				);
-				$this->table->set_template($template_batch);
-				$this->table->set_heading('Pilih', 'Nomor Batch', 'Jumlah', 'Satuan', 'Keterangan', 'EXP. Date');
-				$exp_date = array(
-		        	'type'          => 'date',
-		        	'name'          => 'exp[]',
-				);
-				$ket = array(
-					'name' => 'keterangan[]',
-					'rows' => '1',
-				);
-				$batch = array(
-		            array(form_checkbox('chk[]', 'accept', TRUE), form_input('batch[]', '', 'class="form-control" required'), form_input('jumlah[]', '', 'class="form-control" required'),  form_dropdown('satuan', $manu_rows, '', 'class="form-control satuan"'), form_textarea($ket, '', 'class="form-control"'), form_input($exp_date, '', 'class="form-control" required'))
-		        );
+	 		<div class="col-md-10 offset-md-1">
+	 			<?php
+					$template_batch = array(
+				        'table_open' => '<table id="dataTable" class="table table-bordered" cell-spacing="0">'
+					);
+					$this->table->set_template($template_batch);
+					$this->table->set_heading('Pilih', 'Nomor Batch', 'Jumlah', 'Satuan', 'Keterangan', 'EXP. Date');
+					$exp_date = array(
+			        	'type'          => 'date',
+			        	'name'          => 'exp[]',
+					);
+					$ket = array(
+						'name' => 'keterangan[]',
+						'rows' => '1',
+					);
+					$batch = array(
+			            array(form_checkbox('chk[]', 'accept', TRUE), form_input('batch[]', '', 'class="form-control" required'), form_input('jumlah[]', '', 'class="form-control" required'),  form_dropdown('satuan', $manu_rows, '', 'class="form-control satuan"'), form_textarea($ket, '', 'class="form-control"'), form_input($exp_date, '', 'class="form-control" required'))
+			        );
 
-				echo $this->table->generate($batch);
-				$this->table->clear();
-			?>
+					echo $this->table->generate($batch);
+					$this->table->clear();
+				?>
+	 		</div>
+	 		
 	 	</div>
 		
 	<div class="button-container p-3">

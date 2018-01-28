@@ -20,12 +20,6 @@ $(document).ready(function(){
         window.location.href=$link ;
     });
 
-    $("#bahanjadi tbody tr td").addClass("klik2");
-    $('.klik2').click(function(){
-        $link = window.location.origin + "/manufaktur/gudang/print_permintaan_bahan_show/" + (this.id);
-        window.location.href=$link ;
-    });
-
     $("#other").click(function(){
        $('.arrow').toggleClass("fa-angle-down");
        $('.arrow').toggleClass("fa-angle-up");
@@ -145,12 +139,34 @@ $(document).ready(function(){
         $("#stockkemas").fadeIn("fast");
     });
 
-    $("#print-all").click(function(){
+    $("#print-bahanbaku").click(function(){
         $("#for-web").hide();
         $("#for-print").show();
+        $("#bahanbaku-content").show();
         window.print();
         $("#for-web").show();
         $("#for-print").hide();
+        $("#bahanbaku-content").hide();
+    });
+
+    $("#print-bahankemas").click(function(){
+        $("#for-web").hide();
+        $("#for-print").show();
+        $("#bahankemas-content").show();
+        window.print();
+        $("#for-web").show();
+        $("#for-print").hide();
+        $("#bahankemas-content").hide();
+    });
+
+    $("#print-bahanbantu").click(function(){
+        $("#for-web").hide();
+        $("#for-print").show();
+        $("#bahanbantu-content").show();
+        window.print();
+        $("#for-web").show();
+        $("#for-print").hide();
+        $("#bahanbantu-content").hide();
     });
 
     $(".jenisbahan").on("change",function(){
