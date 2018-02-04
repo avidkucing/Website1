@@ -8,7 +8,7 @@ Class Gudang_database extends CI_Model {
  		$this->db->from('bahan_terima');
  		$this->db->join('jenis_bahan', 'bahan_terima.ID_Bahan = jenis_bahan.ID_Bahan', 'inner');
  		$this->db->where("jenis_bahan.Jenis", "Baku");
- 		$this->db->order_by('Nomor_LPB', 'asc');
+ 		$this->db->order_by('Nomor_LPB', 'desc');
  		
  		$o_lpb_rows = $this->db->get()->result();
 
@@ -88,7 +88,7 @@ Class Gudang_database extends CI_Model {
  		$this->db->select('analisa_sampel.Nomor_Analisa, jenis_bahan.Kode_Bahan, bahan_terima.Nama_Manufacturer, nomor_batch_bahan.EXP_Date, nomor_batch_bahan.Jumlah, nomor_batch_bahan.Keterangan, bahan_terima.Nomor_LPB');
  		$this->db->from('nomor_batch_bahan');
  		$this->db->join('bahan_terima', 'bahan_terima.Nomor_LPB = nomor_batch_bahan.Nomor_LPB', 'inner');
- 		$this->db->join('analisa_sampel', 'nomor_batch_bahan.Nomor_Batch = analisa_sampel.Nomor_Batch', 'inner');
+ 		$this->db->join('analisa_sampel', 'nomor_batch_bahan.ID_Batch = analisa_sampel.ID_Batch', 'inner');
  		$this->db->join('jenis_bahan', 'bahan_terima.ID_Bahan = jenis_bahan.ID_Bahan', 'inner');
  		$this->db->order_by('Nomor_Analisa desc');
  		$this->db->where("nomor_batch_bahan.Status", "RELEASE");
@@ -103,7 +103,7 @@ Class Gudang_database extends CI_Model {
  		$this->db->select('analisa_sampel.Nomor_Analisa, jenis_bahan.Kode_Bahan, bahan_terima.Nama_Manufacturer, nomor_batch_bahan.EXP_Date, nomor_batch_bahan.Jumlah, nomor_batch_bahan.Keterangan, bahan_terima.Nomor_LPB');
  		$this->db->from('nomor_batch_bahan');
  		$this->db->join('bahan_terima', 'bahan_terima.Nomor_LPB = nomor_batch_bahan.Nomor_LPB', 'inner');
- 		$this->db->join('analisa_sampel', 'nomor_batch_bahan.Nomor_Batch = analisa_sampel.Nomor_Batch', 'inner');
+ 		$this->db->join('analisa_sampel', 'nomor_batch_bahan.ID_Batch = analisa_sampel.ID_Batch', 'inner');
  		$this->db->join('jenis_bahan', 'bahan_terima.ID_Bahan = jenis_bahan.ID_Bahan', 'inner');
  		$this->db->order_by('Nomor_Analisa desc');
  		$this->db->where("nomor_batch_bahan.Status", "RELEASE");
