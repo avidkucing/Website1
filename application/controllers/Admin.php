@@ -28,9 +28,10 @@ class Admin extends CI_Controller{
 	}
  
 	public function index(){
-		$this->load->view('admin/admin_homepage');
+		$data['akun'] = $this->admin_database->show_user();
+		$this->load->view('admin/admin_homepage', $data);
 	}
-	
+
 	// Show registration page
 	public function user_registration_show() {
 		$this->load->view('admin/registration_form');
@@ -181,6 +182,23 @@ class Admin extends CI_Controller{
 			$data['message_display'] = 'Sukses menambahkan data!';
 			$this->load->view('admin/admin_homepage', $data);	
 		}
+	}
+
+	public function get_data_user() {
+		$value = $this->input->post("value");
+	    $data = $this->admin_database->get_data_user($value);
+	    
+	    echo json_encode($data);
+	}
+
+	public function update_data_user() {
+		$data = array(
+				'Tipe_Pegawai' => $this->input->post('tipe'),
+				'Nama' => $this->input->post('nama'),
+				'Username' => $this->input->post('uname'),
+				'Password' => md5(sha1(md5($this->input->post('password'))))
+				);
+		$this->admin_database->update_data_user($data);
 	}
 
 	public function logout() {

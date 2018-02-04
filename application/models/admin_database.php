@@ -2,6 +2,14 @@
 
 Class Admin_database extends CI_Model {
 
+	public function show_user() {
+		$this->db->select('Username, Nama, Tipe_Pegawai');
+		$this->db->from('akun');
+		$query = $this->db->get()->result();
+
+		return $query;
+	}
+
 	// Insert registration data in database
 	public function registration_insert($data) {
 
@@ -58,6 +66,18 @@ Class Admin_database extends CI_Model {
 		} else {
 			return false;
 		}
+	}
+
+	public function get_data_user($data) {
+	    $this->db->select('*');
+	    $this->db->from('akun');
+	    $this->db->where("Username", $data);
+	    
+	    return $this->db->get()->result();
+	}
+
+	public function update_data_user($data) {
+		$this->db->replace('akun', $data);
 	}
 
 }

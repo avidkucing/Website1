@@ -165,14 +165,6 @@
 					);
 					$this->table->set_template($template_batch);
 					$this->table->set_heading('Pilih', 'Nomor Batch', 'Jumlah', 'Satuan', 'Keterangan', 'EXP. Date');
-					$bat = array(
-						'id' => 'bat',
-						'name' => 'batch[]',
-						'pattern' => '[0-9]{4}|[0-9]{4}[a-zA-z]{1}',
-						//'oninvalid' => "this.setCustomValidity('Enter User Name Here')",
-    					//'oninput' => "setCustomValidity('')",
-						//'title' => 'Nomor Batch harus menggunakan format 4 angka atau 4 angka ditambah 1 huruf',
-					);
 					$exp_date = array(
 			        	'type'          => 'date',
 			        	'name'          => 'exp[]',
@@ -182,7 +174,7 @@
 						'rows' => '1',
 					);
 					$batch = array(
-			            array(form_checkbox('chk[]', 'accept', TRUE), form_input($bat, '', 'class="form-control" required'), form_input('jumlah[]', '', 'class="form-control" required'),  form_dropdown('satuan', $manu_rows, '', 'class="form-control satuan"'), form_textarea($ket, '', 'class="form-control"'), form_input($exp_date, '', 'class="form-control" required'))
+			            array(form_checkbox('chk[]', 'accept', TRUE), form_input('batch[]', '', 'class="form-control" required'), form_input('jumlah[]', '', 'class="form-control" required'),  form_dropdown('satuan', $manu_rows, '', 'class="form-control satuan"'), form_textarea($ket, '', 'class="form-control"'), form_input($exp_date, '', 'class="form-control" required'))
 			        );
 
 					echo $this->table->generate($batch);
