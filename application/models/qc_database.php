@@ -8,7 +8,6 @@ Class Qc_database extends CI_Model {
 		$this->db->from('bahan_terima');
 		$this->db->join('jenis_bahan', 'bahan_terima.ID_Bahan = jenis_bahan.ID_Bahan', 'inner');
 		$this->db->order_by('Tanggal_Terima desc, Nomor_LPB desc');
- 		
 
 		$o_lps_rows = $this->db->get()->result();
 
@@ -27,7 +26,7 @@ Class Qc_database extends CI_Model {
 	}
 
 	public function homepage_sampel(){
-		$this->db->select('Nomor_Batch, Nomor_Instruksi, Jumlah_Sampel');
+		$this->db->select('ID_Batch, Nomor_Instruksi, Jumlah_Sampel');
 		$this->db->from('sampel_bahan_terima');
 		
 		$o_lps_rows = $this->db->get()->result();
@@ -45,8 +44,8 @@ Class Qc_database extends CI_Model {
 	}
 
 	public function get_data_bahan_terima($value) {
-		$condition = "Nomor_LPB = (SELECT Nomor_LPB FROM nomor_batch_bahan WHERE Nomor_Batch = " . "'" . $value . "'" . ")";
-		$this->db->select('bahan_terima.Nomor_LPB, jenis_bahan.Nama_Bahan, jenis_bahan.Kode_Bahan, jenis_bahan.Merk, jenis_bahan.Nama_Manufacturer, jenis_bahan.Nama_Supplier, bahan_terima.Tanggal_Terima');
+		$condition = "Nomor_LPB = (SELECT Nomor_LPB FROM nomor_batch_bahan WHERE ID_Batch = " . "'" . $value . "'" . ")";
+		$this->db->select('bahan_terima.Nomor_LPB, jenis_bahan.Nama_Bahan, jenis_bahan.Kode_Bahan, bahan_terima.Nama_Manufacturer, bahan_terima.Nama_Supplier, bahan_terima.Tanggal_Terima');
 		$this->db->from('bahan_terima');
 		$this->db->where($condition);
 		$this->db->join('jenis_bahan', 'bahan_terima.ID_Bahan = jenis_bahan.ID_Bahan', 'inner');
@@ -63,7 +62,7 @@ Class Qc_database extends CI_Model {
 	public function get_data_batch_bahan_terima($value) {
 		$this->db->select('*');
 		$this->db->from('nomor_batch_bahan');
-		$this->db->where('Nomor_Batch', $value);;
+		$this->db->where('ID_Batch', $value);;
 		
 		$query = $this->db->get();
 		$o_batch_row = $query->result();
@@ -75,7 +74,7 @@ Class Qc_database extends CI_Model {
 	}
 
 	public function get_data_param_bahan_terima($value) {
-		$condition = "Kode_Bahan = (SELECT Kode_Bahan FROM jenis_bahan WHERE ID_Bahan = (SELECT ID_Bahan FROM bahan_terima WHERE Nomor_LPB = (SELECT Nomor_LPB FROM nomor_batch_bahan WHERE Nomor_Batch =" . "'" . $value . "'" . ")))";
+		$condition = "Kode_Bahan = (SELECT Kode_Bahan FROM jenis_bahan WHERE ID_Bahan = (SELECT ID_Bahan FROM bahan_terima WHERE Nomor_LPB = (SELECT Nomor_LPB FROM nomor_batch_bahan WHERE ID_Batch =" . "'" . $value . "'" . ")))";
 		$this->db->select('*');
 		$this->db->from('parameter_bahan');
 		$this->db->where($condition);
@@ -85,7 +84,7 @@ Class Qc_database extends CI_Model {
 		return $o_bahan;
 	}
 
-	public function instruksi_insert($data) {
+	/*public function instruksi_insert($data) {
 		$condition = "Nomor_Instruksi =" . "'" . $data['Nomor_Instruksi'] . "'";
 		$this->db->select('*');
 		$this->db->from('sampel_bahan_terima');
@@ -102,7 +101,7 @@ Class Qc_database extends CI_Model {
 		} else {
 			return false;
 		}
-	}
+	}*/
 
 	public function analisa_insert($data) {
 		$condition = "Nomor_Analisa =" . "'" . $data['Nomor_Analisa'] . "'";

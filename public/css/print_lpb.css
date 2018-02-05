@@ -25,6 +25,10 @@ button {
 	margin-bottom: 10px;
 }
 
+#confirm {
+	background: blue;
+}
+
 #print {
 	background: green;
 }

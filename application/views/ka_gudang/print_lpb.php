@@ -55,6 +55,7 @@
 	</div>
 
 	<div class="button-container mt-3">
+		<button onclick="location.href='<?php echo base_url();?>ka_gudang/konfirmasi_lpb/<?php echo $lpb[0]['Nomor_LPB'];?>'" type="button" class="button-item btn" id="confirm">Konfirmasi</button>
 		<button onclick="printThis()" type="button" class="button-item btn" id="print">Print</button>
 		<button onclick="location.href='<?php echo base_url();?>ka_gudang'" type="button" class="button-item btn" id="back">Kembali</button>
 		<br>

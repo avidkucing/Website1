@@ -4,7 +4,7 @@ Class Kagudang_database extends CI_Model {
 
 
 	public function homepage() {
-		$this->db->select('bahan_terima.Nomor_LPB, bahan_terima.Tanggal_Terima, jenis_bahan.Kode_Bahan, bahan_terima.Nama_Supplier, bahan_terima.Nama_Manufacturer, jenis_bahan.Satuan');
+		$this->db->select('bahan_terima.Nomor_LPB, bahan_terima.Tanggal_Terima, jenis_bahan.Kode_Bahan, bahan_terima.Nama_Supplier, bahan_terima.Nama_Manufacturer, jenis_bahan.Satuan, bahan_terima.Status');
  		$this->db->from('bahan_terima');
  		$this->db->join('jenis_bahan', 'bahan_terima.ID_Bahan = jenis_bahan.ID_Bahan', 'inner');
  		$this->db->where("jenis_bahan.Jenis", "Baku");
@@ -19,7 +19,7 @@ Class Kagudang_database extends CI_Model {
 
 	//show data LPB bahan kemas
  	public function homepage_kemas() {
- 		$this->db->select('bahan_terima.Nomor_LPB, bahan_terima.Tanggal_Terima, jenis_bahan.Kode_Bahan, bahan_terima.Nama_Supplier, bahan_terima.Nama_Manufacturer, jenis_bahan.Satuan');
+ 		$this->db->select('bahan_terima.Nomor_LPB, bahan_terima.Tanggal_Terima, jenis_bahan.Kode_Bahan, bahan_terima.Nama_Supplier, bahan_terima.Nama_Manufacturer, jenis_bahan.Satuan, bahan_terima.Status');
  		$this->db->from('bahan_terima');
  		$this->db->join('jenis_bahan', 'bahan_terima.ID_Bahan = jenis_bahan.ID_Bahan', 'inner');
  		$this->db->order_by('Tanggal_Terima desc, Nomor_LPB desc');
@@ -181,6 +181,17 @@ Class Kagudang_database extends CI_Model {
  		return $a_lpb_rows;
  	}
 
+ 	public function konfirmasi_lpb($lpb) {
+ 		$this->db->set('Status', 'ACCEPTED');
+ 		$this->db->where('Nomor_LPB', $lpb);
+ 		$this->db->update('bahan_terima');
+
+ 		if ($this->db->affected_rows() > 0) {
+			return true;
+		} else {
+			return false;
+		}
+ 	}
 
  	public function ubah_format_tanggal($data){
 	 	

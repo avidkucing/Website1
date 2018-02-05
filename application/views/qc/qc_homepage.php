@@ -70,14 +70,14 @@
 				//print_r($lps_analisa); //baru bisa dilihat setelah fungsi tambahnya jadi
 					
 				foreach ($lps_sampel as $x) {
-					$kode = $x->Nomor_Batch;
+					$kode = $x->ID_Batch;
 					$ins[$kode] = $x->Nomor_Instruksi;
 					$jum[$kode] = $x->Jumlah_Sampel;
 					//$ana[$kode] = $x->Nomor_Analisa;
 					//$sisa[$kode] = $x->Sisa_Sampel;
 				}
 				foreach ($lps_analisa as $x) {
-					$kode = $x->Nomor_Batch;
+					$kode = $x->ID_Batch;
 					$ana[$kode] = $x->Nomor_Analisa;
 					$sisa[$kode] = $x->Sisa_Sampel;
 				}
@@ -86,11 +86,11 @@
 					foreach ($lps_batch as $rowb) {
 						$a = $row->Nomor_LPB;
  						$b = $rowb->Nomor_LPB;
- 						$c = $rowb->Nomor_Batch;
+ 						$c = $rowb->ID_Batch;
  						
  						if ($b == $a) {
  							if (!(isset($ins[$c]))) {
- 								$form_ins = array('data' => '--isi--','id' => $c, 'class' => 'instruksi');
+ 								$form_ins = array('data' => '--Menunggu instruksi--','id' => $c, 'class' => 'instruksi');
  								$this->table->add_row($row->Nomor_LPB, $form_ins, $row->Tanggal_Terima, $row->Kode_Bahan, $rowb->Nomor_Batch, $form_ins, $row->Satuan, '', '');	
  							} else if (!(isset($ana[$c]))) {
  								$form_ana = array('data' => '--isi--', 'id' => $c, 'class' => 'analisa');

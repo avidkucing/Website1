@@ -26,7 +26,7 @@ Class Kaqc_Database extends CI_Model {
 	}
 
 	public function homepage_sampel(){
-		$this->db->select('Nomor_Batch, Nomor_Instruksi, Jumlah_Sampel');
+		$this->db->select('ID_Batch, Nomor_Instruksi, Jumlah_Sampel');
 		$this->db->from('sampel_bahan_terima');
 		
 		$o_lps_rows = $this->db->get()->result();
@@ -43,10 +43,30 @@ Class Kaqc_Database extends CI_Model {
 		return $o_lps_rows;
 	}
 
+	public function instruksi_insert($data) {
+		$condition = "Nomor_Instruksi =" . "'" . $data['Nomor_Instruksi'] . "'";
+		$this->db->select('*');
+		$this->db->from('sampel_bahan_terima');
+		$this->db->where($condition);
+		$this->db->limit(1);
+		$query = $this->db->get();
+		if ($query->num_rows() == 0) {
+
+			// Query to insert data in database
+			$this->db->insert('sampel_bahan_terima', $data);
+			if ($this->db->affected_rows() > 0) {
+				return true;
+			}
+		} else {
+			return false;
+		}
+	}
+
 	public function get_data_bahan_terima($value) {
-		$this->db->select('bahan_terima.Nomor_LPB, jenis_bahan.Nama_Bahan, jenis_bahan.Kode_Bahan, jenis_bahan.Merk, jenis_bahan.Nama_Manufacturer, jenis_bahan.Nama_Supplier, bahan_terima.Tanggal_Terima');
+		$condition = "Nomor_LPB = (SELECT Nomor_LPB FROM nomor_batch_bahan WHERE ID_Batch =" . "'" . $value . "'" . ")";
+		$this->db->select('bahan_terima.Nomor_LPB, jenis_bahan.Nama_Bahan, jenis_bahan.Kode_Bahan, bahan_terima.Nama_Manufacturer, bahan_terima.Nama_Supplier, bahan_terima.Tanggal_Terima');
 		$this->db->from('bahan_terima');
-		$this->db->where('bahan_terima.Nomor_LPB', $value);
+		$this->db->where($condition);
 		$this->db->join('jenis_bahan', 'bahan_terima.ID_Bahan = jenis_bahan.ID_Bahan', 'inner');
 
 		$o_bahan = $this->db->get()->result();
@@ -62,7 +82,7 @@ Class Kaqc_Database extends CI_Model {
 	public function get_data_batch_bahan_terima($value) {
 		$this->db->select('*');
 		$this->db->from('nomor_batch_bahan');
-		$this->db->where('Nomor_Batch', $value);;
+		$this->db->where('ID_Batch', $value);;
 		
 		$query = $this->db->get();
 		$o_batch_row = $query->result();
@@ -74,7 +94,7 @@ Class Kaqc_Database extends CI_Model {
 	}
 
 	public function get_data_param_bahan_terima($value) {
-		$condition = "Kode_Bahan = (SELECT Kode_Bahan FROM jenis_bahan WHERE ID_Bahan = (SELECT ID_Bahan FROM bahan_terima WHERE Nomor_LPB = (SELECT Nomor_LPB FROM nomor_batch_bahan WHERE Nomor_Batch =" . "'" . $value . "'" . ")))";
+		$condition = "Kode_Bahan = (SELECT Kode_Bahan FROM jenis_bahan WHERE ID_Bahan = (SELECT ID_Bahan FROM bahan_terima WHERE Nomor_LPB = (SELECT Nomor_LPB FROM nomor_batch_bahan WHERE ID_Batch =" . "'" . $value . "'" . ")))";
 		$this->db->select('*');
 		$this->db->from('parameter_bahan');
 		$this->db->where($condition);
@@ -85,7 +105,7 @@ Class Kaqc_Database extends CI_Model {
 	}
 
 	public function get_data_sampel_analisa_bahan_terima($value) {
-		$condition = "Nomor_Batch = " . "'" . $value . "'";
+		$condition = "ID_Batch = " . "'" . $value . "'";
 		$this->db->select('Tanggal_Pemeriksaan, Sisa_Sampel');
 		$this->db->from('analisa_sampel');
 		$this->db->where($condition);
@@ -99,7 +119,7 @@ Class Kaqc_Database extends CI_Model {
 	}
 
 	public function get_data_hasil_analisa_bahan_terima($value) {
-		$condition = "Nomor_Analisa = (SELECT Nomor_Analisa FROM analisa_sampel WHERE Nomor_Batch = " . "'" . $value . "'" . ")";
+		$condition = "Nomor_Analisa = (SELECT Nomor_Analisa FROM analisa_sampel WHERE ID_Batch = " . "'" . $value . "'" . ")";
 		$this->db->select('*');
 		$this->db->from('hasil_analisa_sampel');
 		$this->db->where($condition);
@@ -111,15 +131,21 @@ Class Kaqc_Database extends CI_Model {
 
 		return $a_bahan;
 	}
-
-	public function update_status_bahan($value, $key) {
+	/*
+	public function update_alasan_status($no, $alasan) {
+		return $this->db->query("UPDATE nomor_batch_bahan SET Alasan_Status = $alasan WHERE ID_Batch = ". "'" . $value . "'");
+	}
+	*/
+	public function update_status_bahan($data) {
+		return $this->db->query("UPDATE nomor_batch_bahan SET STATUS = " . "'" . $data['Status'] . "'" . ", Alasan_Status = " . "'" . $data['Alasan_Status'] . "'" . "WHERE ID_Batch = " . "'" . $data['ID_Batch'] . "'");
+		/*
 		if ($key == 1){
-			return $this->db->query("UPDATE nomor_batch_bahan SET STATUS = 'RELEASE' WHERE Nomor_Batch = " . "'" . $value . "'");
+			return $this->db->query("UPDATE nomor_batch_bahan SET STATUS = 'RELEASE' WHERE ID_Batch = " . "'" . $value . "'");
 		} else if ($key == 0) {
-			return $this->db->query("UPDATE nomor_batch_bahan SET STATUS = 'REJECT' WHERE Nomor_Batch = " . "'" . $value . "'");
+			return $this->db->query("UPDATE nomor_batch_bahan SET STATUS = 'REJECT' WHERE ID_Batch = " . "'" . $value . "'");
 		} else {
 			return FALSE;
-		}
+		}*/
 	}
 }
 

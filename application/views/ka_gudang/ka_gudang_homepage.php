@@ -78,7 +78,7 @@
 	 			        'table_open' => '<table class="table table-bordered table-hover decorated" cell-spacing="0">'
 	 				);
 	 				$this->table->set_template($template);
-	 				$this->table->set_heading('No LPB', 'Tanggal Terima', 'Kode Bahan', 'Nomor Batch', 'Nama Supplier', 'Nama Manufacturer', 'Jumlah', 'Satuan', 'Status');
+	 				$this->table->set_heading('No LPB', 'Tanggal Terima', 'Kode Bahan', 'Nomor Batch', 'Nama Supplier', 'Nama Manufacturer', 'Jumlah', 'Satuan', 'Status', 'Status Approve');
 
 	 				foreach ($lpb as $row) {
 	 					foreach ($lpb_batch as $rowb) {
@@ -94,7 +94,8 @@
 	 							$jml = array('data' => $rowb->Jumlah, 'id' => $a);
 	 							$sat = array('data' => $row->Satuan, 'id' => $a);
 	 							$sta = array('data' => $rowb->Status, 'id' => $a);
-	 							$this->table->add_row($nolpb, $tgl, $kode, $btc, $sup, $mnf, $jml, $sat, $sta);	
+	 							$stp = array('data' => $row->Status, 'id' => $a);
+	 							$this->table->add_row($nolpb, $tgl, $kode, $btc, $sup, $mnf, $jml, $sat, $sta, $stp);
 	 						}
 	 					}
 	 				}
@@ -117,7 +118,7 @@
 	 			        'table_open' => '<table class="table table-bordered table-hover decorated" cell-spacing="0">'
 	 				);
 	 				$this->table->set_template($template);
-	 				$this->table->set_heading('No LPB', 'Tanggal Terima', 'Kode Bahan', 'Nomor Batch', 'Nama Supplier', 'Nama Manufacturer', 'Jumlah', 'Satuan', 'Status');
+	 				$this->table->set_heading('No LPB', 'Tanggal Terima', 'Kode Bahan', 'Nomor Batch', 'Nama Supplier', 'Nama Manufacturer', 'Jumlah', 'Satuan', 'Status', 'Status Approve');
 
 	 				foreach ($lpb_kemas as $row) {
 	 					foreach ($lpb_batch as $rowb) {
@@ -133,7 +134,12 @@
 	 							$jml = array('data' => $rowb->Jumlah, 'id' => $a);
 	 							$sat = array('data' => $row->Satuan, 'id' => $a);
 	 							$sta = array('data' => $rowb->Status, 'id' => $a);
-	 							$this->table->add_row($nolpb, $tgl, $kode, $btc, $sup, $mnf, $jml, $sat, $sta);	
+	 							if (($row->Status)== 'QUARANTINE') {
+	 								$stp = array('data' => '--Konfirmasi Status LPB--', 'id' => $a);
+	 							} else {
+	 								$stp = array('data' => $row->Status, 'id' => $a);
+	 							}
+	 							$this->table->add_row($nolpb, $tgl, $kode, $btc, $sup, $mnf, $jml, $sat, $sta, $stp);	
 	 						}
 	 					}
 	 				}

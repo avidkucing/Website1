@@ -1,4 +1,4 @@
-<?php
+ <?php
 
 Class Gudang_database extends CI_Model {
 

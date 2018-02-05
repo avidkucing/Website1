@@ -68,7 +68,7 @@
 				echo form_label('Nomor Batch :');
 				echo ' ';
 				echo $batch[0]['Nomor_Batch'];
-				echo form_hidden('batch', $batch[0]['Nomor_Batch']);
+				echo form_hidden('batch', $batch[0]['ID_Batch']);
 				echo"<br/>";
 				echo form_label('Sisa Pertinggal :');
 				echo ' ';

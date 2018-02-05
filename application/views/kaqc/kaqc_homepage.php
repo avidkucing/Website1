@@ -15,7 +15,7 @@
   <title>Quality Control</title>
   <meta charset="utf-8">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>public/css/gudang.css">
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>public/css/qc.css">
     <script defer src="<?php echo base_url(); ?>public/js/fontawesome-all.js"></script>
     <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -65,12 +65,12 @@
 				$this->table->set_heading('No. LPB',  'Nomor Instruksi Sampling', 'Tanggal Terima', 'Kode Bahan', 'Nomor Batch', 'Jumlah Sampel', 'Satuan','Nomor Analisa', 'Sisa Sampel Pertinggal', 'Status');
 				
 				foreach ($lps_sampel as $x) {
-					$kode = $x->Nomor_Batch;
+					$kode = $x->ID_Batch;
 					$ins[$kode] = $x->Nomor_Instruksi;
 					$jum[$kode] = $x->Jumlah_Sampel;
 				}
 				foreach ($lps_analisa as $x) {
-					$kode = $x->Nomor_Batch;
+					$kode = $x->ID_Batch;
 					$ana[$kode] = $x->Nomor_Analisa;
 					$sisa[$kode] = $x->Sisa_Sampel;
 				}
@@ -78,19 +78,21 @@
 					foreach ($lps_batch as $rowb) {
 						$a = $row->Nomor_LPB;
  						$b = $rowb->Nomor_LPB;
- 						$c = $rowb->Nomor_Batch;
+ 						$c = $rowb->ID_Batch;
+ 						$d = $rowb->Nomor_Batch;
  						$cek_status = $rowb->Status;
  						
  						if ($b == $a) {
  							if (!(isset($ins[$c]))) {
-								$this->table->add_row($row->Nomor_LPB, 'Belum Diinstruksikan' , $row->Tanggal_Terima, $row->Kode_Bahan, $c, 'Belum Diinstruksikan', $row->Satuan, 'Belum Dianalisa', 'Belum Dianalisa', $rowb->Status);
+ 								$form_ins = array('data' => '--Buat instruksi--','id' => $c, 'class' => 'instruksi');
+								$this->table->add_row($row->Nomor_LPB, $form_ins , $row->Tanggal_Terima, $row->Kode_Bahan, $d, $form_ins, $row->Satuan, 'Menunggu instruksi', 'Menunggu instruksi', $rowb->Status);
 							} else if (!(isset($ana[$c]))) {
-								$this->table->add_row($row->Nomor_LPB, $ins[$c] , $row->Tanggal_Terima, $row->Kode_Bahan, $c, $jum[$c], $row->Satuan, 'Belum Dianalisa', 'Belum Dianalisa', $rowb->Status);
+								$this->table->add_row($row->Nomor_LPB, $ins[$c] , $row->Tanggal_Terima, $row->Kode_Bahan, $d, $jum[$c], $row->Satuan, 'Belum Dianalisa', 'Belum Dianalisa', $rowb->Status);
 							} else if ($cek_status == 'QUARANTINE') {
 								$form_status = array('data' => '--isi--', 'id' => $c, 'class' => 'status');
-								$this->table->add_row($row->Nomor_LPB, $ins[$c] , $row->Tanggal_Terima, $row->Kode_Bahan, $c, $jum[$c], $row->Satuan, $ana[$c], $sisa[$c], $form_status);
+								$this->table->add_row($row->Nomor_LPB, $ins[$c] , $row->Tanggal_Terima, $row->Kode_Bahan, $d, $jum[$c], $row->Satuan, $ana[$c], $sisa[$c], $form_status);
 							} else {
-								$this->table->add_row($row->Nomor_LPB, $ins[$c] , $row->Tanggal_Terima, $row->Kode_Bahan, $c, $jum[$c], $row->Satuan, $ana[$c], $sisa[$c], $rowb->Status);
+								$this->table->add_row($row->Nomor_LPB, $ins[$c] , $row->Tanggal_Terima, $row->Kode_Bahan, $d, $jum[$c], $row->Satuan, $ana[$c], $sisa[$c], $rowb->Status);
 							}
  						}
 					}

@@ -46,9 +46,31 @@ class Ka_Gudang extends CI_Controller{
 	}
 
 	public function print_permintaan_bahan_show($value){
-		$data['ins'] = $this->gudang_database->print_instruksi_permintaan(rawurldecode($value));
-		$data['ins_bahan'] = $this->gudang_database->print_permintaan_bahan(rawurldecode($value));
+		$data['ins'] = $this->kagudang_database->print_instruksi_permintaan(rawurldecode($value));
+		$data['ins_bahan'] = $this->kagudang_database->print_permintaan_bahan(rawurldecode($value));
 		$this->load->view('ka_gudang/print_instruksi', $data);
+	}
+
+	public function konfirmasi_lpb($a, $b, $c, $d){
+		$lpb = $a . "/" . $b . "/"  . $c . "/"  . $d;
+		$result = $this->kagudang_database->konfirmasi_lpb($lpb);
+		
+		if ($result) { //sukses update
+			$data['message_display'] = 'Sukses mengupdate data!';
+			$data['lpb'] = $this->kagudang_database->homepage();
+			$data['lpb_kemas'] = $this->kagudang_database->homepage_kemas();
+	 		$data['lpb_batch'] = $this->kagudang_database->homepage_batch();
+	 		$data['lpb_bantu'] = $this->kagudang_database->homepage_bantu();
+	 		$data['stock_baku'] = $this->kagudang_database->homepage_stock_baku();
+	 		$data['stock_kemas'] = $this->kagudang_database->homepage_stock_kemas();
+	 		$data['ins'] = $this->kagudang_database->homepage_instruksi();
+	 		$this->load->view('ka_gudang/ka_gudang_homepage', $data);
+		} else { //gagal update
+			$data['message_display'] = 'Gagal mengupdate data!';
+			$data['lpb'] = $this->kagudang_database->print_lpb($a, $b, $c, $d);
+	 		$data['lpb_batch'] =$this->kagudang_database->print_batch_lpb($a, $b, $c, $d);
+			$this->load->view('ka_gudang/print_lpb', $data);
+		}
 	}
 
 	public function logout() {

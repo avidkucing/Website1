@@ -70,7 +70,7 @@
 				echo form_label('Nomor Batch :');
 				echo ' ';
 				echo $row['Nomor_Batch'];
-				$a = $row['Nomor_Batch'];
+				$a = $row['ID_Batch']; // untuk release/reject
 				echo"<br/>";
 			}
 			foreach ($sampel as $row) {
@@ -96,11 +96,29 @@
 			$i++;
 		}
 		echo $this->table->generate();
+
+		echo form_open('ka_quality_control/fix_status');
+		$input_attr = array('class' => 'form-control input-sm');
+		$teks = array('type' => 'text', 'name' => 'alasan', 'rows' => '2',);
+		$label_attr = array('class' => 'col-form-label col-sm-6');
+		echo "<div class='col-sm-6'>";
+		echo form_label('Alasan Pengubahan Status', '', $label_attr);
+		echo form_textarea($teks, '', $input_attr);
+		echo "<br>";
+		$options = array('QUARANTINE' => 'QUARANTINE', 'RELEASE' => 'RELEASE', 'REJECT' => 'REJECT');
+		echo form_label('Status', '', $label_attr);
+		echo form_dropdown('status', $options, '', 'class="form-control"');
+		echo "</div>";
+		echo form_hidden('bat', $a);
+
 	?>
 	
 	<div class="button-container">
+		<button type="button submit" class="btn" id="print">SUBMIT</button>
 		<button onclick="location.href='<?php echo base_url();?>ka_quality_control'" type="button" class="btn" id="tambah">HOLD</button>
-		<button onclick="location.href='<?php echo base_url();?>ka_quality_control/reject_bahan/<?php echo $a;?>'" type="button" class="btn" id="back">REJECT</button>
-		<button onclick="location.href='<?php echo base_url();?>ka_quality_control/release_bahan/<?php echo $a;?>'" type="button" class="btn" id="print">RELEASE</button>
 	</div>
+
+	<?php
+		echo form_close();
+	?>
 </body>
