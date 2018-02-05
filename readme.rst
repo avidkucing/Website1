@@ -54,10 +54,12 @@ Account access
 Jenis akun -> username :
 
 - Administrator 			-> admin
+- Kepala Gudang 	-> mr_head_gudang
 - Gudang 					-> mr_gudang
 - Quality-Control 			-> mr_qc
 - Kepala Quality-Control 	-> mr_head_qc
 - Produksi 					-> mr_produksi
+- Produksi 2 		-> mr_produksi_2
 
 All password : yoyomam@
 
