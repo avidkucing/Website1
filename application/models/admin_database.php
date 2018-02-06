@@ -77,7 +77,8 @@ Class Admin_database extends CI_Model {
 	}
 
 	public function update_data_user($data) {
-		$this->db->replace('akun', $data);
+		$this->db->where('Username', $data['Username']);
+		$this->db->update('akun', $data);
 	}
 
 }

@@ -16,6 +16,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<!-- jQuery library -->
 	<script src="<?php echo base_url(); ?>public/js/jquery-3.2.1.min.js"></script>
+	<script src="<?php echo base_url(); ?>public/js/jquery.validate.min.js"></script>
 	<!--Bootstrap 4-->
 	<link rel="stylesheet" href="<?php echo base_url(); ?>public/css/bootstrap.min.css">
 	<script src="<?php echo base_url(); ?>public/js/bootstrap.min.js"></script>
@@ -37,18 +38,18 @@
 		<div class="modal fade" id="editor" tabindex="-1" role="dialog">
 		 	<div class="modal-dialog modal-dialog-centered" role="document">
 			    <div class="modal-content">
+			    <form id="form-edit">
 			      	<div class="modal-header">
 				        <h5 class="modal-title">Edit Data</h5>
 				        <button type="button" class="close" data-dismiss="modal">
 				        	<span>&times;</span>
 				        </button>
 			      	</div>
-			     <div class="modal-body">
-			        <form>
+			    	<div class="modal-body">
 			        	<div class="form-group row">
 			        		<label for="uname" class="col-md-2 col-form-label">Username:</label>
 			        		<div class="col-md-10">
-			        			<input type="text" class="form-control" id="uname" name="uname" required> <!--@TODO add validation-->
+			        			<input type="text" class="form-control" id="uname" name="uname" disabled> <!--@TODO add validation-->
 			        		</div>
 			        	</div>
 			        	<div class="form-group row">
@@ -60,21 +61,34 @@
 			        	<div class="form-group row">
 			        		<label for="tipe" class="col-md-2 col-form-label">Tipe:</label>
     						<div class="col-md-10">
-			        			<input type="text" class="form-control" id="tipe" name="tipe">
+			        			<select class="custom-select" id="tipe">
+								    <option value="Gudang">Gudang</option>
+								    <option value="Kepala Bagian Gudang">Kepala Bagian Gudang</option>
+								    <option value="Quality Control">Quality Control</option>
+								    <option value="Kepala Bagian Quality Control">Kepala Bagian Quality Control</option>
+								    <option value="Quality Assurance">Quality Assurance</option>
+								    <option value="Kepala Bagian Quality Assurance">Kepala Bagian Quality Assurance</option>
+								    <option value="Produksi">Produksi</option>
+								    <option value="Kepala Bagian Produksi">Kepala Bagian Produksi</option>
+								    <option value="Administrator">Administrator</option>
+							 	</select>
 			        		</div>
 			        	</div>
 			        	<div class="form-group row">
-			        		<label for="password" class="col-md-2 col-form-label">New Password:</label>
-    						<div class="col-md-10">
+			        		<label for="password" class="col-md-2 col-form-label">Password:</label>
+    						<div id="passdiv" class="col-md-10" style="display: none;">
 			        			<input type="text" class="form-control" id="password" name="password">
 			        		</div>
+			        		<div id="change" class="col-md-1">
+			        			<button type="button" class="btn btn-info">Change</button>
+			        		</div>
 			        	</div>
-			        </form>
-			     </div>
+			    	</div>
 			    	<div class="modal-footer">
 				        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-				        <button type="submit" class="btn btn-primary" id="save" data-dismiss="modal">Save</button>
+				        <button type="submit" class="btn btn-primary" id="save">Save</button>
 			    	</div>
+			    	</form>
 			    </div>
 			</div>
 		</div>

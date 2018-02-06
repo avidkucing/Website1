@@ -201,6 +201,15 @@ class Admin extends CI_Controller{
 		$this->admin_database->update_data_user($data);
 	}
 
+	public function update_data_user_nopass() {
+		$data = array(
+				'Tipe_Pegawai' => $this->input->post('tipe'),
+				'Nama' => $this->input->post('nama'),
+				'Username' => $this->input->post('uname'),
+				);
+		$this->admin_database->update_data_user($data);
+	}
+
 	public function logout() {
 
 		// Removing session data
