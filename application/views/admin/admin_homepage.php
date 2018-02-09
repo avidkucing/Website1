@@ -94,14 +94,16 @@
 		</div>
 		<div class="row">
 			<div class="col-md-2 sidebar">
-				<div class="sidebar-header">
-					<h2>Admin</h2>
-					<p>Halo, <?php echo $nama;?></p>
-				</div>
+				<a href="<?php echo current_url(); ?>">
+					<div class="sidebar-header">
+						<h2>Admin</h2>
+						<p>Halo, <?php echo $nama;?></p>
+					</div>
+				</a>
 				<hr>
 				<ul class="links list-unstyled">
-					<li class="active" id="bahan"><a href="#data-bahan">Data Bahan</a></li>
-					<li id="akun"><a href="#kelola-akun">Kelola Akun</a></li>
+					<li class="menu" id="bahan"><a href="#bahan">Data Bahan</a></li>
+					<li class="menu" id="akun"><a href="#akun"><span>Kelola Akun</span></a></li>
 					<!--<li>
 						<a id="other" href="#sublinks" data-toggle="collapse" aria-expanded="false">Lihat Lainnya<i class="fas fa-angle-down fa-fw fa-lg arrow"></i></a>
 						<ul class="collapse list-unstyled" id="sublinks">
@@ -118,7 +120,7 @@
 					</ul>
 				</div>
 			</div>
-			<div class="col-md-10 offset-md-2 content">
+			<div class="col-md-10 offset-md-2 main">
 				<?php
 					echo "<div class='error_msg'>";
 					if (isset($message_display)) {
@@ -126,7 +128,7 @@
 					}
 					echo "</div>";
 				?>
-				<div id="bahan-content">
+				<div id="bahan-content" class="content" style="display: none;">
 					<div class="row button-container mr-0">
 						<div class="col">
 							<button class="btn btn-block" onclick="location.href='<?php echo base_url();?>Admin/add_data_bahan_baku_show'"; >Tambah Data Bahan Baku</button>
@@ -136,7 +138,7 @@
 						</div>
 					</div>
 				</div>
-				<div id="akun-content" style="display: none;">
+				<div id="akun-content" class="content" style="display: none;">
 					<div id="test-table">
 						<div id=asd>
 							<?php

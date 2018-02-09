@@ -2,6 +2,10 @@ body {
 	overflow-x: hidden;
 }
 
+a:hover {
+    text-decoration: none;
+}
+
 .sidebar {
     position: fixed;
     height: 100vh;
@@ -13,6 +17,7 @@ body {
 .sidebar-header {
     padding: 15px 0 0 0;
     text-align: center;
+    color: white;
 }
 
 .sidebar-header p {
@@ -59,7 +64,7 @@ hr {
     color: #1584B2;
 }
 
-.content {
+.main {
     padding: 15px 15px 15px 5px;
 }
 
@@ -76,7 +81,7 @@ tr {
     cursor: pointer;
 }
 
-.content button {
+.main button {
     margin-top: 10px;
     background: green;
     color: white;

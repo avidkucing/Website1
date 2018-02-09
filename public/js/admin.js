@@ -1,4 +1,9 @@
 $(document).ready(function(){
+    if(window.location.hash) { // just in case there is no hash
+        activate_menu(window.location.hash.substr(1));
+    } else {
+        activate_menu('bahan');
+    }
 
     var dataTable = $('.decorated').DataTable({
         
@@ -28,6 +33,7 @@ $(document).ready(function(){
     $('#change').click(function(){
         $("#passdiv").show();
         $(this).hide();
+        $("#password").addClass("required");
         change_pass = true;
     });
 
@@ -94,22 +100,15 @@ $(document).ready(function(){
         
     });
 
-    $("#bahan").click(function(){
-        $("#akun").removeClass("active");
-        $("#bahan").addClass("active");
-        $("#akun-content").hide();
-        $("#bahan-content").fadeIn("fast");
-    });
-
-    $("#akun").click(function(){
-        $("#bahan").removeClass("active");
-        $("#akun").addClass("active");
-        $("#bahan-content").hide();
-        $("#akun-content").fadeIn("fast");
-    });
-
-    function isEmpty(str) {
-        return (!str || 0 === str.length);
+    function activate_menu(data) {
+        $(".menu").removeClass("active");
+        $("#"+data+"").addClass("active");
+        $(".content").hide();
+        $("#"+data+"-content").fadeIn("slow");
     }
+
+    $(".menu").click(function(){
+        activate_menu(this.id);
+    })
 
 });
