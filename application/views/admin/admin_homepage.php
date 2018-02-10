@@ -102,6 +102,7 @@
 				</a>
 				<hr>
 				<ul class="links list-unstyled">
+					<li class="menu" id="lpb"><a href="#lpb">LPB Bahan</a></li>
 					<li class="menu" id="bahan"><a href="#bahan">Data Bahan</a></li>
 					<li class="menu" id="akun"><a href="#akun"><span>Kelola Akun</span></a></li>
 					<!--<li>
@@ -128,7 +129,25 @@
 					}
 					echo "</div>";
 				?>
-				<div id="bahan-content" class="content" style="display: none;">
+				<div id="lpb-content" class="content">
+					<ul class="nav nav-tabs nav-fill justify-content-center mb-3" id="lpb-tab">
+						<li class="nav-item">
+							<a class="nav-link active" id="home-tab" data-toggle="tab" href="#home">LPB Bahan Baku</a>
+						</li>
+						<li class="nav-item">
+					    	<a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile">LPB Bahan Kemas</a>
+						</li>
+						<li class="nav-item">
+					    	<a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact">LPB Bahan Pembantu</a>
+						</li>
+					</ul>
+					<div class="tab-content" id="lpb-tab-content">
+						<div class="tab-pane fade show active" id="home"><?=$contents['lpb_bahanbaku']?></div>
+						<div class="tab-pane fade" id="profile">...</div>
+						<div class="tab-pane fade" id="contact">...</div>
+					</div>
+				</div>
+				<div id="bahan-content" class="content">
 					<div class="row button-container mr-0">
 						<div class="col">
 							<button class="btn btn-block" onclick="location.href='<?php echo base_url();?>Admin/add_data_bahan_baku_show'"; >Tambah Data Bahan Baku</button>
@@ -138,7 +157,7 @@
 						</div>
 					</div>
 				</div>
-				<div id="akun-content" class="content" style="display: none;">
+				<div id="akun-content" class="content">
 					<div id="test-table">
 						<div id=asd>
 							<?php

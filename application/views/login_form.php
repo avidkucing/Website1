@@ -2,7 +2,20 @@
 <html>
 	<?php
 		if (isset($this->session->userdata['logged_in'])) {
-			header("location: http://localhost/login/User_Authentication/user_login_process");
+			$tipe = $this->session->userdata['logged_in']['tipe'];
+			if ($tipe == 'Administrator') {
+				redirect(base_url("Admin"));
+			} else if ($tipe == 'Gudang') {
+				redirect(base_url("Gudang"));
+			} else if ($tipe == 'Kepala Bagian Gudang') {
+				redirect(base_url("Ka_gudang"));
+			} else if ($tipe == 'Quality Control') {
+				redirect(base_url("Quality_control"));
+			} else if ($tipe == 'Kepala Bagian Quality Control') {
+				redirect(base_url("Ka_quality_control"));
+			} else if ($tipe == 'Produksi') {
+				redirect(base_url("Produksi"));
+			}
 		}
 	?>
 	<head>

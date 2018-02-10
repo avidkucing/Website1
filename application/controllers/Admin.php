@@ -21,15 +21,23 @@ class Admin extends CI_Controller{
 
 		// Load database
 		$this->load->model('admin_database');
+		$this->load->model('data_lpb');
 
 		if (!(isset($this->session->userdata['logged_in']))) {
 			redirect(base_url("User_Authentication"));
 		}
 	}
  
-	public function index(){
+	public function index() {
 		$data['akun'] = $this->admin_database->show_user();
+		$data['contents']['lpb_bahanbaku'] = $this->load->view('contents/lpb_bahanbaku', $this->load_content('data_lpb'), TRUE);
 		$this->load->view('admin/admin_homepage', $data);
+	}
+
+	public function load_content($content) {
+		$data['lpb'] = $this->$content->lpb();
+ 		$data['lpb_batch'] = $this->$content->lpb_batch();
+ 		return $data;
 	}
 
 	// Show registration page

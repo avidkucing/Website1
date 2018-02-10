@@ -2,7 +2,7 @@ $(document).ready(function(){
     if(window.location.hash) { // just in case there is no hash
         activate_menu(window.location.hash.substr(1));
     } else {
-        activate_menu('bahan');
+        activate_menu('lpb');
     }
 
     var dataTable = $('.decorated').DataTable({

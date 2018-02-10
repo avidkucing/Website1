@@ -68,6 +68,15 @@ hr {
     padding: 15px 15px 15px 5px;
 }
 
+.content {
+    display: none;
+}
+
+.nav {
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
 table {
     border-spacing: 0;
 }
