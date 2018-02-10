@@ -218,6 +218,13 @@ class Admin extends CI_Controller{
 		$this->admin_database->update_data_user($data);
 	}
 
+	public function delete_user() {
+		$data = array(
+				'Username' => $this->input->post('uname'),
+				);
+		$this->admin_database->delete_user($data);
+	}
+
 	public function logout() {
 
 		// Removing session data

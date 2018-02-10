@@ -80,11 +80,12 @@
 			        			<input type="text" class="form-control" id="password" name="password">
 			        		</div>
 			        		<div id="change" class="col-md-1">
-			        			<button type="button" class="btn btn-info">Change</button>
+			        			<button type="button" class="btn btn-success">Change</button>
 			        		</div>
 			        	</div>
 			    	</div>
 			    	<div class="modal-footer">
+			    		<button type="button" class="btn btn-danger" data-dismiss="modal" id="delete">Delete</button>
 				        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
 				        <button type="submit" class="btn btn-primary" id="save">Save</button>
 			    	</div>

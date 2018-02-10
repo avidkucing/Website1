@@ -6,7 +6,6 @@ $(document).ready(function(){
     $("#bahanbantu table tr td").addClass("klik");
     
     $('.klik').click(function(){
-        //$id=this.id.replace(/\//g, '\-');
         $link = window.location.origin + "/manufaktur/gudang/print_lpb_show/" + (this.id);
         window.location.href=$link ;
     });
@@ -19,26 +18,6 @@ $(document).ready(function(){
     $('.decorated').DataTable( {
 
     });
-
-    //$('#print').click(function(){
-        //$link = window.location.origin + "/hisamitsu/gudang/print_lpb_no_tombol_show/" + (this.id);
-        //window.location.href=$link ;
-        /*var doc = new jsPDF();
-        var specialElementHandlers = {
-            '#print': function (element, renderer) {
-                return true;
-            }
-        };
-
-        doc.fromHTML($('body').get(0), 15, 15, {
-            'width': 170,
-            'elementHandlers': specialElementHandlers
-        });
-        doc.save('sample-file.pdf');*/
-        //window.history.back();
-        //$(".button-container").hide();
-        //window.print();
-    //});
 
     $("#bahanbakutab").click(function(){
 		$("#mintabakutab").removeClass("active");

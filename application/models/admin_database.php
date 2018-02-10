@@ -81,6 +81,11 @@ Class Admin_database extends CI_Model {
 		$this->db->update('akun', $data);
 	}
 
+	public function delete_user($data) {
+		$this->db->where('Username', $data['Username']);
+		$this->db->delete('akun');
+	}
+
 }
 
 ?>

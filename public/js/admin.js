@@ -37,6 +37,20 @@ $(document).ready(function(){
         change_pass = true;
     });
 
+    $('#delete').click(function(){
+        var uname = $('#uname').val();
+
+        $.ajax({
+            url : "Admin/delete_user",
+            type: "post",
+            data: {
+                "uname":uname,
+            }
+        })
+        
+        window.location.reload();
+    });
+
     $('#save').click(function(){
         $('#form-edit').validate({
             ignore: '',
@@ -64,13 +78,6 @@ $(document).ready(function(){
                     })
 
                     change_pass = false;
-
-                    $("#editor").modal('hide');
-
-                $("#passdiv").hide();
-                $("#change").show();
-                
-                window.location.reload();
                 } else {
                     var tipe = $('#tipe').val();
                     var nama = $('#nama').val();
@@ -85,15 +92,14 @@ $(document).ready(function(){
                             "uname":uname,
                             
                         }
-                    })
+                    })    
+                }
 
-                    $("#editor").modal('hide');
-
+                $("#editor").modal('hide');
                 $("#passdiv").hide();
                 $("#change").show();
                 
                 window.location.reload();
-                }
             }
         });
         //$('#form-edit').submit()
