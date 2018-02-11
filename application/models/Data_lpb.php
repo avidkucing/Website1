@@ -2,8 +2,7 @@
 
 Class Data_lpb extends CI_Model {
 
-	//show data LPB
- 	public function lpb() {
+ 	public function lpb_baku() {
  		$this->db->select('bahan_terima.Nomor_LPB, bahan_terima.Tanggal_Terima, jenis_bahan.Kode_Bahan, bahan_terima.Nama_Supplier, bahan_terima.Nama_Manufacturer, jenis_bahan.Satuan');
  		$this->db->from('bahan_terima');
  		$this->db->join('jenis_bahan', 'bahan_terima.ID_Bahan = jenis_bahan.ID_Bahan', 'inner');
@@ -17,7 +16,34 @@ Class Data_lpb extends CI_Model {
  		return $o_lpb_rows;
  	}
 
- 	//homepage batch show data batch
+ 	public function lpb_kemas() {
+ 		$this->db->select('bahan_terima.Nomor_LPB, bahan_terima.Tanggal_Terima, jenis_bahan.Kode_Bahan, bahan_terima.Nama_Supplier, bahan_terima.Nama_Manufacturer, jenis_bahan.Satuan');
+ 		$this->db->from('bahan_terima');
+ 		$this->db->join('jenis_bahan', 'bahan_terima.ID_Bahan = jenis_bahan.ID_Bahan', 'inner');
+ 		$this->db->order_by('Tanggal_Terima desc, Nomor_LPB desc');
+ 		$this->db->where("jenis_bahan.Jenis", "Kemas");
+ 		
+ 		$o_lpb_rows = $this->db->get()->result();
+ 		
+ 		$this->ubah_format_tanggal($o_lpb_rows);
+	
+ 		return $o_lpb_rows;
+ 	}
+
+ 	public function lpb_bantu() {
+ 		$this->db->select('bahan_terima.Nomor_LPB, bahan_terima.Tanggal_Terima, jenis_bahan.Kode_Bahan, bahan_terima.Nama_Supplier, bahan_terima.Nama_Manufacturer, jenis_bahan.Satuan');
+ 		$this->db->from('bahan_terima');
+ 		$this->db->join('jenis_bahan', 'bahan_terima.ID_Bahan = jenis_bahan.ID_Bahan', 'inner');
+ 		$this->db->order_by('Tanggal_Terima desc, Nomor_LPB desc');
+ 		$this->db->where("jenis_bahan.Jenis", "Pembantu");
+ 		
+ 		$o_lpb_rows = $this->db->get()->result();
+ 		
+ 		$this->ubah_format_tanggal($o_lpb_rows);
+	
+ 		return $o_lpb_rows;	
+ 	}
+
  	public function lpb_batch() {
  		$this->db->select('*');
  		$this->db->from('nomor_batch_bahan');

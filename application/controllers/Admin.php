@@ -31,11 +31,15 @@ class Admin extends CI_Controller{
 	public function index() {
 		$data['akun'] = $this->admin_database->show_user();
 		$data['contents']['lpb_bahanbaku'] = $this->load->view('contents/lpb_bahanbaku', $this->load_content('data_lpb'), TRUE);
+		$data['contents']['lpb_bahanbantu'] = $this->load->view('contents/lpb_bahanbantu', $this->load_content('data_lpb'), TRUE);
+		$data['contents']['lpb_bahankemas'] = $this->load->view('contents/lpb_bahankemas', $this->load_content('data_lpb'), TRUE);
 		$this->load->view('admin/admin_homepage', $data);
 	}
 
 	public function load_content($content) {
-		$data['lpb'] = $this->$content->lpb();
+		$data['lpb_baku'] = $this->$content->lpb_baku();
+		$data['lpb_kemas'] = $this->$content->lpb_kemas();
+ 		$data['lpb_bantu'] = $this->$content->lpb_bantu();
  		$data['lpb_batch'] = $this->$content->lpb_batch();
  		return $data;
 	}

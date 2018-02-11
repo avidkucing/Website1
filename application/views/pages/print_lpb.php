@@ -54,11 +54,29 @@
 		<p class="right-item sign print-only" style="display: none;">Signed By (Electronic Sign)</p>
 	</div>
 
-	<div class="button-container mt-3">
-		<button onclick="printThis()" type="button" class="button-item btn" id="print">Print</button>
-		<button onclick="location.href='<?php echo base_url();?>'" type="button" class="button-item btn" id="back">Kembali</button>
-		<br>
+	<?php
+	if($tipe == 'Administrator') {
+		echo '<div class="row mt-3">
+			<div class="col-md-1 offset-md-5 p-1">
+				<button type="button" class="btn btn-block btn-primary">Edit</button>
+			</div>
+			<div class="col-md-1 p-1">
+				<button type="button" class="btn btn-block btn-danger">Delete</button>
+			</div>
+		</div>';
+	}
+	?>
+
+	<div class="row mt-3">
+		<div class="col-md-1 offset-md-5 p-1">
+			<button onclick="printThis()" type="button" class="btn btn-block btn-success">Print</button>
+		</div>
+		<div class="col-md-1 p-1">
+			<button onclick="location.href='<?php echo base_url();?>'" type="button" class="btn btn-block btn-secondary">Back</button>
+		</div>
 	</div>
+
+	
 
 	<script type="text/javascript">
 		function printThis() {

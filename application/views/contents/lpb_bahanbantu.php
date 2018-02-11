@@ -1,11 +1,11 @@
 <?php
 	$template = array(
-        'table_open' => '<table class="table table-bordered table-hover decorated" cell-spacing="0" id="lpb_bahanbaku">'
+	    'table_open' => '<table class="table table-bordered table-hover decorated" cell-spacing="0" id="lpb_bahanbantu">'
 	);
 	$this->table->set_template($template);
 	$this->table->set_heading('No LPB', 'Tanggal Terima', 'Kode Bahan', 'Nomor Batch', 'Nama Supplier', 'Nama Manufacturer', 'Jumlah', 'Satuan', 'Status');
 
-	foreach ($lpb_baku as $row) {
+	foreach ($lpb_bantu as $row) {
 		foreach ($lpb_batch as $rowb) {
 			$a = $row->Nomor_LPB;
 			$b = $rowb->Nomor_LPB;
@@ -27,7 +27,7 @@
 	$this->table->clear();
 ?>
 <script type="text/javascript">
-	$('#lpb_bahanbaku tr td').click(function(){
+	$('#lpb_bahanbantu tr td').click(function(){
         $link = window.location.origin + "/manufaktur/pages/print_lpb/" + (this.id);
         window.location.href=$link ;
     });

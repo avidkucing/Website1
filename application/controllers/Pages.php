@@ -28,6 +28,7 @@ class Pages extends CI_Controller{
 	}
 
 	public function print_lpb($a, $b, $c, $d){
+		$data['tipe'] = $this->session->userdata['logged_in']['tipe'];
 		$data['lpb'] = $this->data_lpb->print_lpb($a, $b, $c, $d);
  		$data['lpb_batch'] =$this->data_lpb->print_batch_lpb($a, $b, $c, $d);
 		$this->load->view('pages/print_lpb', $data);		

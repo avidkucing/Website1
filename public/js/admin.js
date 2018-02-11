@@ -1,9 +1,19 @@
 $(document).ready(function(){
+
     if(window.location.hash) { // just in case there is no hash
-        activate_menu(window.location.hash.substr(1));
+        var hash = window.location.hash.substr(1).split('-');
+        activate_menu(hash[0]);
+        if (hash[1]) {
+            activate_tab(hash[1]);
+        }
     } else {
         activate_menu('lpb');
+        activate_tab('baku');
     }
+
+    $('#lpb-tab a').on('click', function (e) {
+        $(this).tab('show');
+    })
 
     var dataTable = $('.decorated').DataTable({
         
@@ -106,11 +116,15 @@ $(document).ready(function(){
         
     });
 
-    function activate_menu(data) {
+    function activate_menu(menu) {
         $(".menu").removeClass("active");
-        $("#"+data+"").addClass("active");
+        $("#"+menu+"").addClass("active");
         $(".content").hide();
-        $("#"+data+"-content").fadeIn("slow");
+        $("#"+menu+"-content").fadeIn("slow");
+    }
+
+    function activate_tab(tab) {
+        $('#lpb-tab #'+tab+'-tab').tab('show');
     }
 
     $(".menu").click(function(){
