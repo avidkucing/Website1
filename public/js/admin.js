@@ -2,22 +2,19 @@ $(document).ready(function(){
 
     if(window.location.hash) { // just in case there is no hash
         var hash = window.location.hash.substr(1).split('-');
-        activate_menu(hash[0]);
-        if (hash[1]) {
-            activate_tab(hash[1]);
+        if (hash[1]==null) {
+            hash[1] = 'baku';
         }
     } else {
-        activate_menu('lpb');
-        activate_tab('baku');
+        var hash = ['lpb', 'baku'];
     }
+    //default state
+    activate_tab('lpb', hash[1]);
+    activate_tab('stock', hash[1]);
+    activate_menu(hash[0]);
+    
 
-    $('#lpb-tab a').on('click', function (e) {
-        $(this).tab('show');
-    })
-
-    var dataTable = $('.decorated').DataTable({
-        
-    });
+    var dataTable = $('.decorated').DataTable({});
 
     var change_pass = false;
 
@@ -116,6 +113,15 @@ $(document).ready(function(){
         
     });
 
+    $(".menu").click(function(){
+        activate_tab(this.id, 'baku');
+        activate_menu(this.id);
+    })
+
+    $('.nav-tabs a').on('click', function(e){
+        $(this).tab('show');
+    })
+
     function activate_menu(menu) {
         $(".menu").removeClass("active");
         $("#"+menu+"").addClass("active");
@@ -123,12 +129,11 @@ $(document).ready(function(){
         $("#"+menu+"-content").fadeIn("slow");
     }
 
-    function activate_tab(tab) {
-        $('#lpb-tab #'+tab+'-tab').tab('show');
+    function activate_tab(menu, tab) {
+        if (menu=='stock' && tab=='bantu') {
+            tab = 'baku';
+        }
+        $('.nav-tabs #'+tab+'-'+menu).tab('show');
     }
-
-    $(".menu").click(function(){
-        activate_menu(this.id);
-    })
 
 });

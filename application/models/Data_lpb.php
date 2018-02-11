@@ -2,6 +2,14 @@
 
 Class Data_lpb extends CI_Model {
 
+	public function load() {
+		$data['lpb_baku'] = $this->lpb_baku();
+		$data['lpb_kemas'] = $this->lpb_kemas();
+ 		$data['lpb_bantu'] = $this->lpb_bantu();
+ 		$data['lpb_batch'] = $this->lpb_batch();
+ 		return $data;
+	}
+
  	public function lpb_baku() {
  		$this->db->select('bahan_terima.Nomor_LPB, bahan_terima.Tanggal_Terima, jenis_bahan.Kode_Bahan, bahan_terima.Nama_Supplier, bahan_terima.Nama_Manufacturer, jenis_bahan.Satuan');
  		$this->db->from('bahan_terima');

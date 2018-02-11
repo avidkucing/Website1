@@ -21,7 +21,9 @@ class Admin extends CI_Controller{
 
 		// Load database
 		$this->load->model('admin_database');
+		$this->load->model('gudang_database');
 		$this->load->model('data_lpb');
+		$this->load->model('data_stock');
 
 		if (!(isset($this->session->userdata['logged_in']))) {
 			redirect(base_url("User_Authentication"));
@@ -30,18 +32,18 @@ class Admin extends CI_Controller{
  
 	public function index() {
 		$data['akun'] = $this->admin_database->show_user();
-		$data['contents']['lpb_bahanbaku'] = $this->load->view('contents/lpb_bahanbaku', $this->load_content('data_lpb'), TRUE);
-		$data['contents']['lpb_bahanbantu'] = $this->load->view('contents/lpb_bahanbantu', $this->load_content('data_lpb'), TRUE);
-		$data['contents']['lpb_bahankemas'] = $this->load->view('contents/lpb_bahankemas', $this->load_content('data_lpb'), TRUE);
+		$data['contents'] = $this->load_contents();
+		$data['ins'] = $this->gudang_database->homepage_instruksi();
 		$this->load->view('admin/admin_homepage', $data);
 	}
 
-	public function load_content($content) {
-		$data['lpb_baku'] = $this->$content->lpb_baku();
-		$data['lpb_kemas'] = $this->$content->lpb_kemas();
- 		$data['lpb_bantu'] = $this->$content->lpb_bantu();
- 		$data['lpb_batch'] = $this->$content->lpb_batch();
- 		return $data;
+	public function load_contents() {
+		$data['lpb_baku'] = $this->load->view('contents/lpb_baku', $this->data_lpb->load(), TRUE);
+		$data['lpb_bantu'] = $this->load->view('contents/lpb_bantu', $this->data_lpb->load(), TRUE);
+		$data['lpb_kemas'] = $this->load->view('contents/lpb_kemas', $this->data_lpb->load(), TRUE);
+		$data['stock_baku'] = $this->load->view('contents/stock_baku', $this->data_stock->load(), TRUE);
+		$data['stock_kemas'] = $this->load->view('contents/stock_kemas', $this->data_stock->load(), TRUE);
+		return $data;
 	}
 
 	// Show registration page

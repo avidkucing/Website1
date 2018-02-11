@@ -72,7 +72,7 @@
 			<button onclick="printThis()" type="button" class="btn btn-block btn-success">Print</button>
 		</div>
 		<div class="col-md-1 p-1">
-			<button onclick="location.href='<?php echo base_url();?>'" type="button" class="btn btn-block btn-secondary">Back</button>
+			<button onclick="history.back()" type="button" class="btn btn-block btn-secondary">Back</button>
 		</div>
 	</div>
 

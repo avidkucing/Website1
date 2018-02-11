@@ -1,14 +1,14 @@
 <!doctype html>
 
-	<?php
-		if (isset($this->session->userdata['logged_in'])) {
-			$username = ($this->session->userdata['logged_in']['username']);
-			$email = ($this->session->userdata['logged_in']['email']);
-			$nama = ($this->session->userdata['logged_in']['nama']);
-		} else {
-			header("location: login");
-		}
-	?>
+<?php
+	if (isset($this->session->userdata['logged_in'])) {
+		$username = ($this->session->userdata['logged_in']['username']);
+		$email = ($this->session->userdata['logged_in']['email']);
+		$nama = ($this->session->userdata['logged_in']['nama']);
+	} else {
+		header("location: login");
+	}
+?>
 
 <head>
 	<title>Admin</title>
@@ -103,7 +103,9 @@
 			<hr>
 			<ul class="links list-unstyled">
 				<li class="menu" id="lpb"><a href="#lpb">LPB Bahan</a></li>
-				<li class="menu" id="bahan"><a href="#bahan">Data Bahan</a></li>
+				<li class="menu" id="stock"><a href="#stock">Stock Bahan</a></li>
+				<li class="menu" id="permintaan"><a href="#permintaan">Permintaan Bahan</a></li>
+				<li class="menu" id="data"><a href="#data">Data Bahan</a></li>
 				<li class="menu" id="akun"><a href="#akun"><span>Kelola Akun</span></a></li>
 				<!--<li>
 					<a id="other" href="#sublinks" data-toggle="collapse" aria-expanded="false">Lihat Lainnya<i class="fas fa-angle-down fa-fw fa-lg arrow"></i></a>
@@ -132,22 +134,56 @@
 			<div id="lpb-content" class="content">
 				<ul class="nav nav-tabs nav-fill justify-content-center mb-3" id="lpb-tab">
 					<li class="nav-item">
-						<a class="nav-link" id="baku-tab" href="#lpb-baku">LPB Bahan Baku</a>
+						<a class="nav-link" id="baku-lpb" href="#lpb-baku">LPB Bahan Baku</a>
 					</li>
 					<li class="nav-item">
-				    	<a class="nav-link" id="kemas-tab" href="#lpb-kemas">LPB Bahan Kemas</a>
+				    	<a class="nav-link" id="kemas-lpb" href="#lpb-kemas">LPB Bahan Kemas</a>
 					</li>
 					<li class="nav-item">
-				    	<a class="nav-link" id="bantu-tab" href="#lpb-bantu">LPB Bahan Pembantu</a>
+				    	<a class="nav-link" id="bantu-lpb" href="#lpb-bantu">LPB Bahan Pembantu</a>
 					</li>
 				</ul>
 				<div class="tab-content" id="lpb-tab-content">
-					<div class="lpb-tab tab-pane fade" id="lpb-baku"><?=$contents['lpb_bahanbaku']?></div>
-					<div class="lpb-tab tab-pane fade" id="lpb-kemas"><?=$contents['lpb_bahankemas']?></div>
-					<div class="lpb-tab tab-pane fade" id="lpb-bantu"><?=$contents['lpb_bahanbantu']?></div>
+					<div class="lpb-tab tab-pane" id="lpb-baku"><?=$contents['lpb_baku']?></div>
+					<div class="lpb-tab tab-pane fade" id="lpb-kemas"><?=$contents['lpb_kemas']?></div>
+					<div class="lpb-tab tab-pane fade" id="lpb-bantu"><?=$contents['lpb_bantu']?></div>
 				</div>
 			</div>
-			<div id="bahan-content" class="content">
+			<div id="stock-content" class="content">
+				<ul class="nav nav-tabs nav-fill justify-content-center mb-3" id="stock-tab">
+					<li class="nav-item">
+						<a class="nav-link" id="baku-stock" href="#stock-baku">Stock Bahan Baku</a>
+					</li>
+					<li class="nav-item">
+				    	<a class="nav-link" id="kemas-stock" href="#stock-kemas">Stock Bahan Kemas</a>
+					</li>
+				</ul>
+				<div class="tab-content" id="stock-tab-content">
+					<div class="stock-tab tab-pane" id="stock-baku"><?=$contents['stock_baku']?></div>
+					<div class="stock-tab tab-pane fade" id="stock-kemas"><?=$contents['stock_kemas']?></div>
+				</div>
+			</div>
+			<div id="permintaan-content" class="content">
+				<?php
+	 				$template = array(
+	 			        'table_open' => '<table class="table table-bordered table-hover decorated" cell-spacing="0">'
+	 				);
+	 				$this->table->set_template($template);
+	 				$this->table->set_heading('No Instruksi', 'Site Produksi', 'Tanggal Permintaan');
+	 				
+	 				foreach ($ins as $row) {
+	 					$a = $row->Nomor_Instruksi;
+						$no_ins = array('data' => $row->Nomor_Instruksi, 'id' => $a);
+						$site = array('data' => $row->Site_Produksi, 'id' => $a);
+						$tgl = array('data' => $row->Tanggal_Permintaan, 'id' => $a);
+						$this->table->add_row($no_ins, $site, $tgl);
+	 				}
+
+	 				echo $this->table->generate();
+	 				$this->table->clear();
+	 			?>
+			</div>
+			<div id="data-content" class="content">
 				<div class="row button-container mr-0">
 					<div class="col">
 						<button class="btn btn-block" onclick="location.href='<?php echo base_url();?>Admin/add_data_bahan_baku_show'"; >Tambah Data Bahan Baku</button>
