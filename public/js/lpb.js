@@ -5,7 +5,7 @@ $(document).ready(function(){
         $link = window.location.origin + "/manufaktur/gudang/print_lpb_show/" + (this.id);
         window.location.href=$link ;
     });
-
+    
     $(".jenisbahan").on("change",function(){
     var value = $(this).val();
     $.ajax({

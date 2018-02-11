@@ -15,7 +15,6 @@
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>public/css/global.css">
 	<script src="<?php echo base_url(); ?>public/js/global.js"></script>
     <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>public/css/lpb.css">
-    <script src="<?php echo base_url(); ?>public/js/lpb.js"></script>
 </head>
 
 <body>
@@ -58,10 +57,10 @@
 	if($tipe == 'Administrator') {
 		echo '<div class="row mt-3">
 			<div class="col-md-1 offset-md-5 p-1">
-				<button type="button" class="btn btn-block btn-primary">Edit</button>
+				<button onclick="editThis()" type="button" class="btn btn-block btn-primary">Edit</button>
 			</div>
 			<div class="col-md-1 p-1">
-				<button type="button" class="btn btn-block btn-danger">Delete</button>
+				<button onclick="deleteThis()" type="button" class="btn btn-block btn-danger">Delete</button>
 			</div>
 		</div>';
 	}
@@ -80,11 +79,32 @@
 
 	<script type="text/javascript">
 		function printThis() {
-			$('.button-container').hide();
+			$('button').hide();
 			$('.print-only').show();
 			window.print();
-			$('.button-container').show();
+			$('button').show();
 			$('.print-only').hide();
 		}
+
+		function deleteThis(){
+	        var no_lpb = '<?php echo $lpb[0]['Nomor_LPB']?>';
+
+	        $.ajax({
+	            url : "<?php echo base_url(); ?>Pages/delete_lpb",
+	            type: "post",
+	            data: {
+	                "Nomor_LPB":no_lpb,
+	            }
+	        })
+	        
+	        window.history.back();
+    	}
+
+    	function editThis() {
+	        //$link = "<?php echo base_url(); ?>Pages/edit_lpb/" + "<?php echo $lpb[0]['Nomor_LPB']?>";
+	        //window.location.href=$link;
+	        $link = "<?php echo base_url(); ?>Pages/error_wip/";
+	        window.location.href=$link;
+    	}
 	</script>
 </body>

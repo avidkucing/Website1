@@ -27,11 +27,28 @@ class Pages extends CI_Controller{
 		}
 	}
 
-	public function print_lpb($a, $b, $c, $d){
+	function print_lpb($a, $b, $c, $d){
 		$data['tipe'] = $this->session->userdata['logged_in']['tipe'];
 		$data['lpb'] = $this->data_lpb->print_lpb($a, $b, $c, $d);
  		$data['lpb_batch'] =$this->data_lpb->print_batch_lpb($a, $b, $c, $d);
 		$this->load->view('pages/print_lpb', $data);		
+	}
+
+	function edit_lpb($a, $b, $c, $d) {
+		$data['lpb'] = $this->data_lpb->print_lpb($a, $b, $c, $d);
+ 		$data['lpb_batch'] =$this->data_lpb->print_batch_lpb($a, $b, $c, $d);
+		$this->load->view('pages/edit_lpb', $data);
+	}
+
+	function delete_lpb() {
+		$data = array(
+				'Nomor_LPB' => $this->input->post('Nomor_LPB'),
+				);
+		$this->data_lpb->delete($data);
+	}
+
+	function error_wip() {
+		$this->load->view('errors/wip');
 	}
 }
 

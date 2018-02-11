@@ -104,8 +104,8 @@
 			<ul class="links list-unstyled">
 				<li class="menu" id="lpb"><a href="#lpb">LPB Bahan</a></li>
 				<li class="menu" id="stock"><a href="#stock">Stock Bahan</a></li>
-				<li class="menu" id="permintaan"><a href="#permintaan">Permintaan Bahan</a></li>
-				<li class="menu" id="data"><a href="#data">Data Bahan</a></li>
+				<li class="menu" id="permintaan"><a href="#permintaan">Permintaan Bahan Baku</a></li>
+				<!--<li class="menu" id="data"><a href="#data">Data Bahan</a></li>-->
 				<li class="menu" id="akun"><a href="#akun"><span>Kelola Akun</span></a></li>
 				<!--<li>
 					<a id="other" href="#sublinks" data-toggle="collapse" aria-expanded="false">Lihat Lainnya<i class="fas fa-angle-down fa-fw fa-lg arrow"></i></a>
@@ -164,24 +164,7 @@
 				</div>
 			</div>
 			<div id="permintaan-content" class="content">
-				<?php
-	 				$template = array(
-	 			        'table_open' => '<table class="table table-bordered table-hover decorated" cell-spacing="0">'
-	 				);
-	 				$this->table->set_template($template);
-	 				$this->table->set_heading('No Instruksi', 'Site Produksi', 'Tanggal Permintaan');
-	 				
-	 				foreach ($ins as $row) {
-	 					$a = $row->Nomor_Instruksi;
-						$no_ins = array('data' => $row->Nomor_Instruksi, 'id' => $a);
-						$site = array('data' => $row->Site_Produksi, 'id' => $a);
-						$tgl = array('data' => $row->Tanggal_Permintaan, 'id' => $a);
-						$this->table->add_row($no_ins, $site, $tgl);
-	 				}
-
-	 				echo $this->table->generate();
-	 				$this->table->clear();
-	 			?>
+				<?=$contents['permintaan_baku']?>
 			</div>
 			<div id="data-content" class="content">
 				<div class="row button-container mr-0">
@@ -194,34 +177,7 @@
 				</div>
 			</div>
 			<div id="akun-content" class="content">
-				<div id="test-table">
-					<div id=asd>
-						<?php
-	 				$template = array(
-	 			        'table_open' => '<table class="table table-bordered table-hover decorated" cell-spacing="0">'
-	 				);
-	 				$this->table->set_template($template);
-	 				$this->table->set_heading('Username', 'Nama', 'Sebagai');
-
-	 				foreach ($akun as $a) {
-	 					$username = array('data' => $a->Username, 'data-id' => $a->Username);
-						$nama = array('data' => $a->Nama, 'data-id' => $a->Username);
-						$tipe = array('data' => $a->Tipe_Pegawai, 'data-id' => $a->Username);
-						$this->table->add_row($username, $nama, $tipe);	
-	 				}
-
-	 				echo $this->table->generate();
-	 				$this->table->clear();
-		 			?>
-					</div>
-					
-				</div>
-				
-				<div class="row button-container mlr-0">
-					<div class="col">
-						<button class="btn btn-block" onclick="location.href='<?php echo base_url();?>Admin/user_registration_show'"; >Buat Akun Baru</button>
-					</div>
-				</div>
+				<?=$contents['akun']?>
 			</div>
 		</div>
 	</div>
