@@ -17,6 +17,8 @@
 	<!-- jQuery library -->
 	<script src="<?php echo base_url(); ?>public/js/jquery-3.2.1.min.js"></script>
 	<script src="<?php echo base_url(); ?>public/js/jquery.validate.min.js"></script>
+	<script src="<?php echo base_url(); ?>public/js/jquery-ui.min.js"></script>
+	<link rel="stylesheet" href="<?php echo base_url(); ?>public/css/jquery-ui.min.css">
 	<!--Bootstrap 4-->
 	<link rel="stylesheet" href="<?php echo base_url(); ?>public/css/bootstrap.min.css">
 	<script src="<?php echo base_url(); ?>public/js/bootstrap.min.js"></script>
@@ -34,10 +36,10 @@
     <script src="<?php echo base_url(); ?>public/js/dataTables.select.min.js"></script>
 </head>
 <body>
-	<div class="modal fade" id="editor" tabindex="-1" role="dialog">
+	<div class="modal fade" id="akun-editor" tabindex="-1" role="dialog">
 	 	<div class="modal-dialog modal-dialog-centered" role="document">
 		    <div class="modal-content">
-		    <form id="form-edit">
+		    <form id="akun-form">
 		      	<div class="modal-header">
 			        <h5 class="modal-title">Edit Data</h5>
 			        <button type="button" class="close" data-dismiss="modal">
@@ -84,9 +86,112 @@
 		        	</div>
 		    	</div>
 		    	<div class="modal-footer">
-		    		<button type="button" class="btn btn-danger" data-dismiss="modal" id="delete">Delete</button>
+		    		<button type="button" id="delete-akun" class="btn btn-danger" data-dismiss="modal">Delete</button>
 			        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-			        <button type="submit" class="btn btn-primary" id="save">Save</button>
+			        <button type="submit" id="save-akun" class="btn btn-primary">Save</button>
+		    	</div>
+		    	</form>
+		    </div>
+		</div>
+	</div>
+	<div class="modal fade" id="permintaan-editor" tabindex="-1" role="dialog">
+	 	<div class="modal-dialog modal-dialog-centered" role="document">
+		    <div class="modal-content">
+		    <form id="permintaan-form">
+		      	<div class="modal-header">
+			        <h5 class="modal-title">Edit Data</h5>
+			        <button type="button" class="close" data-dismiss="modal">
+			        	<span>&times;</span>
+			        </button>
+		      	</div>
+		    	<div class="modal-body">
+		        	<div class="form-group row">
+		        		<label for="noins" class="col-md-4 col-form-label">No. Intruksi:</label>
+		        		<div class="col-md-8">
+		        			<input type="text" class="form-control" id="noins" name="noins" disabled>
+		        		</div>
+		        	</div>
+		        	<div class="form-group row">
+		        		<label for="site" class="col-md-4 col-form-label">Site Produksi:</label>
+						<div class="col-md-8">
+		        			<select class="custom-select" id="site">
+							    <option value="Site 1">Site 1</option>
+							    <option value="Site 2">Site 2</option>
+						 	</select>
+		        		</div>
+		        	</div>
+		        	<div class="form-group row">
+		        		<label for="tglminta" class="col-md-4 col-form-label">Tanggal Permintaan:</label>
+						<div class="col-md-8">
+		        			<input type="text" class="form-control" id="tglminta" name="tglminta">
+		        		</div>
+		        	</div>
+		    	</div>
+		    	<div class="modal-footer">
+		    		<button type="button" id="delete-permintaan" class="btn btn-danger" data-dismiss="modal">Delete</button>
+			        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+			        <button type="submit" id="save-permintaan" class="btn btn-primary">Save</button>
+		    	</div>
+		    	</form>
+		    </div>
+		</div>
+	</div>
+	<div class="modal fade" id="stock-editor" tabindex="-1" role="dialog">
+	 	<div class="modal-dialog modal-dialog-centered" role="document">
+		    <div class="modal-content">
+		    <form id="stock-form">
+		      	<div class="modal-header">
+			        <h5 class="modal-title">Edit Data</h5>
+			        <button type="button" class="close" data-dismiss="modal">
+			        	<span>&times;</span>
+			        </button>
+		      	</div>
+		    	<div class="modal-body">
+		        	<div class="form-group row">
+		        		<label for="noana" class="col-md-4 col-form-label">No. Analisa:</label>
+		        		<div class="col-md-8">
+		        			<input type="text" class="form-control" id="noana" name="noana" disabled>
+		        		</div>
+		        	</div>
+		        	<div class="form-group row">
+		        		<label for="kode" class="col-md-4 col-form-label">Kode Bahan:</label>
+						<div class="col-md-8">
+		        			<select class="custom-select" id="kode">
+							    <!--pake ajax-->
+						 	</select>
+		        		</div>
+		        	</div>
+		        	<div class="form-group row">
+		        		<label for="manu" class="col-md-4 col-form-label">Nama Manufacturer:</label>
+						<div class="col-md-8">
+		        			<select class="custom-select" id="manu">
+							    <!--pake ajax-->
+						 	</select>
+		        		</div>
+		        	</div>
+		        	<div class="form-group row">
+		        		<label for="exp" class="col-md-4 col-form-label">Exp. Date:</label>
+						<div class="col-md-8">
+		        			<input type="text" class="form-control" id="exp" name="exp">
+		        		</div>
+		        	</div>
+		        	<div class="form-group row">
+		        		<label for="jumlah" class="col-md-4 col-form-label">Jumlah:</label>
+						<div class="col-md-8">
+		        			<input type="text" class="form-control" id="jumlah" name="jumlah">
+		        		</div>
+		        	</div>
+		        	<div class="form-group row">
+		        		<label for="ket" class="col-md-4 col-form-label">Keterangan:</label>
+						<div class="col-md-8">
+		        			<textarea rows="3" class="form-control" id="ket" name="ket"></textarea>
+		        		</div>
+		        	</div>
+		    	</div>
+		    	<div class="modal-footer">
+		    		<button type="button" id="delete-stock" class="btn btn-danger" data-dismiss="modal">Delete</button>
+			        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+			        <button type="submit" id="save-stock" class="btn btn-primary">Save</button>
 		    	</div>
 		    	</form>
 		    </div>

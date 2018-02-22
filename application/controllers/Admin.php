@@ -202,6 +202,40 @@ class Admin extends CI_Controller{
 		}
 	}
 
+	public function get_data_stock() {
+		$value = $this->input->post("value");
+	    $data = $this->data_stock->get_data_stock($value);
+	    
+	    echo json_encode($data);
+	}
+
+	public function get_data_permintaan() {
+		$value = $this->input->post("value");
+	    $data = $this->data_permintaan->get_data_permintaan($value);
+	    
+	    echo json_encode($data);
+	}
+
+	public function update_data_permintaan() {
+		$data = array(
+				'Nomor_Instruksi' => $this->input->post('noins'),
+				'Site_Produksi' => $this->input->post('site'),
+				'Tanggal_Permintaan' => $this->input->post('tglminta'),
+				);
+
+		$newtgl = str_replace('/', '-', $data['Tanggal_Permintaan']);
+		$data['Tanggal_Permintaan'] = date('Y-m-d',strtotime($newtgl));
+
+		$this->data_permintaan->update_data_permintaan($data);
+	}
+
+	public function delete_permintaan() {
+		$data = array(
+				'Nomor_Instruksi' => $this->input->post('noins'),
+				);
+		$this->data_permintaan->delete_permintaan($data);
+	}
+
 	public function get_data_user() {
 		$value = $this->input->post("value");
 	    $data = $this->admin_database->get_data_user($value);
@@ -245,6 +279,5 @@ class Admin extends CI_Controller{
 		$data['message_display'] = 'Successfully Logout';
 		$this->load->view('login_form', $data);
 	}
-
 }
 ?>

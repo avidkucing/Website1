@@ -7,9 +7,9 @@
 	
 	foreach ($permintaan_baku as $row) {
 		$a = $row->Nomor_Instruksi;
-	$no_ins = array('data' => $row->Nomor_Instruksi, 'id' => $a);
-	$site = array('data' => $row->Site_Produksi, 'id' => $a);
-	$tgl = array('data' => $row->Tanggal_Permintaan, 'id' => $a);
+	$no_ins = array('data' => $row->Nomor_Instruksi, 'data-id' => $a);
+	$site = array('data' => $row->Site_Produksi, 'data-id' => $a);
+	$tgl = array('data' => $row->Tanggal_Permintaan, 'data-id' => $a);
 	$this->table->add_row($no_ins, $site, $tgl);
 	}
 

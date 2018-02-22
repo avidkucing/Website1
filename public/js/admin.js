@@ -12,16 +12,32 @@ $(document).ready(function(){
     activate_tab('lpb', hash[1]);
     activate_tab('stock', hash[1]);
     activate_menu(hash[0]);
-    
 
     var dataTable = $('.decorated').DataTable({});
 
     var change_pass = false;
 
-    $("#akun-content table tr td").addClass("klik");
+    $(".menu").click(function(){
+        activate_tab(this.id, 'baku');
+        activate_menu(this.id);
+    })
+
+    $('.nav-tabs a').on('click', function(e){
+        $(this).tab('show');
+    })
+
+    $("#tglminta").datepicker({
+        dateFormat: "dd/mm/yy",
+        changeMonth: true,
+        changeYear: true
+    });
+
+    $("#akun-content table tr td").addClass("akun-row");
+    $("#permintaan-content table tr td").addClass("permintaan-row");
+    $("#stock-content table tr td").addClass("stock-row");
     
-    $('.klik').click(function(){
-        $('#editor').modal('show');
+    $('.akun-row').click(function(){
+        $('#akun-editor').modal('show');
         var value = $(this).data('id');
         $.ajax({
             url : "Admin/get_data_user",
@@ -36,6 +52,39 @@ $(document).ready(function(){
             },
         })
     });
+    $('.permintaan-row').click(function(){
+        $('#permintaan-editor').modal('show');
+        var value = $(this).data('id');
+        $.ajax({
+            url : "Admin/get_data_permintaan",
+            type: "post",
+            data: {"value":value},
+            success : function(data){
+                var newdata = JSON.parse(data);
+                $("#noins").val(newdata[0].Nomor_Instruksi);
+                $("#site").val(newdata[0].Site_Produksi);
+                $("#tglminta").val(newdata[0].Tanggal_Permintaan);
+            },
+        })
+    });
+    $('.stock-row').click(function(){
+        $('#stock-editor').modal('show');
+        var value = $(this).data('id');
+        $.ajax({
+            url : "Admin/get_data_stock",
+            type: "post",
+            data: {"value":value},
+            success : function(data){
+                var newdata = JSON.parse(data);
+                $("#noana").val(newdata[0].Nomor_Analisa);
+                $("#kode").val(newdata[0].Kode_Bahan);
+                $("#manu").val(newdata[0].Nama_Manufacturer);
+                $("#exp").val(newdata[0].EXP_Date);
+                $("#jumlah").val(newdata[0].Jumlah);
+                $("#ket").val(newdata[0].Keterangan);
+            },
+        })
+    });
 
     $('#change').click(function(){
         $("#passdiv").show();
@@ -44,7 +93,7 @@ $(document).ready(function(){
         change_pass = true;
     });
 
-    $('#delete').click(function(){
+    $('#delete-akun').click(function(){
         var uname = $('#uname').val();
 
         $.ajax({
@@ -58,8 +107,8 @@ $(document).ready(function(){
         window.location.reload();
     });
 
-    $('#save').click(function(){
-        $('#form-edit').validate({
+    $('#save-akun').click(function(){
+        $('#akun-form').validate({
             ignore: '',
             rules: {
                 password: {
@@ -102,25 +151,58 @@ $(document).ready(function(){
                     })    
                 }
 
-                $("#editor").modal('hide');
+                $("#akun-editor").modal('hide');
                 $("#passdiv").hide();
                 $("#change").show();
                 
                 window.location.reload();
             }
         });
-        //$('#form-edit').submit()
-        
+        //$('#form-edit').submit()  
     });
 
-    $(".menu").click(function(){
-        activate_tab(this.id, 'baku');
-        activate_menu(this.id);
-    })
+    $('#delete-permintaan').click(function(){
+        var noins = $('#noins').val();
 
-    $('.nav-tabs a').on('click', function(e){
-        $(this).tab('show');
-    })
+        $.ajax({
+            url : "Admin/delete_permintaan",
+            type: "post",
+            data: {
+                "noins":noins,
+            }
+        })
+        
+        window.location.reload();
+    });
+
+    $('#save-permintaan').click(function(){
+        $('#permintaan-form').validate({
+            ignore: '',
+            rules: {
+                
+            },
+            submitHandler: function(form) {
+                
+                var noins = $('#noins').val();
+                var site = $('#site').val();
+                var tglminta = $('#tglminta').val();
+                    
+                $.ajax({
+                    url : "Admin/update_data_permintaan",
+                    type: "post",
+                    data: {
+                        "noins":noins,
+                        "site":site,
+                        "tglminta":tglminta,   
+                    }
+                })
+
+                $("#permintaan-editor").modal('hide');
+                
+                //window.location.reload();
+            }
+        });
+    });
 
     function activate_menu(menu) {
         $(".menu").removeClass("active");
