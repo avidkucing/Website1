@@ -42,7 +42,7 @@
 		$label_attr = array('class' => 'col-form-label col-sm-2 offset-sm-1');
 		echo form_label('No. LPB:', ' ', $label_attr);
 			echo "<div class='col-sm-8'>";
-			$input_attr = array('class' => 'form-control nolpb', 'pattern' => '[0-9]+/[a-zA-z]+/[a-zA-z]+/[0-9]{4}', 'required' => '');
+			$input_attr = array('class' => 'form-control nolpb', 'pattern' => '[0-9]+/[a-zA-z]+/[a-zA-z]+/[0-9]{4}', 'required' => '', 'placeholder' => 'Format Nomor LPB harus AA/BB/CC/DDDD = Nomor Urut/Kode Huruf Bahan/Bulan dalam Kode Romawi/Tahun');
 			echo form_input('lpb', '', $input_attr);
 			echo "</div>";
 		echo "</div>";
@@ -64,8 +64,8 @@
 		$label_attr = array('class' => 'col-form-label col-sm-2 offset-sm-1');
 		echo form_label('No. Surat Pesanan:', ' ', $label_attr);
 			echo "<div class='col-sm-8'>";
-			$input_attr = array('class' => 'form-control', 'pattern' => '[0-9]+/[P]+[S]+/[a-zA-z]+/[0-9]{4}', 'required' => '');
-			echo form_input('surat', ' ', $input_attr);
+			$input_attr = array('class' => 'form-control', 'placeholder' => 'Format Nomor Surat harus XXX/PS/YY/ZZZZ = Nomor Urut/PS/Bulan dalam Kode Romawi/Tahun', 'pattern' => '[0-9]+/[P]+[S]+/[a-zA-z]+/[0-9]{4}', 'required' => '');
+			echo form_input('surat', '', $input_attr);
 			echo "</div>";
 		echo "</div>";
 
@@ -173,8 +173,13 @@
 						'name' => 'keterangan[]',
 						'rows' => '1',
 					);
+					$jum = array(
+						'name' => 'jumlah[]',
+						'type' => 'number',
+						//'step' => '0.1',
+					);
 					$batch = array(
-			            array(form_checkbox('chk[]', 'accept', TRUE), form_input('batch[]', '', 'class="form-control" required'), form_input('jumlah[]', '', 'class="form-control" required'),  form_dropdown('satuan', $manu_rows, '', 'class="form-control satuan"'), form_textarea($ket, '', 'class="form-control"'), form_input($exp_date, '', 'class="form-control" required'))
+			            array(form_checkbox('chk[]', 'accept', TRUE), form_input('batch[]', '', 'class="form-control" pattern = "[0-9]{4}|[0-9]{4}[a-zA-z]{1}" placeholder="Format : 4 angka atau 4 angka 1 huruf" size="50" required'), form_input($jum, '', 'class="form-control" required'),  form_dropdown('satuan', $manu_rows, '', 'class="form-control satuan"'), form_textarea($ket, '', 'class="form-control"'), form_input($exp_date, '', 'class="form-control" required'))
 			        );
 
 					echo $this->table->generate($batch);
