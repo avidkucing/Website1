@@ -54,6 +54,7 @@ class Gudang extends CI_Controller{
 	public function tambah_lpb_show(){
 		$this->load->view('gudang/tambah_lpb');
 	}
+
 	public function get_data_kode_bahan(){
 		$value = $this->input->post("value");
 	      $data = $this->gudang_database->get_data_kode_bahan($value);
