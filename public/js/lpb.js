@@ -8,53 +8,53 @@ $(document).ready(function(){
     
     $(".jenisbahan").on("change",function(){
     var value = $(this).val();
-        $.ajax({
-             url : "get_data_kode_bahan",
-             type: "post",
-             data: {"value":value},
-             success : function(data){
-                 $(".kodebahan").html(data);
-             },
-        });
+    $.ajax({
+         url : "get_data_kode_bahan",
+         type: "post",
+         data: {"value":value},
+         success : function(data){
+             $(".kodebahan").html(data);
+         },
+    });
     });
 
 	$(".kodebahan").on("change",function(){
     var value = $(this).val();
-        $.ajax({
-             url : "get_data_nama_bahan",
-             type: "post",
-             data: {"value":value},
-             success : function(data){
-                 $(".namabahan").html(data);
-             },
-        });
+    $.ajax({
+         url : "get_data_nama_bahan",
+         type: "post",
+         data: {"value":value},
+         success : function(data){
+             $(".namabahan").html(data);
+         },
+    });
 
-        $.ajax({
-             url : "get_data_manufaktur",
-             type: "post",
-             data: {"value":value},
-             success : function(data){
-                 $(".manufaktur").html(data);
-             },
-        });
+    $.ajax({
+         url : "get_data_manufaktur",
+         type: "post",
+         data: {"value":value},
+         success : function(data){
+             $(".manufaktur").html(data);
+         },
+    });
 
-        $.ajax({
-             url : "get_data_supplier",
-             type: "post",
-             data: {"value":value},
-             success : function(data){
-                 $(".supplier").html(data);
-             },
-        });
+    $.ajax({
+         url : "get_data_supplier",
+         type: "post",
+         data: {"value":value},
+         success : function(data){
+             $(".supplier").html(data);
+         },
+    });
 
-        $.ajax({
-             url : "get_data_satuan",
-             type: "post",
-             data: {"value":value},
-             success : function(data){
-                 $(".satuan").html(data);
-             },
-        });
+    $.ajax({
+         url : "get_data_satuan",
+         type: "post",
+         data: {"value":value},
+         success : function(data){
+             $(".satuan").html(data);
+         },
+    });
 
 	});
     /*

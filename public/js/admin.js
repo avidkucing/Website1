@@ -32,15 +32,10 @@ $(document).ready(function(){
         changeYear: true
     });
 
-    $('#lpb-content table tr td').addClass("lpb-row")
     $("#akun-content table tr td").addClass("akun-row");
     $("#permintaan-content table tr td").addClass("permintaan-row");
     $("#stock-content table tr td").addClass("stock-row");
-
-    $('.lpb-row').click(function(){
-        $link = window.location.origin + "/manufaktur/lpb/print_lpb/" + (this.id);
-        window.location.href=$link ;
-    });
+    
     $('.akun-row').click(function(){
         $('#akun-editor').modal('show');
         var value = $(this).data('id');
@@ -72,7 +67,7 @@ $(document).ready(function(){
             },
         })
     });
-    /*$('.stock-row').click(function(){
+    $('.stock-row').click(function(){
         $('#stock-editor').modal('show');
         var value = $(this).data('id');
         $.ajax({
@@ -89,7 +84,7 @@ $(document).ready(function(){
                 $("#ket").val(newdata[0].Keterangan);
             },
         })
-    });*/
+    });
 
     $('#change').click(function(){
         $("#passdiv").show();
@@ -111,6 +106,7 @@ $(document).ready(function(){
         
         window.location.reload();
     });
+
     $('#save-akun').click(function(){
         $('#akun-form').validate({
             ignore: '',
@@ -178,6 +174,7 @@ $(document).ready(function(){
         
         window.location.reload();
     });
+
     $('#save-permintaan').click(function(){
         $('#permintaan-form').validate({
             ignore: '',
@@ -215,6 +212,9 @@ $(document).ready(function(){
     }
 
     function activate_tab(menu, tab) {
+        if (menu=='stock' && tab=='bantu') {
+            tab = 'baku';
+        }
         $('.nav-tabs #'+tab+'-'+menu).tab('show');
     }
 

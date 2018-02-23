@@ -6,16 +6,22 @@ class Gudang extends CI_Controller{
 		
 		//Load helper url
 		$this->load->helper('url');
+
 		// Load form helper library
 		$this->load->helper('form');
+
 		// Load table library
 		$this->load->library('table');
+
 		// Load form validation library
 		$this->load->library('form_validation');
+
 		// Load session library
 		$this->load->library('session');
+
 		// Load database
 		$this->load->model('gudang_database');
+
 		if (!(isset($this->session->userdata['logged_in']))) {
 			redirect(base_url("User_Authentication"));
 		}
@@ -31,7 +37,7 @@ class Gudang extends CI_Controller{
  		$data['ins'] = $this->gudang_database->homepage_instruksi();
  		$this->load->view('gudang/gudang_homepage', $data);
 	}
-	
+
 	public function print_lpb_show($a, $b, $c, $d){
 		//$value = $this->input->post("value");
 		$data['lpb'] = $this->gudang_database->print_lpb($a, $b, $c, $d);
@@ -48,7 +54,7 @@ class Gudang extends CI_Controller{
 	public function tambah_lpb_show(){
 		$this->load->view('gudang/tambah_lpb');
 	}
-
+	
 	public function get_data_kode_bahan(){
 		$value = $this->input->post("value");
 	      $data = $this->gudang_database->get_data_kode_bahan($value);
@@ -103,7 +109,6 @@ class Gudang extends CI_Controller{
 	      }
 	      echo $option;		
 	}
-
 	/*
 	public function get_data_manufaktur_from_supplier(){
 		  $kodebahan = $this->input->post("kode");
@@ -128,7 +133,6 @@ class Gudang extends CI_Controller{
 	      echo $option;
 	}
 	*/
-
 	public function get_tahun_lpb() {
 		$date = $this->input->post("value");
 		$year = substr($date, 0, 4);
@@ -195,7 +199,7 @@ class Gudang extends CI_Controller{
 					'Nama_Supplier' => $this->input->post('supp'),
 					'Tanggal_Terima' => $this->input->post('tgl'),
 					'Nomor_Surat' => $this->input->post('surat'),
-					'Status' => 'QUARANTINE',
+					'Status' => 'WAITING',
 					'Jenis_Permintaan' => $this->input->post('jenis'),
 					//'Jumlah' => $this->input->post('jumlah'),
 					);
@@ -220,6 +224,7 @@ class Gudang extends CI_Controller{
 							'keterangan' => $array_ket[$a],
 							'Status' => 'QUARANTINE',
 						);
+
 						$result[$a] = $this->gudang_database->insert_batch_bahan_baku($data);
 						if ($result[$a] == FALSE) {
 							$data['message_display'] = 'Gagal menambahkan data batch!';
@@ -232,12 +237,13 @@ class Gudang extends CI_Controller{
 						$this->load->view('gudang/tambah_lpb', $data);	
 					} else {
 						$data['message_display'] = 'Sukses menambahkan data!';
-						$data['lpb'] = $this->gudang_database->homepage();
+						/*$data['lpb'] = $this->gudang_database->homepage();
 						$data['lpb_kemas'] = $this->gudang_database->homepage_kemas();
  						$data['lpb_bantu'] = $this->gudang_database->homepage_bantu();
-							$data['lpb_batch'] =$this->gudang_database->homepage_batch();
+						$data['lpb_batch'] =$this->gudang_database->homepage_batch();
  						$data['ins'] = $this->gudang_database->homepage_instruksi();
-						$this->load->view('gudang/gudang_homepage', $data);	
+						$this->load->view('gudang/gudang_homepage', $data);	*/
+						$this->index();
 					}
 				} else {
 					$data['message_display'] = 'Nomor LPB sudah ada! Gunakan nomor yang lain!';
@@ -248,6 +254,7 @@ class Gudang extends CI_Controller{
 	}
 
 	public function logout() {
+
 		// Removing session data
 		$sess_array = array(
 		'username' => ''

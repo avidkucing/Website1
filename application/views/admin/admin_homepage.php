@@ -94,6 +94,48 @@
 		    </div>
 		</div>
 	</div>
+	<div class="modal fade" id="permintaan-editor" tabindex="-1" role="dialog">
+	 	<div class="modal-dialog modal-dialog-centered" role="document">
+		    <div class="modal-content">
+		    <form id="permintaan-form">
+		      	<div class="modal-header">
+			        <h5 class="modal-title">Edit Data</h5>
+			        <button type="button" class="close" data-dismiss="modal">
+			        	<span>&times;</span>
+			        </button>
+		      	</div>
+		    	<div class="modal-body">
+		        	<div class="form-group row">
+		        		<label for="noins" class="col-md-4 col-form-label">No. Intruksi:</label>
+		        		<div class="col-md-8">
+		        			<input type="text" class="form-control" id="noins" name="noins" disabled>
+		        		</div>
+		        	</div>
+		        	<div class="form-group row">
+		        		<label for="site" class="col-md-4 col-form-label">Site Produksi:</label>
+						<div class="col-md-8">
+		        			<select class="custom-select" id="site">
+							    <option value="Site 1">Site 1</option>
+							    <option value="Site 2">Site 2</option>
+						 	</select>
+		        		</div>
+		        	</div>
+		        	<div class="form-group row">
+		        		<label for="tglminta" class="col-md-4 col-form-label">Tanggal Permintaan:</label>
+						<div class="col-md-8">
+		        			<input type="text" class="form-control" id="tglminta" name="tglminta">
+		        		</div>
+		        	</div>
+		    	</div>
+		    	<div class="modal-footer">
+		    		<button type="button" id="delete-permintaan" class="btn btn-danger" data-dismiss="modal">Delete</button>
+			        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+			        <button type="submit" id="save-permintaan" class="btn btn-primary">Save</button>
+		    	</div>
+		    	</form>
+		    </div>
+		</div>
+	</div>
 	<div class="modal fade" id="stock-editor" tabindex="-1" role="dialog">
 	 	<div class="modal-dialog modal-dialog-centered" role="document">
 		    <div class="modal-content">
@@ -155,48 +197,6 @@
 		    </div>
 		</div>
 	</div>
-	<div class="modal fade" id="permintaan-editor" tabindex="-1" role="dialog">
-	 	<div class="modal-dialog modal-dialog-centered" role="document">
-		    <div class="modal-content">
-		    <form id="permintaan-form">
-		      	<div class="modal-header">
-			        <h5 class="modal-title">Edit Data</h5>
-			        <button type="button" class="close" data-dismiss="modal">
-			        	<span>&times;</span>
-			        </button>
-		      	</div>
-		    	<div class="modal-body">
-		        	<div class="form-group row">
-		        		<label for="noins" class="col-md-4 col-form-label">No. Intruksi:</label>
-		        		<div class="col-md-8">
-		        			<input type="text" class="form-control" id="noins" name="noins" disabled>
-		        		</div>
-		        	</div>
-		        	<div class="form-group row">
-		        		<label for="site" class="col-md-4 col-form-label">Site Produksi:</label>
-						<div class="col-md-8">
-		        			<select class="custom-select" id="site">
-							    <option value="Site 1">Site 1</option>
-							    <option value="Site 2">Site 2</option>
-						 	</select>
-		        		</div>
-		        	</div>
-		        	<div class="form-group row">
-		        		<label for="tglminta" class="col-md-4 col-form-label">Tanggal Permintaan:</label>
-						<div class="col-md-8">
-		        			<input type="text" class="form-control" id="tglminta" name="tglminta">
-		        		</div>
-		        	</div>
-		    	</div>
-		    	<div class="modal-footer">
-		    		<button type="button" id="delete-permintaan" class="btn btn-danger" data-dismiss="modal">Delete</button>
-			        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-			        <button type="submit" id="save-permintaan" class="btn btn-primary">Save</button>
-		    	</div>
-		    	</form>
-		    </div>
-		</div>
-	</div>
 	<div class="row">
 		<div class="col-md-2 sidebar">
 			<a href="<?php echo current_url(); ?>">
@@ -253,14 +253,6 @@
 					<div class="lpb-tab tab-pane fade" id="lpb-kemas"><?=$contents['lpb_kemas']?></div>
 					<div class="lpb-tab tab-pane fade" id="lpb-bantu"><?=$contents['lpb_bantu']?></div>
 				</div>
-				<div class="row button-container">
-					<div class="col">
-		 				<button onclick="location.href='<?php echo base_url();?>lpb/tambah_lpb'" type="button" class="btn btn-block"><i class="fas fa-plus fa-fw fa-lg"></i> Tambah LPB</button>
-		 			</div>
-		 			<!--<div class="col">
-		 				<button id="print-bahanbaku" type="button" class="btn btn-block"><i class="fas fa-print fa-fw fa-lg"></i> Print All</button>
-		 			</div>-->
-				</div>
 			</div>
 			<div id="stock-content" class="content">
 				<ul class="nav nav-tabs nav-fill justify-content-center mb-3" id="stock-tab">
@@ -270,14 +262,10 @@
 					<li class="nav-item">
 				    	<a class="nav-link" id="kemas-stock" href="#stock-kemas">Stock Bahan Kemas</a>
 					</li>
-					<li class="nav-item">
-				    	<a class="nav-link" id="bantu-stock" href="#stock-bantu">Stock Bahan Pembantu</a>
-					</li>
 				</ul>
 				<div class="tab-content" id="stock-tab-content">
 					<div class="stock-tab tab-pane" id="stock-baku"><?=$contents['stock_baku']?></div>
 					<div class="stock-tab tab-pane fade" id="stock-kemas"><?=$contents['stock_kemas']?></div>
-					<div class="stock-tab tab-pane fade" id="stock-bantu"><?=$contents['stock_bantu']?></div>
 				</div>
 			</div>
 			<div id="permintaan-content" class="content">
