@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<!-- jQuery library -->
 	<script src="<?php echo base_url(); ?>public/js/jquery-3.2.1.min.js"></script>
+	<script src="<?php echo base_url(); ?>public/js/jquery-ui.min.js"></script>
+	<link rel="stylesheet" href="<?php echo base_url(); ?>public/css/jquery-ui.min.css">
 	<!--Bootstrap 4-->
 	<link rel="stylesheet" href="<?php echo base_url(); ?>public/css/bootstrap.min.css">
 	<script src="<?php echo base_url(); ?>public/js/bootstrap.min.js"></script>
@@ -14,8 +16,8 @@
 	<!--Our Custom CSS & JS-->
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>public/css/global.css">
 	<script src="<?php echo base_url(); ?>public/js/global.js"></script>
-    <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>public/css/lpb.css">
-    <script src="<?php echo base_url(); ?>public/js/lpb.js"></script>
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>public/css/edit-lpb.css">
+    <script src="<?php echo base_url(); ?>public/js/tambah-lpb.js"></script>
 </head>
 
 <body>
@@ -40,31 +42,31 @@
 	
 		echo "<div class='form-group row'>";
 		$label_attr = array('class' => 'col-form-label col-sm-2 offset-sm-1');
-		echo form_label('No. LPB:', ' ', $label_attr);
+		echo form_label('No. LPB:', '', $label_attr);
 			echo "<div class='col-sm-8'>";
-			$input_attr = array('class' => 'form-control nolpb', 'pattern' => '[0-9]+/[a-zA-z]+/[a-zA-z]+/[0-9]{4}', 'required' => '', 'placeholder' => 'Format Nomor LPB harus AA/BB/CC/DDDD = Nomor Urut/Kode Huruf Bahan/Bulan dalam Kode Romawi/Tahun');
+			$input_attr = array('class' => 'form-control nolpb', 'pattern' => '[0-9]+/[a-zA-z]+/[a-zA-z]+/[0-9]{4}', 'required' => '');
 			echo form_input('lpb', '', $input_attr);
 			echo "</div>";
 		echo "</div>";
 
 		echo "<div class='form-group row'>";
 		$label_attr = array('class' => 'col-form-label col-sm-2 offset-sm-1');
-		echo form_label('Tgl Terima:', ' ', $label_attr);
+		echo form_label('Tgl Terima:', '', $label_attr);
 			echo "<div class='col-sm-8'>";
 			$date = array(
 		        'type'          => 'date',
 		        'name'          => 'tgl',
 			);
 			$input_attr = array('class' => 'form-control tglterima', 'required' => '');
-			echo form_input($date, ' ', $input_attr);
+			echo form_input($date, '', $input_attr);
 			echo "</div>";
 		echo "</div>";
 
 		echo "<div class='form-group row'>";
 		$label_attr = array('class' => 'col-form-label col-sm-2 offset-sm-1');
-		echo form_label('No. Surat Pesanan:', ' ', $label_attr);
+		echo form_label('No. Surat Pesanan:', '', $label_attr);
 			echo "<div class='col-sm-8'>";
-			$input_attr = array('class' => 'form-control', 'placeholder' => 'Format Nomor Surat harus XXX/PS/YY/ZZZZ = Nomor Urut/PS/Bulan dalam Kode Romawi/Tahun', 'pattern' => '[0-9]+/[P]+[S]+/[a-zA-z]+/[0-9]{4}', 'required' => '');
+			$input_attr = array('class' => 'form-control', 'pattern' => '[0-9]+/[P]+[S]+/[a-zA-z]+/[0-9]{4}', 'required' => '');
 			echo form_input('surat', '', $input_attr);
 			echo "</div>";
 		echo "</div>";
@@ -72,7 +74,7 @@
 		//opsi bahan baku/bahan kemas
 		echo "<div class='form-group row'>";
 		$label_attr = array('class' => 'control-label col-sm-2 offset-sm-1');
-		echo form_label('Jenis Bahan:', ' ', $label_attr);
+		echo form_label('Jenis Bahan:', '', $label_attr);
 			echo "<div class='col-sm-8'>";
 			$jenis_bahan = array ('' => '--Pilih Opsi Jenis Bahan--', 'Baku' => 'Bahan Baku', 'Kemas' => 'Bahan Kemas', 'Pembantu' => 'Bahan Pembantu');
 			echo my_form_dropdown('jenis', $jenis_bahan,'', '', '', 'class="form-control jenisbahan"'); 
@@ -97,7 +99,7 @@
 
 		echo "<div class='form-group row'>";
 		$label_attr = array('class' => 'col-form-label col-sm-2 offset-sm-1');
-		echo form_label('Nama Bahan:', ' ', $label_attr);
+		echo form_label('Nama Bahan:', '', $label_attr);
 			echo "<div class='col-sm-8'>";
 			echo form_dropdown('nama', $nama_rows, '', 'class="form-control namabahan"');
 			echo "</div>";
@@ -115,7 +117,7 @@
 	
 		echo "<div class='form-group row'>";
 		$label_attr = array('class' => 'col-form-label col-sm-2 offset-sm-1');
-		echo form_label('Nama Supplier:', ' ', $label_attr);
+		echo form_label('Nama Supplier:', '', $label_attr);
 			echo "<div class='col-sm-8'>";
 			echo form_dropdown('supp', $supp_rows, '', 'class="form-control supplier"'); 
 			echo "</div>";
@@ -123,7 +125,7 @@
 
 		echo "<div class='form-group row'>";
 		$label_attr = array('class' => 'col-form-label col-sm-2 offset-sm-1');
-		echo form_label('Nama Manufacturer:', ' ', $label_attr);
+		echo form_label('Nama Manufacturer:', '', $label_attr);
 			echo "<div class='col-sm-8'>";
 			echo form_dropdown('manu', $manu_rows, '', 'class="form-control manufaktur"');
 			echo "</div>";
@@ -131,7 +133,7 @@
 
 		echo "<div class='form-group row'>";
 		$label_attr = array('class' => 'col-form-label col-sm-2 offset-sm-1');
-		echo form_label('Jenis Permintaan:', ' ', $label_attr);
+		echo form_label('Jenis Permintaan:', '', $label_attr);
 			echo "<div class='col-sm-8'>";
 			echo form_dropdown('jenis', $jenis_rows, '', 'class="form-control" required');
 			echo "</div>";
@@ -139,8 +141,8 @@
 		?>
 		
 		<div class="button-container p-3">
-			<button type="button" class="btn" id="tambah" onClick="addRow('dataTable')">Tambah Nomor Batch</button>
-	 		<button type="button" class="btn" id="back" onClick="deleteRow('dataTable')">Hapus Nomor Batch</button>
+			<button type="button" class="btn btn-primary" id="tambah" onClick="addRow('dataTable')">Tambah Nomor Batch</button>
+	 		<button type="button" class="btn btn-secondary" id="back" onClick="deleteRow('dataTable')">Hapus Nomor Batch</button>
 	 	</div>
 
 	 	<div class="form-group row">
@@ -159,13 +161,8 @@
 						'name' => 'keterangan[]',
 						'rows' => '1',
 					);
-					$jum = array(
-						'name' => 'jumlah[]',
-						'type' => 'number',
-						//'step' => '0.1',
-					);
 					$batch = array(
-			            array(form_checkbox('chk[]', 'accept', TRUE), form_input('batch[]', '', 'class="form-control" pattern = "[0-9]{4}|[0-9]{4}[a-zA-z]{1}" placeholder="Format : 4 angka atau 4 angka 1 huruf" size="50" required'), form_input($jum, '', 'class="form-control" required'),  form_dropdown('satuan', $manu_rows, '', 'class="form-control satuan"'), form_textarea($ket, '', 'class="form-control"'), form_input($exp_date, '', 'class="form-control" required'))
+			            array(form_checkbox('chk[]', 'accept', TRUE), form_input('batch[]', '', 'class="form-control" required'), form_input('jumlah[]', '', 'class="form-control" required'),  form_dropdown('satuan', $manu_rows, '', 'class="form-control satuan"'), form_textarea($ket, '', 'class="form-control"'), form_input($exp_date, '', 'class="form-control" required'))
 			        );
 
 					echo $this->table->generate($batch);
@@ -176,8 +173,8 @@
 	 	</div>
 		
 	<div class="button-container p-3">
-		<button type="button submit" class="btn" id="tambah">Tambah</button>
-		<button onclick="location.href='<?php echo base_url();?>gudang'" type="button" class="btn" id="back">Kembali</button>
+		<button type="button submit" class="btn btn-success" id="tambah">Tambah</button>
+		<button onclick="window.history.back()" type="button" class="btn btn-danger" id="back">Kembali</button>
 	</div>
 	<?php
 		echo form_close();

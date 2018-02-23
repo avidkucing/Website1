@@ -1,6 +1,6 @@
 <?php
 	$template = array(
-        'table_open' => '<table class="table table-bordered table-hover decorated" cell-spacing="0" id="lpb_bahanbaku">'
+        'table_open' => '<table class="table table-bordered table-hover decorated" cell-spacing="0">'
 	);
 	$this->table->set_template($template);
 	$this->table->set_heading('No LPB', 'Tanggal Terima', 'Kode Bahan', 'Nomor Batch', 'Nama Supplier', 'Nama Manufacturer', 'Jumlah', 'Satuan', 'Status');
@@ -26,9 +26,3 @@
 	echo $this->table->generate();
 	$this->table->clear();
 ?>
-<script type="text/javascript">
-	$('#lpb_bahanbaku tr td').click(function(){
-        $link = window.location.origin + "/manufaktur/pages/print_lpb/" + (this.id);
-        window.location.href=$link ;
-    });
-</script>
