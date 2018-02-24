@@ -35,8 +35,8 @@
 				$label_attr = array('class' => 'col-form-label col-sm-5');
 				echo form_label('No. Instruksi:', '', $label_attr);
 					echo "<div class='col-sm-7'>";
-					$input_attr = array('class' => 'form-control input-sm', 'pattern' => '[0-9]+/ISP-BA+/[0-9]{4}');
-					echo form_input('no_ins', '', $input_attr);
+					$input_attr = array('name' => 'no_ins', 'class' => 'form-control', 'pattern' => '[0-9]+/[a-zA-z]+-+[a-zA-z]+/[0-9]{4}', 'placeholder' => 'AAA/ISP-BA/BBBB = Nomor Urut/Kode Instruksi/Tahun', 'size' => '50');
+					echo form_input($input_attr);
 					echo "</div>";
 				echo "</div>";
 				echo "<div class='col-sm-2'>";

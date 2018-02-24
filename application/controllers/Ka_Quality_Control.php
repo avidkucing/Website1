@@ -77,7 +77,8 @@ class Ka_Quality_Control extends CI_Controller{
 		$data['bahan'] = $this->kaqc_database->get_data_bahan_terima($no);
 		$data['batch'] = $this->kaqc_database->get_data_batch_bahan_terima($no);
 		$data['param'] = $this->kaqc_database->get_data_param_bahan_terima($no);
-		$data['sampel'] = $this->kaqc_database->get_data_sampel_analisa_bahan_terima($no);
+		$data['sampel'] = $this->kaqc_database->get_data_sampel_bahan_terima($no);
+		$data['analisa'] = $this->kaqc_database->get_data_analisa_bahan_terima($no);
 		$data['hasil'] = $this->kaqc_database->get_data_hasil_analisa_bahan_terima($no);
 		$this->load->view('kaqc/kaqc_status_form', $data);	
 	}

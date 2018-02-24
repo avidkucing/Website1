@@ -195,7 +195,7 @@ class Gudang extends CI_Controller{
 					'Nama_Supplier' => $this->input->post('supp'),
 					'Tanggal_Terima' => $this->input->post('tgl'),
 					'Nomor_Surat' => $this->input->post('surat'),
-					'Status' => 'QUARANTINE',
+					'Status' => 'WAITING',
 					'Jenis_Permintaan' => $this->input->post('jenis'),
 					//'Jumlah' => $this->input->post('jumlah'),
 					);

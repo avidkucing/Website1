@@ -45,10 +45,28 @@
 				echo $row['Tanggal_Terima'];
 				echo"<br/>";
 			}
-			foreach ($sampel as $row) {
+			foreach ($analisa as $row) {
 				echo form_label('Tanggal Pemeriksaan :');
 				echo ' ';
 				echo $row['Tanggal_Pemeriksaan'];
+				echo"<br/>";
+			}
+			foreach ($bahan as $row) {
+				echo form_label('Nama Manufacturer :');
+				echo ' ';
+				echo $row['Nama_Manufacturer'];
+				echo"<br/>";
+			}
+			foreach ($bahan as $row) {
+				echo form_label('Nama Supplier :');
+				echo ' ';
+				echo $row['Nama_Supplier'];
+				echo"<br/>";
+							}
+			foreach ($analisa as $row) {
+				echo form_label('Merk :');
+				echo ' ';
+				echo $row['Merk'];
 				echo"<br/>";
 				echo "</p>";
 			}
@@ -73,13 +91,32 @@
 				$a = $row['ID_Batch']; // untuk release/reject
 				echo"<br/>";
 			}
-			foreach ($sampel as $row) {
+			foreach ($analisa as $row) {
 				echo form_label('Sisa Pertinggal :');
 				echo ' ';
 				echo $row['Sisa_Sampel'];
 				echo"<br/>";
+			}
+			foreach ($sampel as $row) {
+				echo form_label('Jumlah Sampel :');
+				echo ' ';
+				echo $row['Jumlah_Sampel'];
+				echo"<br/>";
+			}
+			foreach ($batch as $row) {
+				echo form_label('EXP. Date :');
+				echo ' ';
+				echo $row['EXP_Date'];
+				echo"<br/>";
+			}
+			foreach ($batch as $row) {
+				echo form_label('Keterangan :');
+				echo ' ';
+				echo $row['Keterangan'];
+				echo"<br/>";
 				echo "</p>";
 			}
+			
 		echo "</div>";
 
 		$template = array(

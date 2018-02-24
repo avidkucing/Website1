@@ -70,6 +70,10 @@
 				echo $batch[0]['Nomor_Batch'];
 				echo form_hidden('batch', $batch[0]['ID_Batch']);
 				echo"<br/>";
+				echo form_label('Merk :');
+				echo ' ';
+				echo form_input('merk');
+				echo"<br/>";
 				echo form_label('Sisa Pertinggal :');
 				echo ' ';
 				echo form_input('sisa');

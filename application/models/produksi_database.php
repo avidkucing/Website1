@@ -7,14 +7,16 @@ Class Produksi_database extends CI_Model {
  		
  	}
 
- 	public function homepage_instruksi(){
+ 	public function homepage_instruksi($nama){
  		$this->db->select('*');
  		$this->db->from('permintaan_bahan');
+ 		$this->db->where("Site_Produksi", $nama);
  		$this->db->order_by('Nomor_Instruksi', 'desc');
  		
  		$query = $this->db->get();
  		$o_batch_rows = $query->result();
- 
+ 		$this->ubah_format_tanggal($o_batch_rows);
+ 		
  		//convert object to multiple-array
  		//$a_batch_rows = json_decode(json_encode($o_batch_rows), True);
 		return $o_batch_rows; 
@@ -29,6 +31,8 @@ Class Produksi_database extends CI_Model {
  		$this->db->order_by('Nomor_Instruksi', 'desc');
  		
  		$o_lpb_rows = $this->db->get()->result();
+ 		$this->ubah_format_tanggal($o_lpb_rows);
+ 		
  		$a_lpb_rows = json_decode(json_encode($o_lpb_rows), True);
  		return $a_lpb_rows;
  	}
@@ -40,6 +44,8 @@ Class Produksi_database extends CI_Model {
  		$this->db->order_by('Kode_Bahan', 'desc');
  		
  		$o_lpb_rows = $this->db->get()->result();
+ 		
+
  		$a_lpb_rows = json_decode(json_encode($o_lpb_rows), True);
  		return $a_lpb_rows;
  	}
@@ -171,6 +177,23 @@ Class Produksi_database extends CI_Model {
 	public function update_stok($value, $key){
 		return $this->db->query("UPDATE nomor_batch_bahan SET Jumlah = " . "'" . $value . "'"  . " WHERE Nomor_Batch = (SELECT Nomor_Batch FROM analisa_sampel WHERE Nomor_Analisa = " . "'" . $key . "'" . ")");
 	}
+
+	public function ubah_format_tanggal($data){
+	 	
+ 		if (isset($data[0]->Tanggal_Terima)) {
+		    foreach($data as $key => $value)
+		    	{
+					$data[$key]->Tanggal_Terima = date('d/m/Y',strtotime($value->Tanggal_Terima));
+				}
+		}
+		if (isset($data[0]->Tanggal_Permintaan)) {
+		    foreach($data as $key => $value)
+		    	{
+					$data[$key]->Tanggal_Permintaan = date('d/m/Y',strtotime($value->Tanggal_Permintaan));
+				}
+		}
+	 }
 }
+	
 
 ?>

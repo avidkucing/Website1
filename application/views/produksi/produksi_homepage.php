@@ -15,7 +15,7 @@
  	<title>Produksi</title>
 	<meta charset="utf-8">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>public/css/gudang.css">
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>public/css/produksi.css">
     <script defer src="<?php echo base_url(); ?>public/js/fontawesome-all.js"></script>
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -66,14 +66,14 @@
 	 			        'table_open'            => '<table id="tabel" class="table table-bordered table-hover table-responsive permintaan">'
 	 				);
 	 				$this->table->set_template($template);
-	 				$this->table->set_heading('No Instruksi', 'Site Produksi', 'Tanggal Permintaan');
+	 				$this->table->set_heading('No Instruksi', /*'Site Produksi', */'Tanggal Permintaan');
 	 				
 	 				foreach ($ins as $row) {
 	 					$a = $row->Nomor_Instruksi;
 						$no_ins = array('data' => $row->Nomor_Instruksi, 'id' => $a);
-						$site = array('data' => $row->Site_Produksi, 'id' => $a);
+						//$site = array('data' => $row->Site_Produksi, 'id' => $a);
 						$tgl = array('data' => $row->Tanggal_Permintaan, 'id' => $a);
-						$this->table->add_row($no_ins, $site, $tgl);
+						$this->table->add_row($no_ins, /*$site, */$tgl);
 	 				}
 
 	 				echo $this->table->generate();

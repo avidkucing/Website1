@@ -96,6 +96,7 @@ class Quality_control extends CI_Controller{
 		$this->form_validation->set_rules('no_ana', 'Nomor Analisa', 'trim|required');
 		$this->form_validation->set_rules('tgl1', 'Tanggal Pemeriksaan', 'trim|required');
 		$this->form_validation->set_rules('sisa', 'Sisa Pertinggal', 'trim|required');
+		$this->form_validation->set_rules('merk', 'Merk', 'trim|required');
 		$j = $this->input->post('hasil_row');
 			for ($i=1; $i <= $j; $i++) { 
 				$this->form_validation->set_rules('hasil'.$i, 'Hasil Pemeriksaan', 'trim|required');
@@ -115,6 +116,7 @@ class Quality_control extends CI_Controller{
 				'Nomor_Analisa' => $this->input->post('no_ana'),
 				'Tanggal_Pemeriksaan' => $this->input->post('tgl1'),
 				'Sisa_Sampel' => $this->input->post('sisa'),
+				'Merk' => $this->input->post('merk'),
 			);
 			$result = $this->qc_database->analisa_insert($data);
 

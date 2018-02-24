@@ -91,7 +91,7 @@
  						if ($b == $a) {
  							if (!(isset($ins[$c]))) {
  								$form_ins = array('data' => '--Menunggu instruksi--','id' => $c, 'class' => 'instruksi');
- 								$this->table->add_row($row->Nomor_LPB, $form_ins, $row->Tanggal_Terima, $row->Kode_Bahan, $rowb->Nomor_Batch, $form_ins, $row->Satuan, '', '');	
+ 								$this->table->add_row($row->Nomor_LPB, $form_ins, $row->Tanggal_Terima, $row->Kode_Bahan, $rowb->Nomor_Batch, $form_ins, $row->Satuan, '--Menunggu instruksi--', '--Menunggu instruksi--');	
  							} else if (!(isset($ana[$c]))) {
  								$form_ana = array('data' => '--isi--', 'id' => $c, 'class' => 'analisa');
  								$this->table->add_row($row->Nomor_LPB, $ins[$c], $row->Tanggal_Terima, $row->Kode_Bahan, $rowb->Nomor_Batch, $jum[$c], $row->Satuan, $form_ana, $form_ana);

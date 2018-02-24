@@ -28,7 +28,7 @@ class Produksi extends CI_Controller{
 	}
  
 	public function index(){
-		$data['ins'] = $this->produksi_database->homepage_instruksi();
+		$data['ins'] = $this->produksi_database->homepage_instruksi($this->session->userdata['logged_in']['nama']);
  		$this->load->view('produksi/produksi_homepage', $data);
 	}
 
@@ -36,7 +36,8 @@ class Produksi extends CI_Controller{
 		$this->load->view('produksi/form_bahan');
 	}
 
-	public function print_permintaan_bahan_show($value){
+	public function print_permintaan_bahan_show($a, $b, $c, $d, $e){
+		$value = $a . "/" . $b . "/" . $c . "/" . $d . "/" . $e;
 		$data['ins'] = $this->produksi_database->print_instruksi_permintaan($value);
 		$data['ins_bahan'] = $this->produksi_database->print_permintaan_bahan($value);
 		$this->load->view('produksi/print_instruksi', $data);
