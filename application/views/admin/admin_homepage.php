@@ -202,7 +202,6 @@
 			<a href="<?php echo current_url(); ?>">
 				<div class="sidebar-header">
 					<h2>Admin</h2>
-					<p>Halo, <?php echo $nama;?></p>
 				</div>
 			</a>
 			<hr>
@@ -255,7 +254,7 @@
 				</div>
 				<div class="row button-container">
 					<div class="col">
-		 				<button onclick="location.href='<?php echo base_url();?>lpb/tambah_lpb'" type="button" class="btn btn-block"><i class="fas fa-plus fa-fw fa-lg"></i> Tambah LPB</button>
+		 				<button onclick="location.href='<?php echo base_url();?>lpb/tambah_lpb'" type="button" class="btn btn-block btn-success"><i class="fas fa-plus fa-fw fa-lg"></i> Tambah LPB</button>
 		 			</div>
 		 			<!--<div class="col">
 		 				<button id="print-bahanbaku" type="button" class="btn btn-block"><i class="fas fa-print fa-fw fa-lg"></i> Print All</button>

@@ -8,7 +8,7 @@ $(document).ready(function(){
     $(".jenisbahan").on("change",function(){
     var value = $(this).val();
         var getkode = $.ajax({
-             url : "/manufaktur/pages_lpb/get_data_kode_bahan",
+             url : "/manufaktur/lpb/get_data_kode_bahan",
              type: "post",
              data: {"value":value},
              success : function(data){
@@ -22,7 +22,7 @@ $(document).ready(function(){
 	$(".kodebahan").on("change",function(){
     var value = $(this).val();
         $.ajax({
-             url : "/manufaktur/pages_lpb/get_data_nama_bahan",
+             url : "/manufaktur/lpb/get_data_nama_bahan",
              type: "post",
              data: {"value":value},
              success : function(data){
@@ -31,7 +31,7 @@ $(document).ready(function(){
         });
 
         $.ajax({
-             url : "/manufaktur/pages_lpb/get_data_manufaktur",
+             url : "/manufaktur/lpb/get_data_manufaktur",
              type: "post",
              data: {"value":value},
              success : function(data){
@@ -40,7 +40,7 @@ $(document).ready(function(){
         });
 
         $.ajax({
-             url : "/manufaktur/pages_lpb/get_data_supplier",
+             url : "/manufaktur/lpb/get_data_supplier",
              type: "post",
              data: {"value":value},
              success : function(data){
@@ -49,7 +49,7 @@ $(document).ready(function(){
         });
 
         $.ajax({
-             url : "/manufaktur/pages_lpb/get_data_satuan",
+             url : "/manufaktur/lpb/get_data_satuan",
              type: "post",
              data: {"value":value},
              success : function(data){
