@@ -45,6 +45,7 @@ class Admin extends CI_Controller{
 		$data['lpb_kemas'] = $this->load->view('contents/lpb_kemas', $this->data_lpb->load(), TRUE);
 		$data['stock_baku'] = $this->load->view('contents/stock_baku', $this->data_stock->load(), TRUE);
 		$data['stock_kemas'] = $this->load->view('contents/stock_kemas', $this->data_stock->load(), TRUE);
+		$data['stock_bantu'] = $this->load->view('contents/stock_bantu', $this->data_stock->load(), TRUE);
 		$data['permintaan_baku'] = $this->load->view('contents/permintaan_baku', $this->data_permintaan->load(), TRUE);
 		$data['akun'] = $this->load->view('contents/akun', $this->data_akun->load(), TRUE);
 		return $data;

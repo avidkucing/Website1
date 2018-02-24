@@ -97,6 +97,52 @@ Class Data_lpb extends CI_Model {
 		$this->db->delete('bahan_terima');
 	}
 
+	public function get_data_kode_bahan($value){
+ 		$this->db->select('Kode_Bahan');
+	    $this->db->distinct();
+	    $this->db->from('jenis_bahan');
+	    $this->db->where("Jenis",$value);
+	    
+	    return $this->db->get()->result();
+ 	}
+ 	
+
+	 public function get_data_nama_bahan($value) {
+	    $this->db->select('Nama_Bahan');
+	    $this->db->distinct();
+	    $this->db->from('jenis_bahan');
+	    $this->db->where("Kode_Bahan",$value);
+	    
+	    return $this->db->get()->result();
+	 }
+
+	 public function get_data_manufaktur($value) {
+	 	$this->db->select('Nama_Manufacturer');
+	    $this->db->distinct();
+	    $this->db->from('manufaktur_bahan');
+	    $this->db->where("Kode_Bahan",$value);
+	    
+	    return $this->db->get()->result();	
+	 }
+
+	 public function get_data_supplier($value) {
+	 	$this->db->select('Nama_Supplier');
+	    $this->db->distinct();
+	    $this->db->from('supplier_bahan');
+	    $this->db->where("Kode_Bahan",$value);
+	    
+	    return $this->db->get()->result();		
+	 }
+
+	 public function get_data_satuan($value) {
+	 	$this->db->select('Satuan');
+	    $this->db->distinct();
+	    $this->db->from('jenis_bahan');
+	    $this->db->where("Kode_Bahan",$value);
+	    
+	    return $this->db->get()->result();		
+	 }
+
 	function ubah_format_tanggal($data){
 	 	
 		if (isset($data[0]->Tanggal_Terima)) {
