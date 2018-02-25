@@ -167,7 +167,7 @@
 		
 	<div class="button-container p-3">
 		<button type="button submit" class="btn" id="tambah">Tambah</button>
-		<button onclick="location.href='<?php echo base_url();?>gudang'" type="button" class="btn" id="back">Kembali</button>
+		<button onclick="location.href='<?php echo base_url();?>lpb'" type="button" class="btn" id="back">Kembali</button>
 	</div>
 	<?php
 		echo form_close();
