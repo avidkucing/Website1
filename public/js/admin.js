@@ -26,6 +26,20 @@ $(document).ready(function(){
         $(this).tab('show');
     })
 
+    $('.nav-tabs a').on('shown.bs.tab', function (e) {
+        hash = window.location.hash.substr(1).split('-');
+        if (hash[1]==null) {
+            hash[1] = 'baku';
+        }
+    })
+
+    $(".print-all").click(function(){
+        if(hash[0]=='lpb') {
+            $link = window.location.origin + "/manufaktur/lpb/print_all/" + hash[1];
+            window.location.href=$link ;
+        }
+    });
+
     $("#tglminta").datepicker({
         dateFormat: "dd/mm/yy",
         changeMonth: true,

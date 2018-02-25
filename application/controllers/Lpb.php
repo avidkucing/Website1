@@ -38,6 +38,14 @@ class Lpb extends CI_Controller{
 		$this->load->view('pages_lpb/print_lpb', $data);		
 	}
 
+	public function print_all($tipe) {
+		$data['lpb_baku'] = $this->load->view('contents/lpb_baku', $this->data_lpb->load(), TRUE);
+		$data['lpb_bantu'] = $this->load->view('contents/lpb_bantu', $this->data_lpb->load(), TRUE);
+		$data['lpb_kemas'] = $this->load->view('contents/lpb_kemas', $this->data_lpb->load(), TRUE);
+		$data['tipe'] = $tipe;
+		$this->load->view('pages_lpb/print_all', $data);
+	}
+
 	public function edit_lpb($a, $b, $c, $d) {
 		$data['lpb'] = $this->data_lpb->print_lpb($a, $b, $c, $d);
  		$data['lpb_batch'] =$this->data_lpb->print_batch_lpb($a, $b, $c, $d);

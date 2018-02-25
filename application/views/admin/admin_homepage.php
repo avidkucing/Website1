@@ -209,7 +209,7 @@
 				<li class="menu" id="lpb"><a href="#lpb">LPB Bahan</a></li>
 				<li class="menu" id="stock"><a href="#stock">Stock Bahan</a></li>
 				<li class="menu" id="permintaan"><a href="#permintaan">Permintaan Bahan Baku</a></li>
-				<!--<li class="menu" id="data"><a href="#data">Data Bahan</a></li>-->
+				<li class="menu" id="data"><a href="#data">Data Bahan</a></li>
 				<li class="menu" id="akun"><a href="#akun"><span>Kelola Akun</span></a></li>
 				<!--<li>
 					<a id="other" href="#sublinks" data-toggle="collapse" aria-expanded="false">Lihat Lainnya<i class="fas fa-angle-down fa-fw fa-lg arrow"></i></a>
@@ -256,9 +256,9 @@
 					<div class="col">
 		 				<button onclick="location.href='<?php echo base_url();?>lpb/tambah_lpb'" type="button" class="btn btn-block btn-success"><i class="fas fa-plus fa-fw fa-lg"></i> Tambah LPB</button>
 		 			</div>
-		 			<!--<div class="col">
-		 				<button id="print-bahanbaku" type="button" class="btn btn-block"><i class="fas fa-print fa-fw fa-lg"></i> Print All</button>
-		 			</div>-->
+		 			<div class="col">
+		 				<button type="button" class="btn btn-block btn-success print-all"><i class="fas fa-print fa-fw fa-lg"></i> Print All</button>
+		 			</div>
 				</div>
 			</div>
 			<div id="stock-content" class="content">
@@ -285,10 +285,10 @@
 			<div id="data-content" class="content">
 				<div class="row button-container mr-0">
 					<div class="col">
-						<button class="btn btn-block" onclick="location.href='<?php echo base_url();?>Admin/add_data_bahan_baku_show'"; >Tambah Data Bahan Baku</button>
+						<button class="btn btn-block btn-success" onclick="location.href='<?php echo base_url();?>Admin/add_data_bahan_baku_show'"; >Tambah Data Bahan Baku</button>
 					</div>
 					<div class="col">
-						<button class="btn btn-block" onclick="location.href='<?php echo base_url();?>Admin/add_data_bahan_kemas_show'"; >Tambah Data Bahan Kemas</button>
+						<button class="btn btn-block btn-success" onclick="location.href='<?php echo base_url();?>Admin/add_data_bahan_kemas_show'"; >Tambah Data Bahan Kemas</button>
 					</div>
 				</div>
 			</div>
