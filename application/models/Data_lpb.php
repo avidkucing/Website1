@@ -94,7 +94,7 @@ Class Data_lpb extends CI_Model {
 
 	function delete($data) {
 		$this->db->where('Nomor_LPB', $data['Nomor_LPB']);
-		$this->db->delete('bahan_terima');
+		$this->db->delete(array('bahan_terima', 'nomor_batch_bahan'));
 	}
 
 	public function get_data_kode_bahan($value){

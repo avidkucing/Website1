@@ -14,7 +14,7 @@
 	<!--Our Custom CSS & JS-->
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>public/css/global.css">
 	<script src="<?php echo base_url(); ?>public/js/global.js"></script>
-    <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>public/css/lpb.css">
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>public/css/edit-lpb.css">
 </head>
 
 <body>
@@ -90,7 +90,7 @@
 	        var no_lpb = '<?php echo $lpb[0]['Nomor_LPB']?>';
 
 	        $.ajax({
-	            url : "<?php echo base_url(); ?>Pages/delete_lpb",
+	            url : "<?php echo base_url(); ?>lpb/delete_lpb",
 	            type: "post",
 	            data: {
 	                "Nomor_LPB":no_lpb,
@@ -101,8 +101,8 @@
     	}
 
     	function editThis() {
-	        $link = "<?php echo base_url(); ?>Pages/edit_lpb/" + "<?php echo $lpb[0]['Nomor_LPB']?>";
-	        //$link = "<?php echo base_url(); ?>Pages/error_wip/";
+	        $link = "<?php echo base_url(); ?>lpb/edit_lpb/" + "<?php echo $lpb[0]['Nomor_LPB']?>";
+	        //$link = "<?php echo base_url(); ?>lpb/error_wip/";
 	        window.location.href=$link;
     	}
 	</script>
