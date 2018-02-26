@@ -58,8 +58,8 @@ Jenis akun -> username :
 - Gudang 					-> mr_gudang
 - Quality-Control 			-> mr_qc
 - Kepala Quality-Control 	-> mr_head_qc
-- Produksi 					-> mr_produksi
-- Produksi 2 		-> mr_produksi_2
+- Produksi 					-> mr_produksi_b1
+- Produksi 2 		-> mr_produksi_b2
 
 All password : yoyomam@
 

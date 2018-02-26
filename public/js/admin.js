@@ -216,7 +216,7 @@ $(document).ready(function(){
 
                 $("#permintaan-editor").modal('hide');
                 
-                //window.location.reload();
+                window.location.reload();
             }
         });
     });
