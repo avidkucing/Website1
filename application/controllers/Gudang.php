@@ -39,12 +39,37 @@ class Gudang extends CI_Controller{
 		$this->load->view('gudang/print_lpb', $data);		
 	}
 	
-	public function print_permintaan_bahan_show($value){
-		$data['ins'] = $this->gudang_database->print_instruksi_permintaan(rawurldecode($value));
-		$data['ins_bahan'] = $this->gudang_database->print_permintaan_bahan(rawurldecode($value));
+	public function print_permintaan_bahan_show($a, $b, $c, $d, $e){
+		$value = $a . "/" . $b . "/" . $c . "/" . $d . "/" . $e;
+		$data['ins'] = $this->gudang_database->print_instruksi_permintaan($value);
+		$data['ins_bahan'] = $this->gudang_database->print_permintaan_bahan($value);
+		$data['jenis_bahan'] = $this->gudang_database->print_jenis_bahan($value);
 		$this->load->view('gudang/print_instruksi', $data);
 	}
 
+	public function konfirmasi_minta_bahan($a, $b, $c, $d, $e){
+		$noins = $a . "/" . $b . "/" . $c . "/" . $d . "/" . $e;
+		$result = $this->gudang_database->konfirmasi_minta_bahan($noins);
+
+		if ($result) {
+			$data['message_display'] = 'Sukses mengupdate data!';
+			$data['lpb'] = $this->gudang_database->homepage();
+			$data['lpb_kemas'] = $this->gudang_database->homepage_kemas();
+	 		$data['lpb_bantu'] = $this->gudang_database->homepage_bantu();
+	 		$data['lpb_batch'] = $this->gudang_database->homepage_batch();
+	 		$data['stock_baku'] = $this->gudang_database->homepage_stock_baku();
+	 		$data['stock_kemas'] = $this->gudang_database->homepage_stock_kemas();
+	 		$data['ins'] = $this->gudang_database->homepage_instruksi();
+ 			$this->load->view('gudang/gudang_homepage', $data);
+		} else {
+			$data['message_display'] = 'Gagal mengupdate data!';
+			$data['ins'] = $this->gudang_database->print_instruksi_permintaan($value);
+			$data['ins_bahan'] = $this->gudang_database->print_permintaan_bahan($value);
+			$data['jenis_bahan'] = $this->gudang_database->print_jenis_bahan($value);
+			$this->load->view('gudang/print_instruksi', $data);
+		}
+	}
+	
 	public function tambah_lpb_show(){
 		$this->load->view('gudang/tambah_lpb');
 	}

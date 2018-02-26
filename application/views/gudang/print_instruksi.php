@@ -19,7 +19,7 @@
 	<div id="print-content">
 		<p class="title">PT. Hisamitsu Pharma Indonesia</p>
 		<div class="left-item">
-			<p>No. Instuksi: <?php echo $ins[0]['Nomor_Instruksi']?></p>
+			<p>No. Instruksi: <?php echo $ins[0]['Nomor_Instruksi']?></p>
 			<p>Site Produksi: <?php echo $ins[0]['Site_Produksi']?></p>
 			<p>Tanggal Permintaan: <?php echo $ins[0]['Tanggal_Permintaan']?></p>
 		</div>
@@ -32,10 +32,16 @@
 		    'table_open'            => '<table class="content-item table table-bordered table-responsive">'
 			);
 			$this->table->set_template($template);
-			$this->table->set_heading('Kode Bahan', 'Nomor Analisa', 'Jumlah', 'Keterangan');
+			$this->table->set_heading('Kode Bahan', 'Nomor Analisa', 'Jumlah', 'Status', 'Keterangan');
 
 			foreach ($ins_bahan as $row) {
-				$this->table->add_row( $row['Kode_Bahan'], $row['Nomor_Analisa'], $row['Jumlah'], $row['Keterangan']);
+				foreach ($jenis_bahan as $rowb) {
+					if ($row['Kode_Bahan'] == $rowb['Kode_Bahan']) {
+						$this->table->add_row( $row['Kode_Bahan'], $row['Nomor_Analisa'], $row['Jumlah'], $rowb['Satuan'], $row['Keterangan']);		
+					}
+					
+				}
+				
 			}
 			echo $this->table->generate();
 	 	?>
@@ -45,6 +51,7 @@
 	</div>
 
 	<div class="button-container">
+		<button onclick="location.href='<?php echo base_url();?>gudang/konfirmasi_minta_bahan/<?php echo $ins[0]['Nomor_Instruksi'];?>'" type="button" class="button-item btn" id="confirm">Konfirmasi</button>
 		<button onclick="printThis()" type="button" class="button-item btn" id="print">Print</button>
 		<button onclick="location.href='<?php echo base_url();?>gudang'" type="button" class="button-item btn" id="back">Kembali</button>
 		<br>

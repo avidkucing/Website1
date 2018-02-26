@@ -40,6 +40,7 @@ class Produksi extends CI_Controller{
 		$value = $a . "/" . $b . "/" . $c . "/" . $d . "/" . $e;
 		$data['ins'] = $this->produksi_database->print_instruksi_permintaan($value);
 		$data['ins_bahan'] = $this->produksi_database->print_permintaan_bahan($value);
+		$data['jenis_bahan'] = $this->produksi_database->print_jenis_bahan($value);
 		$this->load->view('produksi/print_instruksi', $data);
 	}
 
@@ -106,9 +107,7 @@ class Produksi extends CI_Controller{
 		$this->form_validation->set_rules('site', 'Site Produksi', 'trim|required');
 		$this->form_validation->set_rules('no_ins', 'Nomor Instruksi', 'trim|required');
 		$this->form_validation->set_rules('tgl', 'Tanggal', 'trim|required');
-		$this->form_validation->set_rules('tgl', 'Tanggal', 'trim|required');
 		$this->form_validation->set_rules('kode[]', 'Kode Bahan', 'trim|required');
-		$this->form_validation->set_rules('no_ana[]', 'Nomor Analisa', 'trim|required');
 		$this->form_validation->set_rules('jumlah[]', 'Jumlah', 'trim|required');
 		$this->form_validation->set_rules('keterangan[]', 'Keterangan', 'trim|required');
 		
@@ -120,11 +119,11 @@ class Produksi extends CI_Controller{
 				'Nomor_Instruksi' => $this->input->post('no_ins'),
 				'Site_Produksi' => $this->input->post('site'),
 				'Tanggal_Permintaan' => $this->input->post('tgl'),
+				'Status'=> 'WAITING',
 			);
 			$result = $this->produksi_database->bahan_minta_insert($data);
 			if ($result == TRUE) {
 				$array_kode = $this->input->post('kode[]');
-				$array_no_ana = $this->input->post('no_ana[]');
 				$array_jumlah = $this->input->post('jumlah[]');
 				$array_ket = $this->input->post('keterangan[]');
 
@@ -135,9 +134,9 @@ class Produksi extends CI_Controller{
 					$data = array(
 						'Nomor_Instruksi' => $this->input->post('no_ins'),
 						'Kode_Bahan' => $array_kode[$a],
-						'Nomor_Analisa' => $array_no_ana[$a],
 						'Jumlah' => $array_jumlah[$a],
-						'keterangan' => $array_ket[$a]
+						'keterangan' => $array_ket[$a],
+						'Nomor_Analisa' => '',
 					);
 
 					//insert
@@ -146,6 +145,7 @@ class Produksi extends CI_Controller{
 						$results = 0;
 						break;
 					} else {
+						/*
 						$cek_stok = $this->produksi_database->cek_stok( $array_no_ana[$a]);
 						$jumlah ="";
 
@@ -159,7 +159,7 @@ class Produksi extends CI_Controller{
 						if ($result[$a] == FALSE) {
 							$results = 0;
 							break;
-						}
+						}*/
 					} 
 				}
 				if ($results == 0) {
@@ -167,7 +167,7 @@ class Produksi extends CI_Controller{
 							$this->load->view('produksi/form_bahan', $data);	
 						} else {
 							$data['message_display'] = 'Sukses menambahkan data permintaan!';
-							$data['ins'] = $this->produksi_database->homepage_instruksi();
+							$data['ins'] = $this->produksi_database->homepage_instruksi($this->session->userdata['logged_in']['nama']);
  							$this->load->view('produksi/produksi_homepage', $data);	
 						}
 			} else {

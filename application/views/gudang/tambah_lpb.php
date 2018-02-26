@@ -42,7 +42,7 @@
 		$label_attr = array('class' => 'col-form-label col-sm-2 offset-sm-1');
 		echo form_label('No. LPB:', ' ', $label_attr);
 			echo "<div class='col-sm-8'>";
-			$input_attr = array('class' => 'form-control nolpb', 'pattern' => '[0-9]+/[a-zA-z]+/[a-zA-z]+/[0-9]{4}', 'required' => '', 'placeholder' => 'Format Nomor LPB harus AA/BB/CC/DDDD = Nomor Urut/Kode Huruf Bahan/Bulan dalam Kode Romawi/Tahun');
+			$input_attr = array('class' => 'form-control nolpb', 'pattern' => '[0-9]+/[a-zA-z]+/[a-zA-z]+/[0-9]{4}', 'required' => '', 'placeholder' => 'Format Nomor LPB harus AA/BB/CC/DDDD = Nomor Urut/Kode Huruf Bahan/Bulan dalam Romawi/Tahun');
 			echo form_input('lpb', '', $input_attr);
 			echo "</div>";
 		echo "</div>";

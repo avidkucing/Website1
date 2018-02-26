@@ -10,6 +10,13 @@ $(document).ready(function(){
         window.location.href=$link ;
     });
 
+    $("#mintabaku table tr td").addClass("klik2");
+
+    $('.klik2').click(function(){
+       $link2 = window.location.origin + "/manufaktur/gudang/print_permintaan_bahan_show/" + (this.id);
+        window.location.href=$link2 ; 
+    });
+
     $("#other").click(function(){
        $('.arrow').toggleClass("fa-angle-down");
        $('.arrow').toggleClass("fa-angle-up");

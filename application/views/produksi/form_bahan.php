@@ -7,7 +7,9 @@
     <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>public/css/print_lpb.css">
     <script defer src="<?php echo base_url(); ?>public/js/fontawesome-all.js"></script>
     <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+    <script src="<?php echo base_url(); ?>public/js/jquery-3.2.1.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.6/umd/popper.min.js"></script>
     <script src="<?php echo base_url(); ?>public/js/produksi.js"></script>
 </head>
 
@@ -28,7 +30,7 @@
 		echo form_open('produksi/new_permintaan_bahan', $form_attr);
 	
 		echo "<div class='content-item'>";
-			echo "<div class='form-group'>";
+			/*echo "<div class='form-group'>";
 			$label_attr = array('class' => 'control-label col-sm-4 text-left');
 			echo form_label('Site Produksi:', ' ', $label_attr);
 				echo "<div class='col-sm-8'>";
@@ -36,13 +38,14 @@
 				echo form_input('site', ' ', $input_attr);
 				echo "</div>";
 			echo "</div>";
-
+			*/
+			echo form_hidden('site', $this->session->userdata['logged_in']['nama']);
 			echo "<div class='form-group'>";
 			$label_attr = array('class' => 'control-label col-sm-4 text-left');
 			echo form_label('Nomor Instruksi:', ' ', $label_attr);
 				echo "<div class='col-sm-8'>";
-				$input_attr = array('class' => 'form-control');
-				echo form_input('no_ins', ' ', $input_attr);
+				$input_attr = array('class' => 'form-control', /*'pattern' => '[0-9]+/[a-zA-Z]{1}[0-9]{1}+/[a-zA-Z]{2}+/[a-zA-Z]{2}+/[0-9]{4}', */'placeholder' => 'Format Nomor Instruksi harus AAA/BX/BB/CC/DDDD = Nomor Urut/Kode Site Produksi/Kode Bahan/Bulan dalam Romawi/Tahun');
+				echo form_input('no_ins', '', $input_attr);
 				echo "</div>";
 			echo "</div>";
 
@@ -75,7 +78,7 @@
 	        'table_open'            => '<table id="dataTable" class="content-item table table-bordered table-responsive">'
 		);
 		$this->table->set_template($template_bahan);
-		$this->table->set_heading('Pilih', 'Kode Bahan', 'Nomor Analisa', 'Jumlah', 'Satuan', 'EXP Date', 'Keterangan');
+		$this->table->set_heading('Pilih', 'Kode Bahan', 'Jumlah', 'Satuan', 'Keterangan');
 
 		$kode_rows = $this->produksi_database->get_kode_bahan();
 		$ana_rows = array();
@@ -112,11 +115,11 @@
 		$exp_rows = array();
 
 		$bahan = array(
-            array(form_checkbox('chk[]', 'accept', TRUE), my_form_dropdown('kode[]', $kode_rows, '', '', '',  'class="form-control kode1"'), form_dropdown('no_ana[]', $ana_rows, '', 'class="form-control no_ana1"'),  form_input($jum_rows1), form_dropdown('satuan[]', $sat_rows, '', 'class="form-control satuan1"'), form_dropdown('exp[]', $exp_rows, '', 'class="form-control exp1"'), form_input('keterangan[]', '-', 'class="form-control"')),
-            array(form_checkbox('chk[]', 'accept', TRUE), my_form_dropdown('kode[]', $kode_rows, '', '', '',  'class="form-control kode2"'), form_dropdown('no_ana[]', $ana_rows, '', 'class="form-control no_ana2"'),  form_input($jum_rows2), form_dropdown('satuan[]', $sat_rows, '', 'class="form-control satuan2"'), form_dropdown('exp[]', $exp_rows, '', 'class="form-control exp2"'), form_input('keterangan[]', '-', 'class="form-control"')),
-            array(form_checkbox('chk[]', 'accept', TRUE), my_form_dropdown('kode[]', $kode_rows, '', '', '',  'class="form-control kode3"'), form_dropdown('no_ana[]', $ana_rows, '', 'class="form-control no_ana3"'),  form_input($jum_rows3), form_dropdown('satuan[]', $sat_rows, '', 'class="form-control satuan3"'), form_dropdown('exp[]', $exp_rows, '', 'class="form-control exp3"'), form_input('keterangan[]', '-', 'class="form-control"')),
-            array(form_checkbox('chk[]', 'accept', TRUE), my_form_dropdown('kode[]', $kode_rows, '', '', '',  'class="form-control kode4"'), form_dropdown('no_ana[]', $ana_rows, '', 'class="form-control no_ana4"'),  form_input($jum_rows4), form_dropdown('satuan[]', $sat_rows, '', 'class="form-control satuan4"'), form_dropdown('exp[]', $exp_rows, '', 'class="form-control exp4"'), form_input('keterangan[]', '-', 'class="form-control"')),
-            array(form_checkbox('chk[]', 'accept', TRUE), my_form_dropdown('kode[]', $kode_rows, '', '', '',  'class="form-control kode5"'), form_dropdown('no_ana[]', $ana_rows, '', 'class="form-control no_ana5"'),  form_input($jum_rows5), form_dropdown('satuan[]', $sat_rows, '', 'class="form-control satuan5"'), form_dropdown('exp[]', $exp_rows, '', 'class="form-control exp5"'), form_input('keterangan[]', '-', 'class="form-control"'))
+            array(form_checkbox('chk[]', 'accept', TRUE), my_form_dropdown('kode[]', $kode_rows, '', '', '',  'class="form-control kode1"'), form_input($jum_rows1), form_dropdown('satuan[]', $sat_rows, '', 'class="form-control satuan1"'), form_input('keterangan[]', '-', 'class="form-control"')),
+            array(form_checkbox('chk[]', 'accept', TRUE), my_form_dropdown('kode[]', $kode_rows, '', '', '',  'class="form-control kode2"'), form_input($jum_rows2), form_dropdown('satuan[]', $sat_rows, '', 'class="form-control satuan2"'), form_input('keterangan[]', '-', 'class="form-control"')),
+            array(form_checkbox('chk[]', 'accept', TRUE), my_form_dropdown('kode[]', $kode_rows, '', '', '',  'class="form-control kode3"'), form_input($jum_rows3), form_dropdown('satuan[]', $sat_rows, '', 'class="form-control satuan3"'), form_input('keterangan[]', '-', 'class="form-control"')),
+            array(form_checkbox('chk[]', 'accept', TRUE), my_form_dropdown('kode[]', $kode_rows, '', '', '',  'class="form-control kode4"'), form_input($jum_rows4), form_dropdown('satuan[]', $sat_rows, '', 'class="form-control satuan4"'), form_input('keterangan[]', '-', 'class="form-control"')),
+            array(form_checkbox('chk[]', 'accept', TRUE), my_form_dropdown('kode[]', $kode_rows, '', '', '',  'class="form-control kode5"'), form_input($jum_rows5), form_dropdown('satuan[]', $sat_rows, '', 'class="form-control satuan5"'), form_input('keterangan[]', '-', 'class="form-control"'))
         );
 
 		echo $this->table->generate($bahan);

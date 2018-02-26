@@ -181,6 +181,32 @@ Class Gudang_database extends CI_Model {
  		return $a_lpb_rows;
  	}
 
+ 	public function print_jenis_bahan($noins) {
+ 		$condition = "Kode_Bahan = ANY (SELECT Kode_Bahan FROM bahan_minta WHERE Nomor_Instruksi = " . "'" . $noins ."'" . ")";
+ 		$this->db->select('*');
+ 		$this->db->from('jenis_bahan');
+ 		$this->db->where($condition);
+ 		$this->db->order_by('Kode_Bahan', 'desc');
+ 		
+ 		$o_lpb_rows = $this->db->get()->result();
+ 		
+
+ 		$a_lpb_rows = json_decode(json_encode($o_lpb_rows), True);
+ 		return $a_lpb_rows;	
+ 	}
+
+ 	public function konfirmasi_minta_bahan($noins) {
+ 		$this->db->set('Status', 'ACCEPTED');
+ 		$this->db->where('Nomor_Instruksi', $noins);
+ 		$this->db->update('permintaan_bahan');
+
+ 		if ($this->db->affected_rows() > 0) {
+			return true;
+		} else {
+			return false;
+		}
+ 	}
+
 	public function get_kode_bahan() {
 
 		$this->db->select('Kode_Bahan');

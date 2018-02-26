@@ -32,10 +32,16 @@
 		    'table_open'            => '<table class="content-item table table-bordered table-responsive">'
 			);
 			$this->table->set_template($template);
-			$this->table->set_heading('Kode Bahan', 'Nomor Analisa', 'Jumlah', 'Keterangan');
+			$this->table->set_heading('Kode Bahan', 'Nomor Analisa', 'Jumlah', 'Satuan', 'Keterangan');
 
 			foreach ($ins_bahan as $row) {
-				$this->table->add_row( $row['Kode_Bahan'], $row['Nomor_Analisa'], $row['Jumlah'], $row['Keterangan']);
+				foreach ($jenis_bahan as $rowb) {
+					if ($row['Kode_Bahan'] == $rowb['Kode_Bahan']) {
+						$this->table->add_row( $row['Kode_Bahan'], $row['Nomor_Analisa'], $row['Jumlah'], $rowb['Satuan'], $row['Keterangan']);		
+					}
+					
+				}
+				
 			}
 			echo $this->table->generate();
 	 	?>

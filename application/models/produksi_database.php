@@ -50,11 +50,26 @@ Class Produksi_database extends CI_Model {
  		return $a_lpb_rows;
  	}
 
+ 	public function print_jenis_bahan($noins) {
+ 		$condition = "Kode_Bahan = ANY (SELECT Kode_Bahan FROM bahan_minta WHERE Nomor_Instruksi = " . "'" . $noins ."'" . ")";
+ 		$this->db->select('*');
+ 		$this->db->from('jenis_bahan');
+ 		$this->db->where($condition);
+ 		$this->db->order_by('Kode_Bahan', 'desc');
+ 		
+ 		$o_lpb_rows = $this->db->get()->result();
+ 		
+
+ 		$a_lpb_rows = json_decode(json_encode($o_lpb_rows), True);
+ 		return $a_lpb_rows;	
+ 	}
+
  	public function get_kode_bahan() {
 
 		$this->db->select('Kode_Bahan');
 		$this->db->distinct();
 		$this->db->from('jenis_bahan');
+		$this->db->where('Jenis', 'Baku');
 
 		$query = $this->db->get();
 		$o_kode_rows = $query->result();
