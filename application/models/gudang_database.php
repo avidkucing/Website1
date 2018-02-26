@@ -195,9 +195,49 @@ Class Gudang_database extends CI_Model {
  		return $a_lpb_rows;	
  	}
 
- 	public function konfirmasi_minta_bahan($noins) {
+ 	public function get_data_nomor_analisa($value) {
+		$condition = "ID_Batch = ANY (SELECT ID_Batch FROM nomor_batch_bahan WHERE Status = 'RELEASE' AND Nomor_LPB = ANY (SELECT Nomor_LPB FROM bahan_terima WHERE ID_Bahan = ANY (SELECT ID_Bahan FROM jenis_bahan WHERE Kode_Bahan = " . "'" . $value . "'" . ")))";
+	 	$this->db->select('Nomor_Analisa');
+	    $this->db->distinct();
+	    $this->db->from('analisa_sampel');
+	    $this->db->where($condition);
+	    $query = $this->db->get();
+		$o_ana_rows = $query->result();
+
+	    //convert object to multiple-array
+		$a_ana_rows = json_decode(json_encode($o_ana_rows), True);
+		//print_r($a_ana_rows);
+		//convert multiple-array to array
+		$b = 0;
+		$ana_rows = array();
+		foreach ($a_ana_rows as $a => $b) {
+			$ana_rows[$a] = $a_ana_rows[$a]['Nomor_Analisa'];
+		}
+
+		//change $a data on array to the value
+		$real_ana_rows = array();
+		foreach ($ana_rows as $a => $b) {
+			$real_ana_rows[$ana_rows[$a]] = $ana_rows[$a];
+		}		
+
+		return $real_ana_rows;
+	}
+
+	public function cek_stok($value) {
+		$condition = "Nomor_Batch = (SELECT Nomor_Batch FROM analisa_sampel WHERE Nomor_Analisa = " . "'" . $value . "'" . ")";
+	 	$this->db->select('Jumlah');
+	    $this->db->distinct();
+	    $this->db->from('nomor_batch_bahan');
+	    $this->db->where($condition);
+
+	    return $this->db->get()->result();
+	}
+	
+ 	public function konfirmasi_minta_bahan($data) {
  		$this->db->set('Status', 'ACCEPTED');
- 		$this->db->where('Nomor_Instruksi', $noins);
+ 		$this->db->set('Nomor_Analisa', $data['Nomor_Analisa']);
+ 		$this->db->set('Jumlah', $data['Jumlah']);
+ 		$this->db->where('Nomor_Instruksi', $data['Nomor_Instruksi']);
  		$this->db->update('permintaan_bahan');
 
  		if ($this->db->affected_rows() > 0) {

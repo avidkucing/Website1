@@ -47,7 +47,71 @@ class Gudang extends CI_Controller{
 		$this->load->view('gudang/print_instruksi', $data);
 	}
 
-	public function konfirmasi_minta_bahan($a, $b, $c, $d, $e){
+
+	public function insert_analisa_bahan_minta(){
+		$this->form_validation->set_rules('no_ana[]', 'Nomor Analisa', 'trim|required');
+		$this->form_validation->set_rules('no_ins', 'Nomor Instruksi', 'trim|required');
+		$this->form_validation->set_rules('jum[]', 'Jumlah', 'trim|required');
+		
+
+		if ($this->form_validation->run() == FALSE) {
+			$data['message_display'] = 'Input kosong!';
+			$noins = $this->input->post('no_ins');
+			$data['ins'] = $this->gudang_database->print_instruksi_permintaan($no_ins);
+			$data['ins_bahan'] = $this->gudang_database->print_permintaan_bahan($no_ins);
+			$data['jenis_bahan'] = $this->gudang_database->print_jenis_bahan($no_ins);
+			$this->load->view('gudang/print_instruksi', $data);
+		} else {
+			$array_ana = $this->input->post('no_ana[]');
+			$array_jum = $this->input->post('jum[]');
+			$key_jum = 0;
+			$results = 1;
+			foreach ($array_ana as $a => $b) {
+				$cek_stok = $this->gudang_database->cek_stok($array_ana[$a]);
+				$jumlah ="";
+
+		      	foreach($cek_stok as $c) {
+		        	$jumlah = $c->Jumlah;
+		      	}
+
+				$data = array(
+					'Nomor_Analisa' => $array_ana[$a],
+					'Nomor_Instruksi' => $this->input->post('no_ins'),
+					'Jumlah' => $jumlah - $array_jum[$key_jum]
+				);
+
+				$result = $this->gudang_database->konfirmasi_minta_bahan($data);
+			
+				if ($result == FALSE) {
+					$data['message_display'] = 'Gagal mengonfirmasi data permintaan bahan!';
+					$results = 0;
+					break;
+				} else {
+					$key_jum++;
+				}
+			}
+
+			if ($result) {
+				$data['message_display'] = 'Sukses mengupdate data!';
+				$data['lpb'] = $this->gudang_database->homepage();
+				$data['lpb_kemas'] = $this->gudang_database->homepage_kemas();
+		 		$data['lpb_bantu'] = $this->gudang_database->homepage_bantu();
+		 		$data['lpb_batch'] = $this->gudang_database->homepage_batch();
+		 		$data['stock_baku'] = $this->gudang_database->homepage_stock_baku();
+		 		$data['stock_kemas'] = $this->gudang_database->homepage_stock_kemas();
+		 		$data['ins'] = $this->gudang_database->homepage_instruksi();
+	 			$this->load->view('gudang/gudang_homepage', $data);
+			} else {
+				$data['message_display'] = 'Gagal mengupdate data!';
+				$data['ins'] = $this->gudang_database->print_instruksi_permintaan($noins);
+				$data['ins_bahan'] = $this->gudang_database->print_permintaan_bahan($noins);
+				$data['jenis_bahan'] = $this->gudang_database->print_jenis_bahan($noins);
+				$this->load->view('gudang/print_instruksi', $data);
+			}
+		}
+	}
+
+	/*public function konfirmasi_minta_bahan($a, $b, $c, $d, $e){
 		$noins = $a . "/" . $b . "/" . $c . "/" . $d . "/" . $e;
 		$result = $this->gudang_database->konfirmasi_minta_bahan($noins);
 
@@ -63,12 +127,12 @@ class Gudang extends CI_Controller{
  			$this->load->view('gudang/gudang_homepage', $data);
 		} else {
 			$data['message_display'] = 'Gagal mengupdate data!';
-			$data['ins'] = $this->gudang_database->print_instruksi_permintaan($value);
-			$data['ins_bahan'] = $this->gudang_database->print_permintaan_bahan($value);
-			$data['jenis_bahan'] = $this->gudang_database->print_jenis_bahan($value);
+			$data['ins'] = $this->gudang_database->print_instruksi_permintaan($noins);
+			$data['ins_bahan'] = $this->gudang_database->print_permintaan_bahan($noins);
+			$data['jenis_bahan'] = $this->gudang_database->print_jenis_bahan($noins);
 			$this->load->view('gudang/print_instruksi', $data);
 		}
-	}
+	}*/
 	
 	public function tambah_lpb_show(){
 		$this->load->view('gudang/tambah_lpb');
