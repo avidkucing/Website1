@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 05 Feb 2018 pada 06.30
+-- Generation Time: 26 Feb 2018 pada 03.26
 -- Versi Server: 10.1.21-MariaDB
 -- PHP Version: 5.6.30
 
@@ -42,10 +42,10 @@ INSERT INTO `akun` (`Username`, `Password`, `Nama`, `Email`, `Tipe_Pegawai`) VAL
 ('admin', '6036902a177b5ecb6e41472be922257a', 'Admin', 'mhabibullah14@yahoo.com', 'Administrator'),
 ('mr_gudang', '6036902a177b5ecb6e41472be922257a', 'Mr. Gudang', 'haha@gmail.com', 'Gudang'),
 ('mr_head_qc', '6036902a177b5ecb6e41472be922257a', 'Mr. Head of QC', 'mizan@gmail.com', 'Kepala Bagian Quality Control'),
-('mr_produksi', '6036902a177b5ecb6e41472be922257a', 'Mr. Produksi', '', 'Produksi'),
+('mr_produksi_b1', '6036902a177b5ecb6e41472be922257a', 'Building 1', 'produksi@hisamitsu.com', 'Produksi'),
 ('mr_qc', '6036902a177b5ecb6e41472be922257a', 'Mr. QC', 'avidkucing@gmail.com', 'Quality Control'),
 ('mr_head_gudang', '6036902a177b5ecb6e41472be922257a', 'Mr. Head of Gudang', 'gudang@hisamitsu.com', 'Kepala Bagian Gudang'),
-('mr_produksi_2', '6036902a177b5ecb6e41472be922257a', 'Mr. Produksi 2', 'produksi2@hisamitsu.com', 'Produksi');
+('mr_produksi_b2', '6036902a177b5ecb6e41472be922257a', 'Building 2', 'produksi2@hisamitsu.com', 'Produksi');
 
 -- --------------------------------------------------------
 
@@ -57,21 +57,18 @@ CREATE TABLE `analisa_sampel` (
   `ID_Batch` varchar(100) NOT NULL,
   `Nomor_Analisa` varchar(100) NOT NULL,
   `Tanggal_Pemeriksaan` date NOT NULL,
-  `Sisa_Sampel` float NOT NULL
+  `Sisa_Sampel` float NOT NULL,
+  `Merk` varchar(100) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data untuk tabel `analisa_sampel`
 --
 
-INSERT INTO `analisa_sampel` (`ID_Batch`, `Nomor_Analisa`, `Tanggal_Pemeriksaan`, `Sisa_Sampel`) VALUES
-('2', '010_BA_18', '2018-01-29', 100),
-('3', '005_BA_18', '2018-01-22', 100),
-('4', '003_BB_18', '2018-01-06', 50),
-('1', '019_BA_18', '2018-01-29', 100),
-('6', '122_BA_19', '2018-01-19', 100),
-('10', '004/BB/18', '2018-02-05', 0.1),
-('8', '005/BB/18', '2018-02-05', 0.01);
+INSERT INTO `analisa_sampel` (`ID_Batch`, `Nomor_Analisa`, `Tanggal_Pemeriksaan`, `Sisa_Sampel`, `Merk`) VALUES
+('10', '004/BB/18', '2018-02-05', 0.1, 'Panadol'),
+('8', '005/BB/18', '2018-02-05', 0.01, 'Panadol'),
+('7', '006/BB/18', '2018-02-24', 1, 'Panadol');
 
 -- --------------------------------------------------------
 
@@ -92,9 +89,7 @@ CREATE TABLE `bahan_minta` (
 --
 
 INSERT INTO `bahan_minta` (`Nomor_Instruksi`, `Kode_Bahan`, `Nomor_Analisa`, `Jumlah`, `Keterangan`) VALUES
-('01_B2_BB_I_2018', 'CAM', '019_BA_18', 500, '-'),
-('001_S100_18', 'CAM', '003_BB_18', 500, '-'),
-('02_B2_BB_I_2018', 'CAM', '120_BA_18', 1000, '-');
+('01/B2/BB/I/2018', 'CAM', '019_BA_18', 500, '-');
 
 -- --------------------------------------------------------
 
@@ -120,15 +115,14 @@ CREATE TABLE `bahan_terima` (
 INSERT INTO `bahan_terima` (`Nomor_LPB`, `ID_Bahan`, `Nama_Manufacturer`, `Nama_Supplier`, `Tanggal_Terima`, `Nomor_Surat`, `Status`, `Jenis_Permintaan`) VALUES
 ('002/BP/I/18', 20, 'Mermaid Textile', 'Sandratex', '2018-01-05', '001/PS/I/2018', 'ACCEPTED', 'Normal'),
 ('003/BB/I/18', 21, 'Suzhou', 'PT. Jutarasa Abadi', '2018-01-05', '001/PS/I/2018', 'ACCEPTED', 'Normal'),
-('004/BB/I/18', 21, 'Suzhou', 'PT. Jutarasa Abadi', '2018-01-05', '001/PS/I/2018', 'ACCEPTED', 'Urgent'),
-('005/BB/I/18', 21, 'Suzhou', 'PT. Jutarasa Abadi', '2018-01-06', '001/PS/I/2018', 'ACCEPTED', 'Very Urgent'),
 ('006/BB/I/18', 21, 'Suzhou', 'PT. Jutarasa Abadi', '2018-01-07', '001/PS/I/2018', 'ACCEPTED', 'Urgent'),
 ('007/BB/I/18', 21, 'Suzhou', 'PT. Jutarasa Abadi', '2018-01-09', '001/PS/I/2018', 'ACCEPTED', 'Normal'),
 ('008/BK/I/18', 27, 'Anhui Great Nation Essential Oils Co., Ltd.', 'PT. Jutarasa Abadi', '2018-01-24', '002/PS/I/2018', 'ACCEPTED', 'Urgent'),
+('014/BB/II/2018', 21, 'Suzhou', 'PT. Jutarasa Abadi', '2018-02-24', '005/PS/II/2018', 'ACCEPTED', 'Urgent'),
 ('009/BK/I/18', 27, 'Anhui Great Nation Essential Oils Co., Ltd.', 'PT. Jutarasa Abadi', '2018-01-25', '003/PS/I/2018', 'ACCEPTED', 'Urgent'),
 ('010/BB/II/2018', 21, 'Suzhou', 'PT. Jutarasa Abadi', '2018-02-03', '001/PS/II/2018', 'ACCEPTED', 'Urgent'),
-('011/BK/II/2018', 28, 'Mermaid Textile', 'PT. Jutarasa Abadi', '2018-02-04', '002/PS/II/2018', 'QUARANTINE', 'Urgent'),
-('012/BB/II/2018', 21, 'Suzhou', 'PT. Jutarasa Abadi', '2018-02-04', '004/PS/II/2018', 'QUARANTINE', 'Normal');
+('013/BB/II/2018', 28, 'Anhui Great Nation Essential Oils Co., Ltd.', 'Mermaid Textile', '2018-02-20', '003/PS/II/2018', 'ACCEPTED', 'Normal'),
+('012/BB/II/2018', 21, 'Suzhou', 'PT. Jutarasa Abadi', '2018-02-04', '004/PS/II/2018', 'WAITING', 'Normal');
 
 -- --------------------------------------------------------
 
@@ -147,12 +141,6 @@ CREATE TABLE `hasil_analisa_sampel` (
 --
 
 INSERT INTO `hasil_analisa_sampel` (`Nomor_Analisa`, `No`, `Hasil`) VALUES
-('120_BA_18', 1, '100'),
-('019_BA_18', 1, '100'),
-('010_BA_18', 1, '100'),
-('005_BA_18', 1, '100'),
-('003_BB_18', 1, 'Sesuai'),
-('122_BA_19', 1, 'Bagus'),
 ('004/BB/18', 1, 'sip'),
 ('004/BB/18', 2, 'sip'),
 ('004/BB/18', 3, 'not sip'),
@@ -170,7 +158,17 @@ INSERT INTO `hasil_analisa_sampel` (`Nomor_Analisa`, `No`, `Hasil`) VALUES
 ('005/BB/18', 6, 'oke'),
 ('005/BB/18', 7, 'oke'),
 ('005/BB/18', 8, 'oke'),
-('005/BB/18', 9, 'oke');
+('005/BB/18', 9, 'oke'),
+('006/BB/18', 1, 'Baik'),
+('006/BB/18', 2, 'Baik'),
+('006/BB/18', 3, 'Baik'),
+('006/BB/18', 4, 'Baik'),
+('006/BB/18', 5, 'Baik'),
+('006/BB/18', 6, 'Baik'),
+('006/BB/18', 7, 'Baik'),
+('006/BB/18', 8, 'Baik'),
+('006/BB/18', 9, 'Tidak Baik'),
+('007/BB/18', 1, 'Mantap');
 
 -- --------------------------------------------------------
 
@@ -242,19 +240,18 @@ CREATE TABLE `nomor_batch_bahan` (
 
 INSERT INTO `nomor_batch_bahan` (`ID_Batch`, `Nomor_Batch`, `Nomor_LPB`, `Jumlah`, `EXP_Date`, `Keterangan`, `Status`, `Alasan_Status`) VALUES
 (1, '3434', '006/BB/I/18', 0, '2018-11-24', '', 'RELEASE', ''),
-(2, '2323', '005/BB/I/18', 2000, '2019-01-21', '', 'REJECT', ''),
-(3, '1211', '004/BB/I/18', 1000, '2020-01-27', '', 'REJECT', ''),
+(16, '1298A', '014/BB/II/2018', 500, '2024-02-24', '50 * 10 kemasan', 'QUARANTINE', ''),
 (4, '1', '003/BB/I/18', 500, '2018-01-31', '10 pcs * 50', 'RELEASE', ''),
 (5, '001', '002/BP/I/18', 1000, '2018-07-27', '', 'RELEASE', ''),
 (6, '1111', '007/BB/I/18', 1000, '2018-11-16', '', 'REJECT', 'sip2'),
-(7, '3456', '008/BK/I/18', 100, '2019-03-14', '', 'QUARANTINE', ''),
+(7, '3456', '008/BK/I/18', 100, '2019-03-14', '10 * 10 pcs', 'RELEASE', 'Tes'),
 (8, '2345', '008/BK/I/18', 100, '2019-10-10', '', 'RELEASE', ''),
 (9, '8769', '009/BK/I/18', 200, '2020-02-05', '8 pcs * 25', 'QUARANTINE', ''),
 (10, '2388', '009/BK/I/18', 250, '2019-01-30', '10 pcs * 25', 'RELEASE', 'sip'),
 (11, '1111A', '010/BB/II/2018', 1000, '2020-02-03', '10 * 100 kg', 'QUARANTINE', ''),
 (12, '1111B', '010/BB/II/2018', 1000, '2020-02-03', '10 * 100 kg', 'QUARANTINE', ''),
-(13, '1356', '011/BK/II/2018', 500, '2044-02-24', '10 * 50 meter', 'QUARANTINE', ''),
-(14, '1111B', '012/BB/II/2018', 100, '2031-02-04', '10 * 10 kg', 'QUARANTINE', '');
+(14, '1111B', '012/BB/II/2018', 100, '2031-02-04', '10 * 10 kg', 'QUARANTINE', ''),
+(15, '1211A', '013/BB/II/2018', 50, '2028-02-20', '5 * 10 meter', 'QUARANTINE', '');
 
 -- --------------------------------------------------------
 
@@ -308,8 +305,6 @@ INSERT INTO `parameter_bahan` (`Kode_Bahan`, `No`, `Parameter`, `Spesifikasi`) V
 ('MEN', 4, 'Rotasi optik (a) 20/D', '-45.0 ~ -51.0 o (2.5g, ethanol 96%, 25 mL, 100 mm'),
 ('MEN', 3, 'Identifikasi (2)', 'Campuran menjadi keruh dengan warna kuning kemerahan'),
 ('MEN', 2, 'Identifikasi (1)', 'Campuran akan menjadi cair'),
-('CLOTH S610', 1, 'Jenis ', 'Rayon'),
-('CLOTH S610', 1, 'Jenis', 'Rayon'),
 ('CAM', 1, 'Kadar', '100'),
 ('MEN', 1, 'Pemerian', 'Krital tidak berwarna atau putih dan bau segar');
 
@@ -322,17 +317,17 @@ INSERT INTO `parameter_bahan` (`Kode_Bahan`, `No`, `Parameter`, `Spesifikasi`) V
 CREATE TABLE `permintaan_bahan` (
   `Nomor_Instruksi` varchar(100) NOT NULL,
   `Site_Produksi` varchar(100) NOT NULL,
-  `Tanggal_Permintaan` date NOT NULL
+  `Tanggal_Permintaan` date NOT NULL,
+  `Status` varchar(100) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data untuk tabel `permintaan_bahan`
 --
 
-INSERT INTO `permintaan_bahan` (`Nomor_Instruksi`, `Site_Produksi`, `Tanggal_Permintaan`) VALUES
-('001_S100_18', 'Building-1', '2018-01-05'),
-('01_B2_BB_I_2018', 'BUILDING 2', '2018-01-09'),
-('02_B2_BB_I_2018', 'BUILDING 2', '2018-01-09');
+INSERT INTO `permintaan_bahan` (`Nomor_Instruksi`, `Site_Produksi`, `Tanggal_Permintaan`, `Status`) VALUES
+('01/B2/BB/I/2018', 'Building 2', '2018-01-09', 'ACCEPTED'),
+('02/B2/BB/I/2018', 'Building 2', '2018-02-26', 'WAITING');
 
 -- --------------------------------------------------------
 
@@ -351,11 +346,11 @@ CREATE TABLE `sampel_bahan_terima` (
 --
 
 INSERT INTO `sampel_bahan_terima` (`ID_Batch`, `Nomor_Instruksi`, `Jumlah_Sampel`) VALUES
-(3, '004/ISP-BA/2018', '10'),
 (4, '003/ISP-BA/2018', '100 gram'),
-(2, '005/ISP-BA/2018', '10'),
+(9, '011/ISP-BA/2018', '10 gram'),
 (1, '006/ISP-BA/2018', '10'),
 (6, '001/ISP-BA/2018', '1.5 meter'),
+(5, '011/ISP/BA/2018', '10'),
 (8, '005/ISP-BA/2018', '1 gram'),
 (7, '009/ISP-BA/2018', '1 gram'),
 (10, '010/ISP-BA/2018', '1 gram');
@@ -479,7 +474,7 @@ ALTER TABLE `jenis_bahan`
 -- AUTO_INCREMENT for table `nomor_batch_bahan`
 --
 ALTER TABLE `nomor_batch_bahan`
-  MODIFY `ID_Batch` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `ID_Batch` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 --
 -- AUTO_INCREMENT for table `sampel_bahan_terima`
 --
