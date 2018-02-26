@@ -176,8 +176,8 @@
 		        		<label for="site" class="col-md-4 col-form-label">Site Produksi:</label>
 						<div class="col-md-8">
 		        			<select class="custom-select" id="site">
-							    <option value="Site 1">Site 1</option>
-							    <option value="Site 2">Site 2</option>
+							    <option value="Building 1">Building 1</option>
+							    <option value="Building 2">Building 2</option>
 						 	</select>
 		        		</div>
 		        	</div>
@@ -283,13 +283,17 @@
 				<?=$contents['permintaan_baku']?>
 			</div>
 			<div id="data-content" class="content">
-				<div class="row button-container mr-0">
+				<?=$contents['bahan']?>
+				<div class="row button-container">
 					<div class="col">
 						<button class="btn btn-block btn-success" onclick="location.href='<?php echo base_url();?>Admin/add_data_bahan_baku_show'"; >Tambah Data Bahan Baku</button>
 					</div>
 					<div class="col">
 						<button class="btn btn-block btn-success" onclick="location.href='<?php echo base_url();?>Admin/add_data_bahan_kemas_show'"; >Tambah Data Bahan Kemas</button>
 					</div>
+					<!--<div class="col">
+						<button class="btn btn-block btn-success" onclick="location.href='<?php echo base_url();?>Admin/add_data_bahan'"; >Tambah Data Bahan</button>
+					</div>-->
 				</div>
 			</div>
 			<div id="akun-content" class="content">

@@ -26,6 +26,7 @@ class Admin extends CI_Controller{
 		$this->load->model('data_stock');
 		$this->load->model('data_permintaan');
 		$this->load->model('data_akun');
+		$this->load->model('data_bahan');
 
 		if (!(isset($this->session->userdata['logged_in']))) {
 			redirect(base_url("User_Authentication"));
@@ -47,6 +48,7 @@ class Admin extends CI_Controller{
 		$data['stock_kemas'] = $this->load->view('contents/stock_kemas', $this->data_stock->load(), TRUE);
 		$data['stock_bantu'] = $this->load->view('contents/stock_bantu', $this->data_stock->load(), TRUE);
 		$data['permintaan_baku'] = $this->load->view('contents/permintaan_baku', $this->data_permintaan->load(), TRUE);
+		$data['bahan'] = $this->load->view('contents/bahan', $this->data_bahan->load(), TRUE);
 		$data['akun'] = $this->load->view('contents/akun', $this->data_akun->load(), TRUE);
 		return $data;
 	}
@@ -84,6 +86,10 @@ class Admin extends CI_Controller{
 			}
 		}
 	}
+
+	public function add_data_bahan(){
+		$this->load->view('admin/add_data_bahan');
+	}	
 
 	public function add_data_bahan_baku_show(){
 		$this->load->view('admin/add_data_bahan_baku_form');
